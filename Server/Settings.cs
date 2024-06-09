@@ -13,6 +13,13 @@ namespace Server
 {
     public partial class Settings : Form
     {
+        private float _fontSize;
+        public float FontSize
+        {
+            get { return _fontSize; }
+            set { _fontSize = value; }
+        }
+
         public Settings()
         {
             InitializeComponent();
@@ -20,10 +27,19 @@ namespace Server
 
         private void Settings_Load(object sender, EventArgs e)
         {
+            FontSizeTB.Text = _fontSize.ToString();
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
+            if (float.TryParse(FontSizeTB.Text, out _fontSize))
+                DialogResult = DialogResult.OK;
+            else
+            {
+                MessageBox.Show("Input proper value!");
+                FontSizeTB.Clear();
+                FontSizeTB.Focus();
+            }
         }
     }
 }
