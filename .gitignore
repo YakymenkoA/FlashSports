@@ -1,3 +1,9 @@
 .vs/
-/bin/
-/obj/
+Admin/bin/
+Admin/obj/
+Server/bin/
+Server/obj/
+Client/bin/
+Client/obj/
+Support/bin/
+Support/obj/
