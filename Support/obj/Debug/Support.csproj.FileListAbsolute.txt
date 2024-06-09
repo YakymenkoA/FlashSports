@@ -1,0 +1,15 @@
+G:\Education\Cursovik\FlashSports\Support\bin\Debug\Support.exe.config
+G:\Education\Cursovik\FlashSports\Support\bin\Debug\Support.exe
+G:\Education\Cursovik\FlashSports\Support\bin\Debug\Support.pdb
+G:\Education\Cursovik\FlashSports\Support\obj\Debug\Support.csproj.AssemblyReference.cache
+G:\Education\Cursovik\FlashSports\Support\obj\Debug\Support.ClientChat.resources
+G:\Education\Cursovik\FlashSports\Support\obj\Debug\Support.Properties.Resources.resources
+G:\Education\Cursovik\FlashSports\Support\obj\Debug\Support.SupportMain.resources
+G:\Education\Cursovik\FlashSports\Support\obj\Debug\Support.csproj.GenerateResource.cache
+G:\Education\Cursovik\FlashSports\Support\obj\Debug\Support.csproj.CoreCompileInputs.cache
+G:\Education\Cursovik\FlashSports\Support\obj\Debug\Support.exe
+G:\Education\Cursovik\FlashSports\Support\obj\Debug\Support.pdb
+G:\Education\Cursovik\FlashSports\Support\bin\Debug\FlashSportsLib.dll
+G:\Education\Cursovik\FlashSports\Support\bin\Debug\FlashSportsLib.pdb
+G:\Education\Cursovik\FlashSports\Support\obj\Debug\Support.csproj.Up2Date
+G:\Education\Cursovik\FlashSports\Support\obj\Debug\Support.Settings.resources
