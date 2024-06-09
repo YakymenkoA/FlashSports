@@ -1,0 +1,6 @@
+G:\Education\Cursovik\FlashSports\FlashSportsLib\bin\Debug\FlashSportsLib.dll
+G:\Education\Cursovik\FlashSports\FlashSportsLib\bin\Debug\FlashSportsLib.pdb
+G:\Education\Cursovik\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.csproj.AssemblyReference.cache
+G:\Education\Cursovik\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.csproj.CoreCompileInputs.cache
+G:\Education\Cursovik\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.dll
+G:\Education\Cursovik\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.pdb
