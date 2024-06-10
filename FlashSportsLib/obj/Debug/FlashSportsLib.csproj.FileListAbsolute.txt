@@ -4,3 +4,15 @@ G:\Education\Cursovik\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.csproj
 G:\Education\Cursovik\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.csproj.CoreCompileInputs.cache
 G:\Education\Cursovik\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.dll
 G:\Education\Cursovik\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.pdb
+D:\Desktop\Kursova\FlashSports\FlashSportsLib\bin\Debug\FlashSportsLib.dll
+D:\Desktop\Kursova\FlashSports\FlashSportsLib\bin\Debug\FlashSportsLib.pdb
+D:\Desktop\Kursova\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.csproj.AssemblyReference.cache
+D:\Desktop\Kursova\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.csproj.CoreCompileInputs.cache
+D:\Desktop\Kursova\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.dll
+D:\Desktop\Kursova\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.pdb
+D:\Desktop\Kursova\FlashSports – рабочая\FlashSportsLib\bin\Debug\FlashSportsLib.dll
+D:\Desktop\Kursova\FlashSports – рабочая\FlashSportsLib\bin\Debug\FlashSportsLib.pdb
+D:\Desktop\Kursova\FlashSports – рабочая\FlashSportsLib\obj\Debug\FlashSportsLib.csproj.AssemblyReference.cache
+D:\Desktop\Kursova\FlashSports – рабочая\FlashSportsLib\obj\Debug\FlashSportsLib.csproj.CoreCompileInputs.cache
+D:\Desktop\Kursova\FlashSports – рабочая\FlashSportsLib\obj\Debug\FlashSportsLib.dll
+D:\Desktop\Kursova\FlashSports – рабочая\FlashSportsLib\obj\Debug\FlashSportsLib.pdb

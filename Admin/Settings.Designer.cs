@@ -41,13 +41,14 @@
             this.SaveBtn.TabIndex = 7;
             this.SaveBtn.Text = "Save";
             this.SaveBtn.UseVisualStyleBackColor = true;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(75, 37);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 16);
+            this.label1.Size = new System.Drawing.Size(97, 20);
             this.label1.TabIndex = 8;
             this.label1.Text = "Back Color:";
             // 
@@ -56,12 +57,12 @@
             this.BackColorsCB.FormattingEnabled = true;
             this.BackColorsCB.Location = new System.Drawing.Point(78, 56);
             this.BackColorsCB.Name = "BackColorsCB";
-            this.BackColorsCB.Size = new System.Drawing.Size(288, 24);
+            this.BackColorsCB.Size = new System.Drawing.Size(288, 28);
             this.BackColorsCB.TabIndex = 9;
             // 
             // Settings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(419, 181);
             this.Controls.Add(this.BackColorsCB);
@@ -74,6 +75,7 @@
             this.Name = "Settings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
+            this.Load += new System.EventHandler(this.Settings_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
