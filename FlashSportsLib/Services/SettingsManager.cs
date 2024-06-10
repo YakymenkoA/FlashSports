@@ -26,5 +26,37 @@ namespace FlashSportsLib.Services
             else
                 return (float)9.75;
         }
+
+        public void SaveFontFamilySetting(string fontFamily)
+        {
+            Registry.SetValue(_regPath, "FontFamily", fontFamily);
+        }
+
+        public string ReadFontFamilySetting()
+        {
+            // Open data
+            var reg = Registry.GetValue(_regPath, "FontFamily", null);
+
+            if (reg != null)
+                return reg.ToString();
+            else
+                return "Microsoft Sans Serif"; // Def
+        }
+
+        public void SaveBackColorSetting(string backColor)
+        {
+            Registry.SetValue(_regPath, "BackColor", backColor);
+        }
+
+        public string ReadBackColorSetting()
+        {
+            // Open data
+            var reg = Registry.GetValue(_regPath, "BackColor", null);
+
+            if (reg != null)
+                return reg.ToString();
+            else
+                return "Control"; // Def
+        }
     }
 }

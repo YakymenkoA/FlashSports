@@ -80,6 +80,7 @@
             this.SettingsBtn.TabIndex = 6;
             this.SettingsBtn.Text = "Settings";
             this.SettingsBtn.UseVisualStyleBackColor = true;
+            this.SettingsBtn.Click += new System.EventHandler(this.SettingsBtn_Click);
             // 
             // RemoveSuppBtn
             // 
@@ -113,7 +114,7 @@
             this.FilterCB.FormattingEnabled = true;
             this.FilterCB.Location = new System.Drawing.Point(87, 34);
             this.FilterCB.Name = "FilterCB";
-            this.FilterCB.Size = new System.Drawing.Size(210, 24);
+            this.FilterCB.Size = new System.Drawing.Size(210, 28);
             this.FilterCB.TabIndex = 1;
             // 
             // label1
@@ -122,7 +123,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(33, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 20);
+            this.label1.Size = new System.Drawing.Size(60, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Filter:";
             // 
@@ -146,9 +147,9 @@
             this.Password});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(3, 18);
+            this.listView1.Location = new System.Drawing.Point(3, 22);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1075, 426);
+            this.listView1.Size = new System.Drawing.Size(1075, 422);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -175,7 +176,7 @@
             // 
             // AdminMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1081, 528);
             this.Controls.Add(this.UsersGB);
@@ -186,6 +187,7 @@
             this.Name = "AdminMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Admin";
+            this.Load += new System.EventHandler(this.AdminMain_Load);
             this.ControlPanelGB.ResumeLayout(false);
             this.ControlPanelGB.PerformLayout();
             this.UsersGB.ResumeLayout(false);
