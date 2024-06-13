@@ -47,7 +47,13 @@ namespace Client
 
         private void ClientMain_Load(object sender, EventArgs e)
         {
-            ApplySettings(_clientRepo.ClientSM.ReadFontFamilySetting());
+            var auth = new Login();
+            if (auth.ShowDialog() == DialogResult.OK)
+            {
+                //...
+            }
+            else
+                this.Close();
         }
     }
 }

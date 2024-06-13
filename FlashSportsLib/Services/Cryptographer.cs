@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Client.Services
 {
-    internal class Criptographer
+    public class Cryptographer
     {
         public static string GetHash(string pass)
         {
