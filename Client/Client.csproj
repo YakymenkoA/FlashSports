@@ -78,7 +78,6 @@
       <DependentUpon>Registration.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositories\ClientRepository.cs" />
-    <Compile Include="Services\Criptographer.cs" />
     <Compile Include="Settings.cs">
       <SubType>Form</SubType>
     </Compile>

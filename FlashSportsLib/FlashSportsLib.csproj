@@ -59,6 +59,7 @@
     <Compile Include="Repositories\AdminRepository.cs" />
     <Compile Include="Repositories\ClientRepository.cs" />
     <Compile Include="Repositories\SupportRepository.cs" />
+    <Compile Include="Services\Cryptographer.cs" />
     <Compile Include="Services\MyRequest.cs" />
     <Compile Include="Services\ClientResponse.cs" />
     <Compile Include="Services\SettingsManager.cs" />
