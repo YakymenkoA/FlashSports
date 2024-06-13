@@ -16,5 +16,15 @@ namespace Client
         {
             InitializeComponent();
         }
+
+        private void SignInBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
+
+        private void SignUpBtn_Click(object sender, EventArgs e)
+        {
+            //..
+        }
     }
 }

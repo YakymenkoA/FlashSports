@@ -52,6 +52,7 @@
     <Compile Include="AddCandies.Designer.cs">
       <DependentUpon>AddCandies.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IClient.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +77,8 @@
     <Compile Include="Registration.Designer.cs">
       <DependentUpon>Registration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\ClientRepository.cs" />
+    <Compile Include="Services\Criptographer.cs" />
     <Compile Include="Settings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,10 +151,6 @@
       <Name>FlashSportsLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Repositories\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
