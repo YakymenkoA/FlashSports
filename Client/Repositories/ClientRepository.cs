@@ -1,4 +1,5 @@
 ﻿using Client.Interfaces;
+using FlashSportsLib.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,14 @@ namespace Client.Repositories
         private int _port;
         private IPAddress _addr;
         private IPEndPoint _ep;
-        
+
+        public SettingsManager ClientSM { get; set; }
+
+        public ClientRepository()
+        {
+            ClientSM = new SettingsManager();
+        }
+
         public void Authorization(string username, string password)
         {
             throw new NotImplementedException();

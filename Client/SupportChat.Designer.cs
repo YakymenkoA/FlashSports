@@ -56,9 +56,9 @@
             this.MessageGB.Controls.Add(this.SendBtn);
             this.MessageGB.Controls.Add(this.MessageTB);
             this.MessageGB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MessageGB.Location = new System.Drawing.Point(3, 598);
+            this.MessageGB.Location = new System.Drawing.Point(3, 602);
             this.MessageGB.Name = "MessageGB";
-            this.MessageGB.Size = new System.Drawing.Size(447, 176);
+            this.MessageGB.Size = new System.Drawing.Size(447, 172);
             this.MessageGB.TabIndex = 1;
             this.MessageGB.TabStop = false;
             this.MessageGB.Text = "Your Message :";
@@ -71,6 +71,7 @@
             this.ClearBtn.TabIndex = 4;
             this.ClearBtn.Text = "Clear";
             this.ClearBtn.UseVisualStyleBackColor = true;
+            this.ClearBtn.Click += new System.EventHandler(this.ClearBtn_Click);
             // 
             // SendBtn
             // 
@@ -84,7 +85,7 @@
             // MessageTB
             // 
             this.MessageTB.Dock = System.Windows.Forms.DockStyle.Top;
-            this.MessageTB.Location = new System.Drawing.Point(3, 18);
+            this.MessageTB.Location = new System.Drawing.Point(3, 22);
             this.MessageTB.Multiline = true;
             this.MessageTB.Name = "MessageTB";
             this.MessageTB.Size = new System.Drawing.Size(441, 99);
@@ -92,16 +93,19 @@
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox1.Location = new System.Drawing.Point(3, 18);
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(3, 22);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(447, 580);
             this.textBox1.TabIndex = 0;
             // 
             // SupportChat
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 777);
             this.Controls.Add(this.ChatGB);

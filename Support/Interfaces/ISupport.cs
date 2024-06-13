@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FlashSportsLib.Interfaces;
 
-namespace FlashSportsLib.Repositories
+namespace Support.Interfaces
 {
-    public class SupportRepository : ISupport
+    internal interface ISupport
     {
 
     }

@@ -51,9 +51,9 @@
             this.EventLogLB.Dock = System.Windows.Forms.DockStyle.Left;
             this.EventLogLB.FullRowSelect = true;
             this.EventLogLB.HideSelection = false;
-            this.EventLogLB.Location = new System.Drawing.Point(3, 18);
+            this.EventLogLB.Location = new System.Drawing.Point(3, 22);
             this.EventLogLB.Name = "EventLogLB";
-            this.EventLogLB.Size = new System.Drawing.Size(679, 522);
+            this.EventLogLB.Size = new System.Drawing.Size(679, 518);
             this.EventLogLB.TabIndex = 0;
             this.EventLogLB.UseCompatibleStateImageBehavior = false;
             this.EventLogLB.View = System.Windows.Forms.View.Details;
@@ -116,7 +116,7 @@
             // 
             // ServerMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(965, 543);
             this.Controls.Add(this.MainGB);

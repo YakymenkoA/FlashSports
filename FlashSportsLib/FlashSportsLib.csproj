@@ -41,9 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IAdmin.cs" />
-    <Compile Include="Interfaces\IClient.cs" />
-    <Compile Include="Interfaces\ISupport.cs" />
     <Compile Include="Models\Bet.cs" />
     <Compile Include="Models\Candy.cs" />
     <Compile Include="Models\Category.cs" />
@@ -56,9 +53,6 @@
     <Compile Include="Models\Support.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\AdminRepository.cs" />
-    <Compile Include="Repositories\ClientRepository.cs" />
-    <Compile Include="Repositories\SupportRepository.cs" />
     <Compile Include="Services\Cryptographer.cs" />
     <Compile Include="Services\MyRequest.cs" />
     <Compile Include="Services\ClientResponse.cs" />

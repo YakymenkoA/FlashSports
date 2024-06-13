@@ -58,6 +58,7 @@
     <Compile Include="Chats.Designer.cs">
       <DependentUpon>Chats.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IAdmin.cs" />
     <Compile Include="ManageSupport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +67,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AdminRepository.cs" />
     <Compile Include="Settings.cs">
       <SubType>Form</SubType>
     </Compile>

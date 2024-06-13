@@ -62,6 +62,7 @@
             // 
             // StartChatBtn
             // 
+            this.StartChatBtn.Enabled = false;
             this.StartChatBtn.Location = new System.Drawing.Point(73, 535);
             this.StartChatBtn.Name = "StartChatBtn";
             this.StartChatBtn.Size = new System.Drawing.Size(136, 43);
@@ -76,8 +77,9 @@
             this.ClientName,
             this.Status});
             this.PendingChatLV.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PendingChatLV.Enabled = false;
             this.PendingChatLV.HideSelection = false;
-            this.PendingChatLV.Location = new System.Drawing.Point(3, 18);
+            this.PendingChatLV.Location = new System.Drawing.Point(3, 22);
             this.PendingChatLV.Name = "PendingChatLV";
             this.PendingChatLV.Size = new System.Drawing.Size(288, 512);
             this.PendingChatLV.TabIndex = 0;
@@ -119,12 +121,13 @@
             this.ConnectBtn.TabIndex = 2;
             this.ConnectBtn.Text = "Connect";
             this.ConnectBtn.UseVisualStyleBackColor = true;
+            this.ConnectBtn.Click += new System.EventHandler(this.ConnectBtn_Click);
             // 
             // PortTB
             // 
             this.PortTB.Location = new System.Drawing.Point(153, 27);
             this.PortTB.Name = "PortTB";
-            this.PortTB.Size = new System.Drawing.Size(131, 22);
+            this.PortTB.Size = new System.Drawing.Size(131, 26);
             this.PortTB.TabIndex = 1;
             // 
             // label1
@@ -132,7 +135,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(113, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 16);
+            this.label1.Size = new System.Drawing.Size(45, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Port:";
             // 
@@ -152,15 +155,18 @@
             // 
             // ClearBtn
             // 
+            this.ClearBtn.Enabled = false;
             this.ClearBtn.Location = new System.Drawing.Point(292, 465);
             this.ClearBtn.Name = "ClearBtn";
             this.ClearBtn.Size = new System.Drawing.Size(136, 43);
             this.ClearBtn.TabIndex = 3;
             this.ClearBtn.Text = "Clear";
             this.ClearBtn.UseVisualStyleBackColor = true;
+            this.ClearBtn.Click += new System.EventHandler(this.ClearBtn_Click);
             // 
             // SendBtn
             // 
+            this.SendBtn.Enabled = false;
             this.SendBtn.Location = new System.Drawing.Point(130, 465);
             this.SendBtn.Name = "SendBtn";
             this.SendBtn.Size = new System.Drawing.Size(136, 43);
@@ -170,6 +176,8 @@
             // 
             // MessageTB
             // 
+            this.MessageTB.BackColor = System.Drawing.Color.White;
+            this.MessageTB.Enabled = false;
             this.MessageTB.Location = new System.Drawing.Point(3, 386);
             this.MessageTB.Multiline = true;
             this.MessageTB.Name = "MessageTB";
@@ -178,8 +186,10 @@
             // 
             // GeneralChatTB
             // 
+            this.GeneralChatTB.BackColor = System.Drawing.Color.White;
             this.GeneralChatTB.Dock = System.Windows.Forms.DockStyle.Top;
-            this.GeneralChatTB.Location = new System.Drawing.Point(3, 18);
+            this.GeneralChatTB.Enabled = false;
+            this.GeneralChatTB.Location = new System.Drawing.Point(3, 22);
             this.GeneralChatTB.Multiline = true;
             this.GeneralChatTB.Name = "GeneralChatTB";
             this.GeneralChatTB.Size = new System.Drawing.Size(565, 355);
@@ -187,7 +197,7 @@
             // 
             // SupportMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 590);
             this.Controls.Add(this.groupBox3);
@@ -196,9 +206,11 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "SupportMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Support";
+            this.Load += new System.EventHandler(this.SupportMain_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
