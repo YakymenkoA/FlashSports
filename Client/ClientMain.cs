@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FlashSportsLib.Repositories;
+using Client.Repositories;
 
 namespace Client
 {
@@ -47,6 +47,10 @@ namespace Client
 
         private void ClientMain_Load(object sender, EventArgs e)
         {
+            // #
+            ApplySettings(_clientRepo.ClientSM.ReadFontFamilySetting());
+
+            //
             var auth = new Login();
             if (auth.ShowDialog() == DialogResult.OK)
             {
@@ -54,6 +58,18 @@ namespace Client
             }
             else
                 this.Close();
+        }
+
+        private void UserAvatar_Click(object sender, EventArgs e)
+        {
+            var profile = new Profile();
+            if (profile.ShowDialog() == DialogResult.OK) {}
+        }
+
+        private void SupportIcon_Click(object sender, EventArgs e)
+        {
+            var supportChat = new SupportChat();
+            if (supportChat.ShowDialog() == DialogResult.OK) {}
         }
     }
 }

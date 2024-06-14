@@ -16,5 +16,11 @@ namespace Client
         {
             InitializeComponent();
         }
+
+        private void ClearBtn_Click(object sender, EventArgs e)
+        {
+            MessageTB.Clear();
+            MessageTB.Focus();
+        }
     }
 }

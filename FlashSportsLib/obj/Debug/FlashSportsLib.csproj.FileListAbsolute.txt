@@ -22,3 +22,9 @@ E:\DEV\STEP\KURSOVIK#1\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.cspro
 E:\DEV\STEP\KURSOVIK#1\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.csproj.CoreCompileInputs.cache
 E:\DEV\STEP\KURSOVIK#1\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.dll
 E:\DEV\STEP\KURSOVIK#1\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.pdb
+D:\Desktop\Kurs\FlashSports\FlashSportsLib\bin\Debug\FlashSportsLib.dll
+D:\Desktop\Kurs\FlashSports\FlashSportsLib\bin\Debug\FlashSportsLib.pdb
+D:\Desktop\Kurs\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.csproj.AssemblyReference.cache
+D:\Desktop\Kurs\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.csproj.CoreCompileInputs.cache
+D:\Desktop\Kurs\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.dll
+D:\Desktop\Kurs\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.pdb

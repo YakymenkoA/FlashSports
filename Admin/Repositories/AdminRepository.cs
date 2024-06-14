@@ -1,12 +1,12 @@
-﻿using FlashSportsLib.Interfaces;
-using FlashSportsLib.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Admin.Interfaces;
+using FlashSportsLib.Services;
 
-namespace FlashSportsLib.Repositories
+namespace Admin.Repositories
 {
     public class AdminRepository : IAdmin
     {

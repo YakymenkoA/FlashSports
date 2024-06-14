@@ -293,6 +293,7 @@
             this.SupportIcon.Size = new System.Drawing.Size(33, 33);
             this.SupportIcon.TabIndex = 4;
             this.SupportIcon.TabStop = false;
+            this.SupportIcon.Click += new System.EventHandler(this.SupportIcon_Click);
             // 
             // CandyAmount
             // 
@@ -327,6 +328,7 @@
             this.UserAvatar.Size = new System.Drawing.Size(50, 50);
             this.UserAvatar.TabIndex = 0;
             this.UserAvatar.TabStop = false;
+            this.UserAvatar.Click += new System.EventHandler(this.UserAvatar_Click);
             // 
             // ClientMain
             // 
@@ -337,6 +339,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "ClientMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Client";
