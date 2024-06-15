@@ -36,11 +36,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.NameTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.PasswordTB2 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.PasswordTB2);
             this.groupBox1.Controls.Add(this.SignInBtn);
             this.groupBox1.Controls.Add(this.PasswordTB);
             this.groupBox1.Controls.Add(this.label3);
@@ -51,13 +53,13 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(405, 284);
+            this.groupBox1.Size = new System.Drawing.Size(405, 338);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
             // SignInBtn
             // 
-            this.SignInBtn.Location = new System.Drawing.Point(142, 210);
+            this.SignInBtn.Location = new System.Drawing.Point(142, 250);
             this.SignInBtn.Name = "SignInBtn";
             this.SignInBtn.Size = new System.Drawing.Size(118, 43);
             this.SignInBtn.TabIndex = 21;
@@ -114,11 +116,19 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "Name:";
             // 
+            // PasswordTB2
+            // 
+            this.PasswordTB2.Location = new System.Drawing.Point(48, 197);
+            this.PasswordTB2.Name = "PasswordTB2";
+            this.PasswordTB2.Size = new System.Drawing.Size(309, 22);
+            this.PasswordTB2.TabIndex = 22;
+            this.PasswordTB2.UseSystemPasswordChar = true;
+            // 
             // Registration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(405, 284);
+            this.ClientSize = new System.Drawing.Size(405, 338);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -126,7 +136,6 @@
             this.Name = "Registration";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registration";
-            this.Load += new System.EventHandler(this.Registration_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -142,5 +151,6 @@
         private System.Windows.Forms.TextBox NameTB;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button SignInBtn;
+        private System.Windows.Forms.TextBox PasswordTB2;
     }
 }

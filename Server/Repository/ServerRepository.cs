@@ -99,13 +99,34 @@ namespace Server.Repositories
                             {
                                 if (u.UserName == userAuth[0] && u.Password == userAuth[1])
                                 {
-                                    response.Obj = u;
+                                    response.User = u;
+                                    response.CandyAmount = _db.Candies.Where(c => c.UserId == u.Id).FirstOrDefault().CandyAmount;
                                     response.Message = "OK";
                                     break;
                                 }
                             }
                       
                             // ->
+                            _bf.Serialize(netStream, response);
+                        }
+                        break;
+                    case "REG":
+                        {
+                            var userReg = (string[])request.Obj;
+                            var user = new User()
+                            {
+                                Id = 0,
+                                UserName = userReg[0],
+                                Password = userReg[2],
+                                Email = userReg[1],
+                                Photo = "",
+                                IsBlocked = false,
+                               
+                            };
+                            _db.Users.Add(user);
+                            _db.SaveChanges();
+                            var response = new ClientResponse();
+                            response.Message = "OK";
                             _bf.Serialize(netStream, response);
                         }
                         break;

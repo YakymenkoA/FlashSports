@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Client.Repositories;
 using FlashSportsLib.Models;
 using FlashSportsLib.Services;
+using FlashSportsLIb2.Services;
 
 namespace Client
 {
@@ -61,8 +62,11 @@ namespace Client
                 DialogResult result = auth.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    _clientRepo._currentUser = auth.currentUser;
+                    _clientRepo.currentClientInfo = auth.currentClientInfo;
                     success = true;
+                    // ->
+                    UserNickname.Text = _clientRepo.currentClientInfo.User.UserName;
+                    CandyAmount.Text += $" {_clientRepo.currentClientInfo.CandyAmount}";
                 }
                 else if (result == DialogResult.Yes)
                 {
@@ -70,6 +74,7 @@ namespace Client
                     DialogResult result2 = reg.ShowDialog();
                     if (result2 == DialogResult.OK)
                     {
+
                         success = true;
                     }
                     else

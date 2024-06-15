@@ -22,8 +22,7 @@ namespace Client.Repositories
         private TcpClient _client;
         private BinaryFormatter _bf;
 
-        public User _currentUser;
-        
+        public ClientResponse currentClientInfo;
 
 
         public SettingsManager ClientSM { get; set; }
@@ -45,7 +44,6 @@ namespace Client.Repositories
             {
                 MessageBox.Show($"\n> Connection Error:\n  {ex.Message}", "Error",
                   MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
         }
 
@@ -68,7 +66,7 @@ namespace Client.Repositories
             {
                 if(request.Header == "AUTH")
                 {
-                    _currentUser = (User)response.Obj;
+                    currentClientInfo = response;
                     MessageBox.Show(
                   "Sucsessfuly Authorization!",
                   "Notification",
@@ -76,17 +74,38 @@ namespace Client.Repositories
                    MessageBoxIcon.Information
                   );
                 }
+                else if(request.Header == "REG")
+                {
+                    MessageBox.Show(
+                 "Sucsessfuly Registered!",
+                 "Notification",
+                 MessageBoxButtons.OK,
+                  MessageBoxIcon.Information
+                 );
+                }
                 success = true;
             }
             else
             {
-                MessageBox.Show(
-                  "Faild Authorization!",
-                  "Warrning",
-                  MessageBoxButtons.OK,
-                  MessageBoxIcon.Warning
-                  );
-                success = false;
+                if(request.Header == "AUTH")
+                {
+                    MessageBox.Show(
+                      "Faild Authorization!",
+                      "Warrning",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Warning
+                      );
+                }      
+                else if (request.Header == "REG")
+                {
+                    MessageBox.Show(
+                      "Faild Registration!",
+                      "Warrning",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Warning
+                      );
+                }
+                    success = false;
             }
             // >
             ns?.Close();
