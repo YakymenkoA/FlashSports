@@ -85,26 +85,35 @@ namespace Server.Repositories
                         break;
                     case "AUTH":
                         {
-                            
-                            var userAuth = (string[])request.Obj;
-                            List<User> users = new List<User>();
-                            users = _db.Users.ToList();
-
-                            //var currentUser = users.Where(u => u.UserName == userAuth[0] && u.Password == userAuth[1]).FirstOrDefault();
+                            var req = (string[])request.Obj;
+                            var name = req[0];
+                            var pass = req[1];
                             var currentUser = new User();
-                            var response = new ClientResponse();
-                            response.Message = "FAILD";
 
-                            foreach (var u in users)
+                            //multi thread protection, you can't use req[0] and req[1] in LINQ directly
+                            lock (_db)
                             {
-                                if (u.UserName == userAuth[0] && u.Password == userAuth[1])
+                                currentUser = _db.Users.Where(u => u.UserName == name && u.Password == pass).FirstOrDefault();
+                            }
+
+                            var response = new ClientResponse();
+
+                            if (currentUser != null)
+                            {
+                                response.Message = "OK";
+                                response.User = currentUser;
+                                //multi thread protection
+                                lock (_db)
                                 {
-                                    response.User = u;
-                                    response.CandyAmount = _db.Candies.Where(c => c.UserId == u.Id).FirstOrDefault().CandyAmount;
-                                    response.Message = "OK";
-                                    break;
+                                    response.CandyAmount = _db.Candies.Where(c => c.UserId == currentUser.Id).First().CandyAmount;
+                                    response.SportEvents = _db.SportEvents.ToList();
+                                    response.News = _db.News.ToList();
+                                    foreach (var id in _db.Favourites.Where(f => f.UserId == currentUser.Id))
+                                        response.FavouritesIds.Append(id.SportEventId);
                                 }
                             }
+                            else
+                                response.Message = "FAILD";
                       
                             // ->
                             _bf.Serialize(netStream, response);
@@ -123,8 +132,15 @@ namespace Server.Repositories
                                 IsBlocked = false,
                                
                             };
-                            _db.Users.Add(user);
-                            _db.SaveChanges();
+                            //multi thread protection
+                            lock (_db)
+                            {
+                                _db.Users.Add(user);
+                                _db.SaveChanges();
+                                // might swap for trigger in database later
+                                _db.Candies.Add(new Candy() { Id = 0, CandyAmount = 0, UserId = _db.Users.Where(u => u.Email == user.Email).First().Id });
+                                _db.SaveChanges();
+                            }
                             var response = new ClientResponse();
                             response.Message = "OK";
                             _bf.Serialize(netStream, response);
@@ -147,5 +163,14 @@ namespace Server.Repositories
             MessageBox.Show($"Server stopped!");
         }
 
+        private User FindUser(string username, string password)
+        {
+            var user = new User();
+            lock(_db)
+            {
+                user = _db.Users.Where(u => u.UserName == username && u.Password == password).FirstOrDefault();
+            }
+            return user;
+        }
     }
 }

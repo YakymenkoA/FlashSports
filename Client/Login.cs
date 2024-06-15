@@ -54,7 +54,7 @@ namespace Client
                 };
                 if (_clientRepo.SendRequest(request))
                 {
-                    currentClientInfo = _clientRepo.currentClientInfo;
+                    currentClientInfo = _clientRepo.CurrentClientInfo;
                     DialogResult = DialogResult.OK;
                 }
                 this.Cursor = Cursor.Current;

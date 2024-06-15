@@ -22,9 +22,7 @@ namespace Client.Repositories
         private TcpClient _client;
         private BinaryFormatter _bf;
 
-        public ClientResponse currentClientInfo;
-
-
+        public ClientResponse CurrentClientInfo { get; set; }
         public SettingsManager ClientSM { get; set; }
 
         public ClientRepository()
@@ -66,7 +64,7 @@ namespace Client.Repositories
             {
                 if(request.Header == "AUTH")
                 {
-                    currentClientInfo = response;
+                    CurrentClientInfo = response;
                     MessageBox.Show(
                   "Sucsessfuly Authorization!",
                   "Notification",

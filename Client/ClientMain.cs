@@ -62,11 +62,11 @@ namespace Client
                 DialogResult result = auth.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    _clientRepo.currentClientInfo = auth.currentClientInfo;
+                    _clientRepo.CurrentClientInfo = auth.currentClientInfo;
                     success = true;
                     // ->
-                    UserNickname.Text = _clientRepo.currentClientInfo.User.UserName;
-                    CandyAmount.Text += $" {_clientRepo.currentClientInfo.CandyAmount}";
+                    UserNickname.Text = _clientRepo.CurrentClientInfo.User.UserName;
+                    CandyAmount.Text += $" {_clientRepo.CurrentClientInfo.CandyAmount}";
                 }
                 else if (result == DialogResult.Yes)
                 {
