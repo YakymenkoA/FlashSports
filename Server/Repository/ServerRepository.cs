@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using Server.EF_ORM;
 using Server.Interface;
 using FlashSportsLib.Services;
+using FlashSportsLib.Models;
 
 namespace Server.Repositories
 {
@@ -80,6 +81,26 @@ namespace Server.Repositories
                     case "ADMIN_STOP_SERVER":
                         {
                             ServerStop();
+                        }
+                        break;
+                    case "AUTH":
+                        {
+                            var userAuth = (string[])request.Obj;
+                            //MessageBox.Show($"{userAuth[0]} -> {userAuth[1]}");
+
+                            var currentUser = _db.Users.Where(u => u.UserName == userAuth[0] && u.Password == userAuth[1]).FirstOrDefault();
+                            //MessageBox.Show($"{currentUser.UserName}");
+
+                            var response = new MyResponse();
+                            if (currentUser != null)
+                            {
+                                response.Mess = "OK";
+                                response.Obj = currentUser;
+                            }
+                            else
+                                response.Mess = "FAILD";
+                            // ->
+                            _bf.Serialize(netStream, response);
                         }
                         break;
                     default:

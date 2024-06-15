@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlashSportsLib.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,9 @@ namespace Client.Interfaces
 {
     internal interface IClient
     {
-        void Connect(string ip, string port);
-
-        void Authorization(string username, string password);
+        void Connect(string ip, int port);
 
         void Registration(string username, string email, string password);
+
     }
 }

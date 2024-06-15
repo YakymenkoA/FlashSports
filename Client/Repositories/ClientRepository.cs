@@ -1,10 +1,13 @@
 ﻿using Client.Interfaces;
+using FlashSportsLib.Models;
 using FlashSportsLib.Services;
+using FlashSportsLIb2.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +19,12 @@ namespace Client.Repositories
         private int _port;
         private IPAddress _addr;
         private IPEndPoint _ep;
+        private TcpClient _client;
+        private BinaryFormatter _bf;
+
+        public User _currentUser;
+        
+
 
         public SettingsManager ClientSM { get; set; }
 
@@ -24,17 +33,12 @@ namespace Client.Repositories
             ClientSM = new SettingsManager();
         }
 
-        public void Authorization(string username, string password)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Connect(string ip, string port)
+        public void Connect(string ip, int port)
         {
             try
             {
                 _addr = IPAddress.Parse(ip);
-                _port = int.Parse(port);
+                _port = port;
                 _ep = new IPEndPoint(_addr, _port);
             }
             catch (Exception ex)
@@ -48,6 +52,46 @@ namespace Client.Repositories
         public void Registration(string username, string email, string password)
         {
             throw new NotImplementedException();
+        }
+
+        public bool SendRequest(MyRequest request)
+        {
+            _bf = new BinaryFormatter();
+            bool success = false;
+            _client = new TcpClient();
+            _client.Connect(_ep);
+            NetworkStream ns = _client.GetStream();
+            _bf.Serialize(ns, request);
+            // ->
+            MyResponse response = (MyResponse) _bf.Deserialize(ns);
+            if(response.Mess == "OK")
+            {
+                if(request.Header == "AUTH")
+                {
+                    _currentUser = (User)response.Obj;
+                    MessageBox.Show(
+                  "Sucsessfuly Authorization!",
+                  "Notification",
+                  MessageBoxButtons.OK,
+                   MessageBoxIcon.Information
+                  );
+                }
+                success = true;
+            }
+            else
+            {
+                MessageBox.Show(
+                  "Faild Authorization!",
+                  "Warrning",
+                  MessageBoxButtons.OK,
+                  MessageBoxIcon.Warning
+                  );
+                success = false;
+            }
+            // >
+            ns?.Close();
+            _client?.Close();
+            return success;
         }
     }
 }

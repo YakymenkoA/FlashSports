@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client.Repositories;
+using FlashSportsLib.Models;
+using FlashSportsLib.Services;
 
 namespace Client
 {
     public partial class ClientMain : Form
     {
         private ClientRepository _clientRepo;
+        
 
         public ClientMain()
         {
@@ -52,12 +55,38 @@ namespace Client
 
             //
             var auth = new Login();
-            if (auth.ShowDialog() == DialogResult.OK)
+            bool success = true;
+            while (success)
             {
-                //...
+                DialogResult result = auth.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    _clientRepo._currentUser = auth.currentUser;
+                }
+                else if (result == DialogResult.Yes)
+                {
+                    var reg = new Registration();
+                    DialogResult result2 = reg.ShowDialog();
+                    if (result2 == DialogResult.OK)
+                    {
+
+                    }
+                    else
+                    {
+                        success = false;
+                        this.Close();
+                    }
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    success = false;
+                    this.Close();
+                }
             }
-            else
-                this.Close();
+           
+
+
+           
         }
 
         private void UserAvatar_Click(object sender, EventArgs e)
