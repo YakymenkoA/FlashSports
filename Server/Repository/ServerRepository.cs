@@ -85,20 +85,26 @@ namespace Server.Repositories
                         break;
                     case "AUTH":
                         {
+                            
                             var userAuth = (string[])request.Obj;
-                            //MessageBox.Show($"{userAuth[0]} -> {userAuth[1]}");
+                            List<User> users = new List<User>();
+                            users = _db.Users.ToList();
 
-                            var currentUser = _db.Users.Where(u => u.UserName == userAuth[0] && u.Password == userAuth[1]).FirstOrDefault();
-                            //MessageBox.Show($"{currentUser.UserName}");
+                            //var currentUser = users.Where(u => u.UserName == userAuth[0] && u.Password == userAuth[1]).FirstOrDefault();
+                            var currentUser = new User();
+                            var response = new ClientResponse();
+                            response.Message = "FAILD";
 
-                            var response = new MyResponse();
-                            if (currentUser != null)
+                            foreach (var u in users)
                             {
-                                response.Mess = "OK";
-                                response.Obj = currentUser;
+                                if (u.UserName == userAuth[0] && u.Password == userAuth[1])
+                                {
+                                    response.Obj = u;
+                                    response.Message = "OK";
+                                    break;
+                                }
                             }
-                            else
-                                response.Mess = "FAILD";
+                      
                             // ->
                             _bf.Serialize(netStream, response);
                         }
