@@ -55,13 +55,14 @@ namespace Client
 
             //
             var auth = new Login();
-            bool success = true;
-            while (success)
+            bool success = false;
+            while (!success)
             {
                 DialogResult result = auth.ShowDialog();
                 if (result == DialogResult.OK)
                 {
                     _clientRepo._currentUser = auth.currentUser;
+                    success = true;
                 }
                 else if (result == DialogResult.Yes)
                 {
@@ -69,17 +70,17 @@ namespace Client
                     DialogResult result2 = reg.ShowDialog();
                     if (result2 == DialogResult.OK)
                     {
-
+                        success = true;
                     }
                     else
                     {
-                        success = false;
+                        success = true;
                         this.Close();
                     }
                 }
                 else if (result == DialogResult.Cancel)
                 {
-                    success = false;
+                    success = true;
                     this.Close();
                 }
             }

@@ -45,6 +45,7 @@ namespace Client
             }
             else
             {
+                this.Cursor = Cursors.WaitCursor;
                 var auth = new string[] { LoginTB.Text, Cryptographer.GetHash(PasswordTB.Text) };
                 var request = new MyRequest()
                 {
@@ -56,8 +57,8 @@ namespace Client
                     currentUser = _clientRepo._currentUser;
                     DialogResult = DialogResult.OK;
                 }
+                this.Cursor = Cursor.Current;
 
-                
             }
 
             

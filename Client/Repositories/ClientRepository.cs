@@ -63,8 +63,8 @@ namespace Client.Repositories
             NetworkStream ns = _client.GetStream();
             _bf.Serialize(ns, request);
             // ->
-            MyResponse response = (MyResponse) _bf.Deserialize(ns);
-            if(response.Mess == "OK")
+            var response = (ClientResponse) _bf.Deserialize(ns);
+            if(response.Message == "OK")
             {
                 if(request.Header == "AUTH")
                 {
