@@ -18,7 +18,7 @@ namespace Client
     public partial class Login : Form
     {
         private ClientRepository _clientRepo;
-        public User currentUser;
+        public ClientResponse currentClientInfo;
         public Login()
         {
             InitializeComponent();
@@ -31,13 +31,13 @@ namespace Client
         private void SignInBtn_Click(object sender, EventArgs e)
         {
            
-            if(LoginTB.Text == string.Empty)
+            if(string.IsNullOrWhiteSpace(LoginTB.Text))
             {
                 MessageBox.Show($"Input LOGIN befor continue! ", "Error",
                   MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LoginTB.Focus();
             }
-            else if(PasswordTB.Text == "")
+            else if(string.IsNullOrWhiteSpace(PasswordTB.Text))
             {
                 MessageBox.Show($"Input PASSWORD befor continue! ", "Error",
                  MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -54,7 +54,7 @@ namespace Client
                 };
                 if (_clientRepo.SendRequest(request))
                 {
-                    currentUser = _clientRepo._currentUser;
+                    currentClientInfo = _clientRepo.currentClientInfo;
                     DialogResult = DialogResult.OK;
                 }
                 this.Cursor = Cursor.Current;
@@ -66,7 +66,37 @@ namespace Client
 
         private void SignUpBtn_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Yes;
+            var reg = new Registration();
+            DialogResult result2 = reg.ShowDialog();
+            if (result2 == DialogResult.OK)
+            {
+                
+                this.Cursor = Cursors.WaitCursor;
+                // ->
+                LoginTB.Enabled = false;
+                PasswordTB.Enabled = false;
+                SignInBtn.Enabled = false;
+                SignUpBtn.Enabled = false;
+                //
+                var o = new string[] { reg.name, reg.email, reg.pass};
+                var request = new MyRequest()
+                {
+                    Header = "REG",
+                    Obj = o,
+                };
+
+                _clientRepo.SendRequest(request);
+                this.Cursor = Cursor.Current;
+                LoginTB.Enabled = true;
+                PasswordTB.Enabled = true;
+                SignInBtn.Enabled = true;
+                SignUpBtn.Enabled = true;
+            }
+            else
+            {
+                
+                this.Close();
+            }
         }
 
         private void Login_Load(object sender, EventArgs e)
