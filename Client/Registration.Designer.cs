@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.SignInBtn = new System.Windows.Forms.Button();
             this.PasswordTB = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.EmailTB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.NameTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.SignInBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +54,16 @@
             this.groupBox1.Size = new System.Drawing.Size(405, 284);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // SignInBtn
+            // 
+            this.SignInBtn.Location = new System.Drawing.Point(142, 210);
+            this.SignInBtn.Name = "SignInBtn";
+            this.SignInBtn.Size = new System.Drawing.Size(118, 43);
+            this.SignInBtn.TabIndex = 21;
+            this.SignInBtn.Text = "Create account";
+            this.SignInBtn.UseVisualStyleBackColor = true;
+            this.SignInBtn.Click += new System.EventHandler(this.SignInBtn_Click);
             // 
             // PasswordTB
             // 
@@ -104,15 +114,6 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "Name:";
             // 
-            // SignInBtn
-            // 
-            this.SignInBtn.Location = new System.Drawing.Point(142, 210);
-            this.SignInBtn.Name = "SignInBtn";
-            this.SignInBtn.Size = new System.Drawing.Size(118, 43);
-            this.SignInBtn.TabIndex = 21;
-            this.SignInBtn.Text = "Create account";
-            this.SignInBtn.UseVisualStyleBackColor = true;
-            // 
             // Registration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -125,6 +126,7 @@
             this.Name = "Registration";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registration";
+            this.Load += new System.EventHandler(this.Registration_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

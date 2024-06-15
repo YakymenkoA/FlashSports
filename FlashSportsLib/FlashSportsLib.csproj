@@ -56,6 +56,7 @@
     <Compile Include="Services\Cryptographer.cs" />
     <Compile Include="Services\MyRequest.cs" />
     <Compile Include="Services\ClientResponse.cs" />
+    <Compile Include="Services\MyResponse.cs" />
     <Compile Include="Services\SettingsManager.cs" />
   </ItemGroup>
   <ItemGroup />
