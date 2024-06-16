@@ -16,5 +16,6 @@ namespace FlashSportsLIb2.Services
         public int CandyAmount { get; set; }
         public int[] FavouritesIds { get; set; }
         public User User { get; set; }
+        public List<Bet> Bets { get; set; }
     }
 }

@@ -190,7 +190,7 @@
             this.Sport3.Name = "Sport3";
             this.Sport3.Size = new System.Drawing.Size(802, 0);
             this.Sport3.TabIndex = 4;
-            this.Sport3.Text = "Sport3";
+            this.Sport3.Text = "Football";
             this.Sport3.UseVisualStyleBackColor = true;
             // 
             // Sport4

@@ -5,6 +5,8 @@
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using FlashSportsLib.Services;
+
 
     internal sealed class Configuration : DbMigrationsConfiguration<Server.EF_ORM.FlashSportsDB>
     {
@@ -37,6 +39,9 @@
             context.Categories.AddOrUpdate(new Category() { Id = 2, Title = "MaxSportType" });
             context.Categories.AddOrUpdate(new Category() { Id = 3, Title = "LeshaSportType" });
             context.Categories.AddOrUpdate(new Category() { Id = 4, Title = "IllyaSportType" });
+
+            var apiManager = new ApiManager();
+            // foreach...
         }
     }
 }

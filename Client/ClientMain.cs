@@ -14,6 +14,7 @@ using FlashSportsLIb2.Services;
 
 namespace Client
 {
+    enum SportCategories { Football = 1, SportType2, SportType3, SportType4 };
     public partial class ClientMain : Form
     {
         private ClientRepository _clientRepo;

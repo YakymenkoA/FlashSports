@@ -110,6 +110,7 @@ namespace Server.Repositories
                                     response.News = _db.News.ToList();
                                     foreach (var id in _db.Favourites.Where(f => f.UserId == currentUser.Id))
                                         response.FavouritesIds.Append(id.SportEventId);
+                                    response.Bets = _db.Bets.Where(b => b.UserId == currentUser.Id).ToList();
                                 }
                             }
                             else
