@@ -162,15 +162,5 @@ namespace Server.Repositories
             _l.Stop();
             MessageBox.Show($"Server stopped!");
         }
-
-        private User FindUser(string username, string password)
-        {
-            var user = new User();
-            lock(_db)
-            {
-                user = _db.Users.Where(u => u.UserName == username && u.Password == password).FirstOrDefault();
-            }
-            return user;
-        }
     }
 }
