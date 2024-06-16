@@ -25,7 +25,7 @@ namespace FlashSportsLib.Services
             return list;
         }
 
-        public List<SportEvent> SoccerSportTypeGetInfo()
+        public List<SportEvent> SoccerGetInfo()
         {
             var list = new List<SportEvent>();
 

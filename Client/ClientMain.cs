@@ -14,7 +14,7 @@ using FlashSportsLIb2.Services;
 
 namespace Client
 {
-    enum SportCategories { Football = 1, SportType2, SportType3, SportType4 };
+    enum SportCategories { Football = 1, SportType2, Soccer, SportType4 };
     public partial class ClientMain : Form
     {
         private ClientRepository _clientRepo;
@@ -92,10 +92,6 @@ namespace Client
                     this.Close();
                 }
             }
-           
-
-
-           
         }
 
         private void UserAvatar_Click(object sender, EventArgs e)
