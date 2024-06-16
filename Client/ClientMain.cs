@@ -14,7 +14,7 @@ using FlashSportsLIb2.Services;
 
 namespace Client
 {
-    enum SportCategories { Football = 1, SportType2, Soccer, SportType4 };
+    enum SportCategories { Football, SportType2, Soccer, SportType4 };
     public partial class ClientMain : Form
     {
         private ClientRepository _clientRepo;
@@ -68,8 +68,9 @@ namespace Client
                     UserNickname.Text = _clientRepo.CurrentClientInfo.User.UserName;
                     CandyAmount.Text += $" {_clientRepo.CurrentClientInfo.CandyAmount}";
                     // ------------------------------------------------------
+                    FiledEvetsList();
 
-                   
+
                 }
                 else if (result == DialogResult.Yes)
                 {
@@ -105,5 +106,28 @@ namespace Client
             var supportChat = new SupportChat();
             if (supportChat.ShowDialog() == DialogResult.OK) {}
         }
+
+        private void FiledEvetsList()
+        {
+            EventsLV.Items.Clear();
+            FilterTC.SelectedIndex = (int)SportCategories.Soccer;
+
+            foreach(var row in _clientRepo.CurrentClientInfo.SportEvents)
+            {
+                try
+                {
+                    var listItem = EventsLV.Items.Add(row.Title);
+                    listItem.SubItems.Add(row.Description);
+                    listItem.SubItems.Add(row.IssueDate.ToString());
+                }
+                catch(Exception ex) {
+                    MessageBox.Show($"{ex}");
+                }
+            }
+
+           
+
+        }
+
     }
 }
