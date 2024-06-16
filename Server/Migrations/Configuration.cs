@@ -37,7 +37,7 @@
 
             context.Categories.AddOrUpdate(new Category() { Id = 1, Title = "AlexSportType" });
             context.Categories.AddOrUpdate(new Category() { Id = 2, Title = "MaxSportType" });
-            context.Categories.AddOrUpdate(new Category() { Id = 3, Title = "LeshaSportType" });
+            context.Categories.AddOrUpdate(new Category() { Id = 3, Title = "SoccerSportType" });
             context.Categories.AddOrUpdate(new Category() { Id = 4, Title = "IllyaSportType" });
 
             context.News.AddOrUpdate(new News() { 
@@ -80,6 +80,14 @@
 
             var apiManager = new ApiManager();
             // foreach... use AddOrUpdate();
+            foreach (var soccer in apiManager.SoccerSportTypeGetInfo())
+            {
+                context.SportEvents.AddOrUpdate(new SportEvent() { 
+                    Id = soccer.Id, Title = soccer.Title, Description = soccer.Description, 
+                    IssueDate = soccer.IssueDate, CategoryId = soccer.CategoryId 
+                });
+            }
+
         }
     }
 }

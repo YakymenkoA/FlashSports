@@ -21,6 +21,7 @@ namespace FlashSportsLib.Models
         public virtual List<Candy> Candies { get; set; }
         public virtual List<Favourite> Favourites { get; set; }
         public virtual List<Chat> Chats { get; set; }
-        public virtual List<Comment> Comments { get; set; }
+        public virtual List<Comment> Comments { get; set; } 
+
     }
 }
