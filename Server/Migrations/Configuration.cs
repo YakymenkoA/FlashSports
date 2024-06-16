@@ -40,8 +40,46 @@
             context.Categories.AddOrUpdate(new Category() { Id = 3, Title = "LeshaSportType" });
             context.Categories.AddOrUpdate(new Category() { Id = 4, Title = "IllyaSportType" });
 
+            context.News.AddOrUpdate(new News() { 
+                Id = 1,
+                Title = "Hamburg police shoot man with axe ahead of Euros match",
+                Content = "A major operation has taken place in central Hamburg after a man with an axe threatened police officers, officials in the German city say." +
+                "\r\nPolice say they shot and seriously injured the man, who is receiving medical attention." +
+                "\r\nMedia reports say the incident took place near a fanzone for supporters of the Dutch football team." +
+                "\r\nThe Netherlands faced Poland in the city in the Euro 2024 tournament on Sunday." +
+                "\r\nAn initial police statement said that a man threatened police officers with a pickaxe and an \"incendiary device\"." +
+                "\r\nLater, a Hamburg police spokesperson told the BBC the suspect was armed with a pickaxe and had tried to ignite a petrol bomb – but that officers responded with pepper spray and then shot him." +
+                "\r\nThe incident is understood to have taken place at around 12:30 local time (10:30 GMT)." +
+                "\r\nVideo footage posted online, shows a man wielding an axe in front of police officers before a series of suspected gunshot sounds can be heard." +
+                "\r\nThe man has not been identified by the police and the authorities have not commented on what motivations they believe were behind the incident.",
+                Picture = "somepicture.png"
+            });
+            context.News.AddOrUpdate(new News()
+            {
+                Id = 2,
+                Title = "Ashes pain forgiven? England rescued by old foe",
+                Content = "Alex Carey, David Warner, Steve Smith and all of that Ashes pain - England fans forgive you." +
+                "\r\nFor Scotland, this was T20 World Cup heartache - with Chris Sole's dropped catch in the final over only adding to 36 hours of cruel sporting misery." +
+                "\r\nFor England, Australia’s gripping victory against Scotland - which knocked out the Scots and sent Jos Buttler’s side through to the Super 8s - offered pure relief, served up by their oldest cricketing rivals." +
+                "\r\nLast summer Travis Head was pounding England bowlers in an attempt to win back the Ashes urn." +
+                "\r\nHe was in the middle on that final day at The Oval with Smith, the pair threatening to take Australia home before Stuart Broad’s grand finale." +
+                "\r\nEighteen months earlier, during England’s most recent venture down under, Head flogged Ben Stokes et al around Brisbane in a blistering century." +
+                "\r\nIt was only the second day of the series, but England would never recover from it.",
+                Picture = "somepicture.png"
+            });
+
+            context.Comments.AddOrUpdate(new Comment() { Id = 1, NewsId = 1, UserId = 1, Content = "ok!" });
+            context.Comments.AddOrUpdate(new Comment() { Id = 2, NewsId = 1, UserId = 2, Content = "wow bad news!" });
+            context.Comments.AddOrUpdate(new Comment() { Id = 3, NewsId = 1, UserId = 3, Content = "wow amazing news!" });
+            context.Comments.AddOrUpdate(new Comment() { Id = 4, NewsId = 1, UserId = 4, Content = "wow cool news!" });
+
+            context.Comments.AddOrUpdate(new Comment() { Id = 5, NewsId = 2, UserId = 1, Content = "my comment!" });
+            context.Comments.AddOrUpdate(new Comment() { Id = 6, NewsId = 2, UserId = 2, Content = "his comment!" });
+            context.Comments.AddOrUpdate(new Comment() { Id = 7, NewsId = 2, UserId = 3, Content = "something!" });
+            context.Comments.AddOrUpdate(new Comment() { Id = 8, NewsId = 2, UserId = 4, Content = "no!" });
+
             var apiManager = new ApiManager();
-            // foreach...
+            // foreach... use AddOrUpdate();
         }
     }
 }
