@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientMain));
             this.MainGB = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
@@ -270,6 +271,8 @@
             // 
             // SettingIcon
             // 
+            this.SettingIcon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SettingIcon.BackgroundImage")));
+            this.SettingIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.SettingIcon.Location = new System.Drawing.Point(771, 30);
             this.SettingIcon.Name = "SettingIcon";
             this.SettingIcon.Size = new System.Drawing.Size(33, 33);
@@ -288,6 +291,8 @@
             // 
             // SupportIcon
             // 
+            this.SupportIcon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SupportIcon.BackgroundImage")));
+            this.SupportIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.SupportIcon.Location = new System.Drawing.Point(895, 30);
             this.SupportIcon.Name = "SupportIcon";
             this.SupportIcon.Size = new System.Drawing.Size(33, 33);
@@ -306,6 +311,8 @@
             // 
             // CandyIcon
             // 
+            this.CandyIcon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("CandyIcon.BackgroundImage")));
+            this.CandyIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.CandyIcon.Location = new System.Drawing.Point(206, 30);
             this.CandyIcon.Name = "CandyIcon";
             this.CandyIcon.Size = new System.Drawing.Size(33, 33);
@@ -323,6 +330,9 @@
             // 
             // UserAvatar
             // 
+            this.UserAvatar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("UserAvatar.BackgroundImage")));
+            this.UserAvatar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.UserAvatar.InitialImage = null;
             this.UserAvatar.Location = new System.Drawing.Point(22, 21);
             this.UserAvatar.Name = "UserAvatar";
             this.UserAvatar.Size = new System.Drawing.Size(50, 50);
