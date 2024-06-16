@@ -154,6 +154,11 @@
       <Name>FlashSportsLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Img\candies.png" />
+    <Content Include="Img\setting.png" />
+    <Content Include="Img\support.png" />
+    <Content Include="Img\user.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
