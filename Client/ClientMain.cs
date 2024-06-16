@@ -18,7 +18,6 @@ namespace Client
     public partial class ClientMain : Form
     {
         private ClientRepository _clientRepo;
-        
 
         public ClientMain()
         {
@@ -68,6 +67,9 @@ namespace Client
                     // ->
                     UserNickname.Text = _clientRepo.CurrentClientInfo.User.UserName;
                     CandyAmount.Text += $" {_clientRepo.CurrentClientInfo.CandyAmount}";
+                    // ------------------------------------------------------
+
+                   
                 }
                 else if (result == DialogResult.Yes)
                 {

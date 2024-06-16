@@ -71,7 +71,7 @@ namespace Client
             if (result2 == DialogResult.OK)
             {
                 
-                this.Cursor = Cursors.WaitCursor;
+                
                 // ->
                 LoginTB.Enabled = false;
                 PasswordTB.Enabled = false;
@@ -84,13 +84,14 @@ namespace Client
                     Header = "REG",
                     Obj = o,
                 };
-
+                this.Cursor = Cursors.WaitCursor;
                 _clientRepo.SendRequest(request);
-                this.Cursor = Cursor.Current;
+                this.Cursor = DefaultCursor;
                 LoginTB.Enabled = true;
                 PasswordTB.Enabled = true;
                 SignInBtn.Enabled = true;
                 SignUpBtn.Enabled = true;
+                
             }
             else
             {
