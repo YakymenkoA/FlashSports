@@ -16,6 +16,7 @@ namespace Support.Repositories
 {
     internal class SupportRepository : ISupport
     {
+        private IPAddress _ip;
         private int _port;
         private IPEndPoint _ep;
         private BinaryFormatter _bf;
@@ -39,11 +40,26 @@ namespace Support.Repositories
 
             _bf.Serialize(ns, "SUPPORT_LOGIN");
             var response = (SupportResponse)_bf.Deserialize(ns);
-            GeneralChat.Text += "Hello, yo";
-            GeneralChat.Text = response.SuppChat;
+            //GeneralChat.Text += "Hello, yo";
+            GeneralChat.Invoke(new Action( () => GeneralChat.Text = response.SuppChat));
 
             ns?.Close();
             _support?.Close();
+        }
+
+        public void Connect(string ip, int port)
+        {
+            try
+            {
+                _ip = IPAddress.Parse(ip);
+                _port = port;
+                _ep = new IPEndPoint(_ip, _port);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"\n> Connection Error:\n  {ex.Message}", "Error",
+                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public bool SendRequest(MyRequest request)
@@ -55,7 +71,7 @@ namespace Support.Repositories
             NetworkStream ns = _support.GetStream();
             _bf.Serialize(ns, request);
             // ->
-            var response = (SupportResponse)_bf.Deserialize(ns);
+            var response = (SupportResponse) _bf.Deserialize(ns);
             if (response.Message == "OK")
             {
                 CurrentSupportInfo = response;

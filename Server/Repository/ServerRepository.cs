@@ -181,10 +181,13 @@ namespace Server.Repositories
                             {
                                 response.Message = "OK";
                                 response.Support = currentSupp;
+                                UpdateLog("AUTH", $"{currentSupp.Id}", "SUPPORT", $"{name} -> SUCCESSFUL LOGIN");
                             }
                             else
+                            {
                                 response.Message = "FAILD";
-
+                                UpdateLog("AUTH", "-1", "SUPPORT", $"{name} -> FAILED LOGIN");
+                            }
                             // ->
                             _bf.Serialize(netStream, response);
                         }

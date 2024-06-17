@@ -114,5 +114,11 @@ namespace Client.Repositories
         {
             return CurrentClientInfo.SportEvents.FindAll(s => s.CategoryId == categoryId);
         }
+
+        public List<FlashSportsLib.Models.News> FillNews()
+        {
+            //
+            return CurrentClientInfo.News;
+        }
     }
 }

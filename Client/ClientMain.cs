@@ -68,7 +68,7 @@ namespace Client
                     CandyAmount.Text += $" {_clientRepo.CurrentClientInfo.CandyAmount}";
                     // ------------------------------------------------------
                     DisplayEvents(_clientRepo.FilterEvents(1));
-
+                    DisplayNews(_clientRepo.FillNews());
 
 
 
@@ -99,13 +99,13 @@ namespace Client
         private void UserAvatar_Click(object sender, EventArgs e)
         {
             var profile = new Profile();
-            if (profile.ShowDialog() == DialogResult.OK) {}
+            if (profile.ShowDialog() == DialogResult.OK) { }
         }
 
         private void SupportIcon_Click(object sender, EventArgs e)
         {
             var supportChat = new SupportChat();
-            if (supportChat.ShowDialog() == DialogResult.OK) {}
+            if (supportChat.ShowDialog() == DialogResult.OK) { }
         }
 
         private void FiledEvetsList(int index)
@@ -121,7 +121,7 @@ namespace Client
                     break;
                     case (int)SportCategories.Cricket:
                         {
-                            // ...
+                            DisplayEvents(_clientRepo.FilterEvents(2));
                         }
                         break;
                     case (int)SportCategories.Soccer:
@@ -164,6 +164,14 @@ namespace Client
                 var listItem = EventsLV.Items.Add(e.Title);
                 listItem.SubItems.Add(e.Description);
                 listItem.SubItems.Add(e.IssueDate.ToString("g"));
+            }
+        }
+
+        private void DisplayNews(List<FlashSportsLib.Models.News> news)
+        {
+            foreach (var n in news)
+            {
+                NewsPanelLV.Items.Add(n.Title);
             }
         }
     }

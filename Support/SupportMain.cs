@@ -23,9 +23,7 @@ namespace Support
                 //_suppRepo.ConnectSupp();
             }
             else
-                this.Close();
-
-            //_suppRepo.ConnectSupp();
+                this.Close();   
         }
 
         private void ClearBtn_Click(object sender, EventArgs e)
