@@ -35,12 +35,12 @@
             context.Candies.AddOrUpdate(new Candy() { Id = 4, CandyAmount = 0, UserId = 4 });
             context.Candies.AddOrUpdate(new Candy() { Id = 5, CandyAmount = 0, UserId = 5 });
 
-            context.Categories.AddOrUpdate(new Category() { Id = 1, Title = "AlexSportType" });
+            context.Categories.AddOrUpdate(new Category() { Id = 1, Title = "Golf" });
             context.Categories.AddOrUpdate(new Category() { Id = 2, Title = "Cricket" });
             context.Categories.AddOrUpdate(new Category() { Id = 3, Title = "Soccer" });
             context.Categories.AddOrUpdate(new Category() { Id = 4, Title = "IllyaSportType" });
 
-            context.News.AddOrUpdate(new News() { 
+            context.News.AddOrUpdate(new News() {
                 Id = 1,
                 Title = "Hamburg police shoot man with axe ahead of Euros match",
                 Content = "A major operation has taken place in central Hamburg after a man with an axe threatened police officers, officials in the German city say." +
@@ -88,6 +88,11 @@
             foreach (var cricket in apiManager.CricketGetInfo().Result)
             {
                 context.SportEvents.AddOrUpdate(cricket);
+            }
+
+            foreach (var golf in apiManager.GolfGetInfoAsync().Result)
+            {
+                context.SportEvents.AddOrUpdate(golf);
             }
         }
     }

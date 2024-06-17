@@ -13,7 +13,7 @@ using FlashSportsLib.Services;
 
 namespace Client
 {
-    enum SportCategories { SportType1, Cricket, Soccer, SportType4, Bets, Favourites };
+    enum SportCategories { Golf, Cricket, Soccer, SportType4, Bets, Favourites };
     public partial class ClientMain : Form
     {
         private ClientRepository _clientRepo;
@@ -67,8 +67,9 @@ namespace Client
                     UserNickname.Text = _clientRepo.CurrentClientInfo.User.UserName;
                     CandyAmount.Text += $" {_clientRepo.CurrentClientInfo.CandyAmount}";
                     // ------------------------------------------------------
+                    DisplayEvents(_clientRepo.FilterEvents(1));
 
-                   
+
 
 
                 }
@@ -113,9 +114,9 @@ namespace Client
             {
                 EventsLV.Items.Clear();
                 switch (index) { 
-                    case (int)SportCategories.SportType1:
+                    case (int)SportCategories.Golf:
                         {
-                            // ...
+                            DisplayEvents(_clientRepo.FilterEvents(1));
                         }
                     break;
                     case (int)SportCategories.Cricket:
@@ -125,19 +126,7 @@ namespace Client
                         break;
                     case (int)SportCategories.Soccer:
                         {
-                          foreach (var row in _clientRepo.FilterEvents(3))
-                            {
-                                try
-                                {
-                                    var listItem = EventsLV.Items.Add(row.Title);
-                                    listItem.SubItems.Add(row.Description);
-                                    listItem.SubItems.Add(row.IssueDate.ToString());
-                                }
-                                catch (Exception ex)
-                                {
-                                    MessageBox.Show($"{ex}");
-                                }
-                            }
+                            DisplayEvents(_clientRepo.FilterEvents(3));                           
                         }
                         break;
                     case (int)SportCategories.SportType4:
@@ -166,7 +155,16 @@ namespace Client
         {
             //FilterTC.SelectedIndex = (int)SportCategories.Soccer;
             FiledEvetsList(FilterTC.SelectedIndex);
+        }
 
+        private void DisplayEvents(List<SportEvent> events)
+        {
+            foreach(var e in events)
+            {
+                var listItem = EventsLV.Items.Add(e.Title);
+                listItem.SubItems.Add(e.Description);
+                listItem.SubItems.Add(e.IssueDate.ToString("g"));
+            }
         }
     }
 }
