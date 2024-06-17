@@ -24,13 +24,14 @@ namespace Server
         public ServerMain()
         {
             InitializeComponent();
-            _serverRepo = new ServerRepository();
+            _serverRepo = new ServerRepository(SupportChatTB, EventLogLB);
         }
 
         private void ServerMain_Load(object sender, EventArgs e)
         {
             _serverRepo.ServerStart();
             ApplySettings(_serverRepo.Sm.ReadFontSizeSetting());
+            SupportChatTB.Text += $"Admin {DateTime.Now} -> Hello everyone";
         }
 
         private void ServerMain_FormClosed(object sender, FormClosedEventArgs e)

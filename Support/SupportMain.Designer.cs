@@ -34,17 +34,12 @@
             this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ClientName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ConnectBtn = new System.Windows.Forms.Button();
-            this.PortTB = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.ClearBtn = new System.Windows.Forms.Button();
             this.SendBtn = new System.Windows.Forms.Button();
             this.MessageTB = new System.Windows.Forms.TextBox();
             this.GeneralChatTB = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,13 +57,13 @@
             // 
             // StartChatBtn
             // 
-            this.StartChatBtn.Enabled = false;
-            this.StartChatBtn.Location = new System.Drawing.Point(73, 535);
+            this.StartChatBtn.Location = new System.Drawing.Point(73, 540);
             this.StartChatBtn.Name = "StartChatBtn";
             this.StartChatBtn.Size = new System.Drawing.Size(136, 43);
             this.StartChatBtn.TabIndex = 1;
             this.StartChatBtn.Text = "Start Chat";
             this.StartChatBtn.UseVisualStyleBackColor = true;
+            this.StartChatBtn.Click += new System.EventHandler(this.StartChatBtn_Click);
             // 
             // PendingChatLV
             // 
@@ -77,7 +72,6 @@
             this.ClientName,
             this.Status});
             this.PendingChatLV.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PendingChatLV.Enabled = false;
             this.PendingChatLV.HideSelection = false;
             this.PendingChatLV.Location = new System.Drawing.Point(3, 22);
             this.PendingChatLV.Name = "PendingChatLV";
@@ -100,45 +94,6 @@
             // 
             this.Status.Text = "Status";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.ConnectBtn);
-            this.groupBox2.Controls.Add(this.PortTB);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(294, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(571, 70);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Multiple connection imitation:";
-            // 
-            // ConnectBtn
-            // 
-            this.ConnectBtn.Location = new System.Drawing.Point(310, 18);
-            this.ConnectBtn.Name = "ConnectBtn";
-            this.ConnectBtn.Size = new System.Drawing.Size(118, 37);
-            this.ConnectBtn.TabIndex = 2;
-            this.ConnectBtn.Text = "Connect";
-            this.ConnectBtn.UseVisualStyleBackColor = true;
-            this.ConnectBtn.Click += new System.EventHandler(this.ConnectBtn_Click);
-            // 
-            // PortTB
-            // 
-            this.PortTB.Location = new System.Drawing.Point(153, 27);
-            this.PortTB.Name = "PortTB";
-            this.PortTB.Size = new System.Drawing.Size(131, 26);
-            this.PortTB.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(113, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Port:";
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.ClearBtn);
@@ -146,17 +101,16 @@
             this.groupBox3.Controls.Add(this.MessageTB);
             this.groupBox3.Controls.Add(this.GeneralChatTB);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(294, 70);
+            this.groupBox3.Location = new System.Drawing.Point(294, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(571, 520);
+            this.groupBox3.Size = new System.Drawing.Size(571, 590);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "General Chat";
             // 
             // ClearBtn
             // 
-            this.ClearBtn.Enabled = false;
-            this.ClearBtn.Location = new System.Drawing.Point(292, 465);
+            this.ClearBtn.Location = new System.Drawing.Point(292, 540);
             this.ClearBtn.Name = "ClearBtn";
             this.ClearBtn.Size = new System.Drawing.Size(136, 43);
             this.ClearBtn.TabIndex = 3;
@@ -166,19 +120,18 @@
             // 
             // SendBtn
             // 
-            this.SendBtn.Enabled = false;
-            this.SendBtn.Location = new System.Drawing.Point(130, 465);
+            this.SendBtn.Location = new System.Drawing.Point(130, 540);
             this.SendBtn.Name = "SendBtn";
             this.SendBtn.Size = new System.Drawing.Size(136, 43);
             this.SendBtn.TabIndex = 2;
             this.SendBtn.Text = "Send Message";
             this.SendBtn.UseVisualStyleBackColor = true;
+            this.SendBtn.Click += new System.EventHandler(this.SendBtn_Click);
             // 
             // MessageTB
             // 
             this.MessageTB.BackColor = System.Drawing.Color.White;
-            this.MessageTB.Enabled = false;
-            this.MessageTB.Location = new System.Drawing.Point(3, 386);
+            this.MessageTB.Location = new System.Drawing.Point(3, 460);
             this.MessageTB.Multiline = true;
             this.MessageTB.Name = "MessageTB";
             this.MessageTB.Size = new System.Drawing.Size(565, 74);
@@ -192,7 +145,7 @@
             this.GeneralChatTB.Location = new System.Drawing.Point(3, 22);
             this.GeneralChatTB.Multiline = true;
             this.GeneralChatTB.Name = "GeneralChatTB";
-            this.GeneralChatTB.Size = new System.Drawing.Size(565, 355);
+            this.GeneralChatTB.Size = new System.Drawing.Size(565, 432);
             this.GeneralChatTB.TabIndex = 0;
             // 
             // SupportMain
@@ -201,7 +154,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 590);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -212,8 +164,6 @@
             this.Text = "Support";
             this.Load += new System.EventHandler(this.SupportMain_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
@@ -228,10 +178,6 @@
         private System.Windows.Forms.ColumnHeader ClientName;
         private System.Windows.Forms.ColumnHeader Status;
         private System.Windows.Forms.Button StartChatBtn;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button ConnectBtn;
-        private System.Windows.Forms.TextBox PortTB;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox GeneralChatTB;
         private System.Windows.Forms.Button ClearBtn;

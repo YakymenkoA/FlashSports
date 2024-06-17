@@ -85,6 +85,10 @@
                 context.SportEvents.AddOrUpdate(soccer);
             }
 
+            foreach (var cricket in apiManager.CricketGetInfo().Result)
+            {
+                context.SportEvents.AddOrUpdate(cricket);
+            }
         }
     }
 }

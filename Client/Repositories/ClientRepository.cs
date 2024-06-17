@@ -66,7 +66,7 @@ namespace Client.Repositories
                 {
                     CurrentClientInfo = response;
                     MessageBox.Show(
-                  "Sucsessfuly Authorization!",
+                  "Successfully Authorization!",
                   "Notification",
                   MessageBoxButtons.OK,
                    MessageBoxIcon.Information
@@ -75,7 +75,7 @@ namespace Client.Repositories
                 else if(request.Header == "REG")
                 {
                     MessageBox.Show(
-                 "Sucsessfuly Registered!",
+                 "Successfully Registered!",
                  "Notification",
                  MessageBoxButtons.OK,
                   MessageBoxIcon.Information
@@ -88,8 +88,8 @@ namespace Client.Repositories
                 if(request.Header == "AUTH")
                 {
                     MessageBox.Show(
-                      "Faild Authorization!",
-                      "Warrning",
+                      "Failed Authorization!",
+                      "Warning",
                       MessageBoxButtons.OK,
                       MessageBoxIcon.Warning
                       );
@@ -97,8 +97,8 @@ namespace Client.Repositories
                 else if (request.Header == "REG")
                 {
                     MessageBox.Show(
-                      "Faild Registration!",
-                      "Warrning",
+                      "Failed Registration!",
+                      "Warning",
                       MessageBoxButtons.OK,
                       MessageBoxIcon.Warning
                       );
