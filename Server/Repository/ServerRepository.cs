@@ -4,15 +4,14 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Net;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using FlashSportsLIb2.Services;
 using System.Windows.Forms;
 using Server.EF_ORM;
 using Server.Interface;
 using FlashSportsLib.Services;
 using FlashSportsLib.Models;
+using System.Xml.Linq;
 
 namespace Server.Repositories
 {
@@ -27,18 +26,16 @@ namespace Server.Repositories
         private Task _serverThread;
         private FlashSportsDB _db;
         public SettingsManager Sm {  get; set; }
-        public TextBox _SuppChat {  get; set; }
-        public ListView _log {  get; set; }
+        public TextBox SuppChat {  get; set; }
+        public ListView Log {  get; set; }
 
-        public ServerRepository(TextBox SuppChat, ListView log)
+        public ServerRepository()
         {
             _ep = new IPEndPoint(IPAddress.Parse(_ip), _port);
             _bf = new BinaryFormatter();
             _tokenSource = new CancellationTokenSource();
             _db = new FlashSportsDB();
             Sm = new SettingsManager();
-            _SuppChat = SuppChat;
-            _log = log;
         }
 
         public void ServerStart()
@@ -50,7 +47,6 @@ namespace Server.Repositories
                 _serverThread = new Task(ServerQueueThread, _tokenSource.Token);
                 _serverThread.Start();
                 MessageBox.Show($"Server started!");
-                UpdateLog("1", "0", "server", "someact");
             }
             catch (Exception ex)
             {
@@ -117,9 +113,13 @@ namespace Server.Repositories
                                         response.FavouritesIds.Append(id.SportEventId);
                                     response.Bets = _db.Bets.Where(b => b.UserId == currentUser.Id).ToList();
                                 }
+                                UpdateLog("AUTH", $"{currentUser.Id}", "USER", $"{name} ->SUCCESSFUL LOGIN");
                             }
                             else
+                            {
                                 response.Message = "FAILD";
+                                UpdateLog("AUTH", "-1", "USER", $"{name} -> FAILED LOGIN");
+                            }
                       
                             // ->
                             _bf.Serialize(netStream, response);
@@ -147,17 +147,20 @@ namespace Server.Repositories
                                 _db.Candies.Add(new Candy() { Id = 0, CandyAmount = 0, UserId = _db.Users.Where(u => u.Email == user.Email).First().Id });
                                 _db.SaveChanges();
                             }
-                            var response = new ClientResponse();
-                            response.Message = "OK";
+                            var response = new ClientResponse
+                            {
+                                Message = "OK"
+                            };
                             _bf.Serialize(netStream, response);
+                            UpdateLog("REG", "0", "USER", $"{userReg[0]} -> SUCCESSFUL REG");
                         }
                         break;
                     case "SUPPORT_LOGIN":
                         {
-                            string chat = _SuppChat.Text;
+                            string chat = SuppChat.Text;
                             var response = new SupportResponse() { SuppChat = chat };
                             _bf.Serialize(netStream, response);
-                            _SuppChat.Invoke(new Action(() => _SuppChat.Text = response.SuppChat));
+                            SuppChat.Invoke(new Action(() => SuppChat.Text = response.SuppChat));
                             UpdateLog("129348", "1", "Support", "Some Act");
                         }
                         break;
@@ -205,11 +208,14 @@ namespace Server.Repositories
 
         private void UpdateLog(string key, string userId, string role, string action)
         {
-            var item = _log.Items.Add(DateTime.Now.ToString());
-            item.SubItems.Add(key);
-            item.SubItems.Add(userId);
-            item.SubItems.Add(role);
-            item.SubItems.Add(action);
+            lock (Log)
+            {
+                var item = Log.Items.Add(DateTime.Now.ToString("g"));
+                item.SubItems.Add(key);
+                item.SubItems.Add(userId);
+                item.SubItems.Add(role);
+                item.SubItems.Add(action);
+            }
         }
     }
 }

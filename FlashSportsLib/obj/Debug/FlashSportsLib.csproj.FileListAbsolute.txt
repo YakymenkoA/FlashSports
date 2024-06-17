@@ -40,3 +40,6 @@ D:\Desktop\LASTVERSION\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.cspro
 D:\Desktop\LASTVERSION\FlashSports\FlashSportsLib\obj\Debug\FlashSpo.283F6FAE.Up2Date
 D:\Desktop\LASTVERSION\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.dll
 D:\Desktop\LASTVERSION\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.pdb
+G:\Education\Cursovik\FlashSports\FlashSportsLib\bin\Debug\Newtonsoft.Json.dll
+G:\Education\Cursovik\FlashSports\FlashSportsLib\bin\Debug\Newtonsoft.Json.xml
+G:\Education\Cursovik\FlashSports\FlashSportsLib\obj\Debug\FlashSpo.283F6FAE.Up2Date

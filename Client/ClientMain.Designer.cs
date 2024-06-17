@@ -183,7 +183,7 @@
             this.Sport2.Padding = new System.Windows.Forms.Padding(3);
             this.Sport2.Size = new System.Drawing.Size(802, 0);
             this.Sport2.TabIndex = 1;
-            this.Sport2.Text = "Sport2";
+            this.Sport2.Text = "Cricket";
             this.Sport2.UseVisualStyleBackColor = true;
             // 
             // Sport3

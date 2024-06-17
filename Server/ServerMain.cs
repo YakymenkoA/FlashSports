@@ -1,19 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Net.Sockets;
-using System.Net;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using FlashSportsLIb2.Services;
 using Server.Repositories;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Server
 {
@@ -24,14 +12,13 @@ namespace Server
         public ServerMain()
         {
             InitializeComponent();
-            _serverRepo = new ServerRepository(SupportChatTB, EventLogLB);
+            _serverRepo = new ServerRepository() { SuppChat = SupportChatTB, Log = EventLogLB };
         }
 
         private void ServerMain_Load(object sender, EventArgs e)
         {
             _serverRepo.ServerStart();
             ApplySettings(_serverRepo.Sm.ReadFontSizeSetting());
-            SupportChatTB.Text += $"Admin {DateTime.Now} -> Hello everyone";
         }
 
         private void ServerMain_FormClosed(object sender, FormClosedEventArgs e)

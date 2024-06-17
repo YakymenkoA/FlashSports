@@ -73,7 +73,7 @@
             this.Status});
             this.PendingChatLV.Dock = System.Windows.Forms.DockStyle.Top;
             this.PendingChatLV.HideSelection = false;
-            this.PendingChatLV.Location = new System.Drawing.Point(3, 22);
+            this.PendingChatLV.Location = new System.Drawing.Point(3, 18);
             this.PendingChatLV.Name = "PendingChatLV";
             this.PendingChatLV.Size = new System.Drawing.Size(288, 512);
             this.PendingChatLV.TabIndex = 0;
@@ -110,7 +110,7 @@
             // 
             // ClearBtn
             // 
-            this.ClearBtn.Location = new System.Drawing.Point(292, 540);
+            this.ClearBtn.Location = new System.Drawing.Point(296, 540);
             this.ClearBtn.Name = "ClearBtn";
             this.ClearBtn.Size = new System.Drawing.Size(136, 43);
             this.ClearBtn.TabIndex = 3;
@@ -120,7 +120,7 @@
             // 
             // SendBtn
             // 
-            this.SendBtn.Location = new System.Drawing.Point(130, 540);
+            this.SendBtn.Location = new System.Drawing.Point(131, 540);
             this.SendBtn.Name = "SendBtn";
             this.SendBtn.Size = new System.Drawing.Size(136, 43);
             this.SendBtn.TabIndex = 2;
@@ -134,7 +134,7 @@
             this.MessageTB.Location = new System.Drawing.Point(3, 460);
             this.MessageTB.Multiline = true;
             this.MessageTB.Name = "MessageTB";
-            this.MessageTB.Size = new System.Drawing.Size(565, 74);
+            this.MessageTB.Size = new System.Drawing.Size(565, 70);
             this.MessageTB.TabIndex = 1;
             // 
             // GeneralChatTB
@@ -142,7 +142,7 @@
             this.GeneralChatTB.BackColor = System.Drawing.Color.White;
             this.GeneralChatTB.Dock = System.Windows.Forms.DockStyle.Top;
             this.GeneralChatTB.Enabled = false;
-            this.GeneralChatTB.Location = new System.Drawing.Point(3, 22);
+            this.GeneralChatTB.Location = new System.Drawing.Point(3, 18);
             this.GeneralChatTB.Multiline = true;
             this.GeneralChatTB.Name = "GeneralChatTB";
             this.GeneralChatTB.Size = new System.Drawing.Size(565, 432);
@@ -150,7 +150,7 @@
             // 
             // SupportMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 590);
             this.Controls.Add(this.groupBox3);

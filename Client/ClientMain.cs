@@ -10,11 +10,10 @@ using System.Windows.Forms;
 using Client.Repositories;
 using FlashSportsLib.Models;
 using FlashSportsLib.Services;
-using FlashSportsLIb2.Services;
 
 namespace Client
 {
-    enum SportCategories { Football, SportType2, Soccer, SportType4 };
+    enum SportCategories { SportType1, Cricket, Soccer, SportType4, Bets, Favourites };
     public partial class ClientMain : Form
     {
         private ClientRepository _clientRepo;
@@ -114,14 +113,19 @@ namespace Client
             {
                 EventsLV.Items.Clear();
                 switch (index) { 
-                    case (int)SportCategories.Football:
-                        // ...
+                    case (int)SportCategories.SportType1:
+                        {
+                            // ...
+                        }
                     break;
-                    case (int)SportCategories.SportType2:
-                        // ...
+                    case (int)SportCategories.Cricket:
+                        {
+                            // ...
+                        }
                         break;
                     case (int)SportCategories.Soccer:
-                            foreach (var row in _clientRepo.CurrentClientInfo.SportEvents)
+                        {
+                          foreach (var row in _clientRepo.FilterEvents(3))
                             {
                                 try
                                 {
@@ -134,9 +138,22 @@ namespace Client
                                     MessageBox.Show($"{ex}");
                                 }
                             }
+                        }
                         break;
                     case (int)SportCategories.SportType4:
-                        // ...
+                        {
+                            // ...
+                        }
+                        break;
+                    case (int)SportCategories.Bets:
+                        {
+                            // ...
+                        }
+                        break;
+                    case (int)SportCategories.Favourites:
+                        {
+                            // ...
+                        }
                         break;
                     default:
 

@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net;
-using System.Net.Sockets;
-using FlashSportsLib.Models;
-using FlashSportsLib.Repositories;
-using System.Net.Http.Headers;
+using Support.Repositories;
+
 
 namespace Support
 {
@@ -22,7 +12,7 @@ namespace Support
         public SupportMain()
         {
             InitializeComponent();
-            _suppRepo = new SupportRepository(GeneralChatTB);
+            _suppRepo = new SupportRepository() { GeneralChat = GeneralChatTB };
         }
 
         private void SupportMain_Load(object sender, EventArgs e)
