@@ -33,13 +33,13 @@ namespace Client
            
             if(string.IsNullOrWhiteSpace(LoginTB.Text))
             {
-                MessageBox.Show($"Input LOGIN befor continue! ", "Error",
+                MessageBox.Show($"Input LOGIN before continue! ", "Error",
                   MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LoginTB.Focus();
             }
             else if(string.IsNullOrWhiteSpace(PasswordTB.Text))
             {
-                MessageBox.Show($"Input PASSWORD befor continue! ", "Error",
+                MessageBox.Show($"Input PASSWORD before continue! ", "Error",
                  MessageBoxButtons.OK, MessageBoxIcon.Error);
                 PasswordTB.Focus();
             }

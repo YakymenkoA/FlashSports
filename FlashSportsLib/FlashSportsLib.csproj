@@ -61,6 +61,7 @@
     <Compile Include="Services\MyRequest.cs" />
     <Compile Include="Services\ClientResponse.cs" />
     <Compile Include="Services\SettingsManager.cs" />
+    <Compile Include="Services\SupportResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -31,3 +31,12 @@ D:\Desktop\Kurs\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.pdb
 E:\DEV\STEP\KURSOVIK#1\FlashSports\FlashSportsLib\bin\Debug\Newtonsoft.Json.dll
 E:\DEV\STEP\KURSOVIK#1\FlashSports\FlashSportsLib\bin\Debug\Newtonsoft.Json.xml
 E:\DEV\STEP\KURSOVIK#1\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.csproj.CopyComplete
+D:\Desktop\LASTVERSION\FlashSports\FlashSportsLib\bin\Debug\FlashSportsLib.dll
+D:\Desktop\LASTVERSION\FlashSports\FlashSportsLib\bin\Debug\FlashSportsLib.pdb
+D:\Desktop\LASTVERSION\FlashSports\FlashSportsLib\bin\Debug\Newtonsoft.Json.dll
+D:\Desktop\LASTVERSION\FlashSports\FlashSportsLib\bin\Debug\Newtonsoft.Json.xml
+D:\Desktop\LASTVERSION\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.csproj.AssemblyReference.cache
+D:\Desktop\LASTVERSION\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.csproj.CoreCompileInputs.cache
+D:\Desktop\LASTVERSION\FlashSports\FlashSportsLib\obj\Debug\FlashSpo.283F6FAE.Up2Date
+D:\Desktop\LASTVERSION\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.dll
+D:\Desktop\LASTVERSION\FlashSports\FlashSportsLib\obj\Debug\FlashSportsLib.pdb

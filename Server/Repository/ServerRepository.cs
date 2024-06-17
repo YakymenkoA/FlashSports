@@ -27,14 +27,18 @@ namespace Server.Repositories
         private Task _serverThread;
         private FlashSportsDB _db;
         public SettingsManager Sm {  get; set; }
+        public TextBox _SuppChat {  get; set; }
+        public ListView _log {  get; set; }
 
-        public ServerRepository()
+        public ServerRepository(TextBox SuppChat, ListView log)
         {
             _ep = new IPEndPoint(IPAddress.Parse(_ip), _port);
             _bf = new BinaryFormatter();
             _tokenSource = new CancellationTokenSource();
             _db = new FlashSportsDB();
             Sm = new SettingsManager();
+            _SuppChat = SuppChat;
+            _log = log;
         }
 
         public void ServerStart()
@@ -46,6 +50,7 @@ namespace Server.Repositories
                 _serverThread = new Task(ServerQueueThread, _tokenSource.Token);
                 _serverThread.Start();
                 MessageBox.Show($"Server started!");
+                UpdateLog("1", "0", "server", "someact");
             }
             catch (Exception ex)
             {
@@ -147,6 +152,40 @@ namespace Server.Repositories
                             _bf.Serialize(netStream, response);
                         }
                         break;
+                    case "SUPPORT_LOGIN":
+                        {
+                            string chat = _SuppChat.Text;
+                            var response = new SupportResponse() { SuppChat = chat };
+                            _bf.Serialize(netStream, response);
+                            _SuppChat.Invoke(new Action(() => _SuppChat.Text = response.SuppChat));
+                            UpdateLog("129348", "1", "Support", "Some Act");
+                        }
+                        break;
+                    case "AUTH_SUPP":
+                        {
+                            var req = (string[])request.Obj;
+                            var name = req[0];
+                            var pass = req[1];
+                            var currentSupp = new Support();
+
+                            lock (_db)
+                            {
+                                currentSupp = _db.Supports.Where(s => s.SupportName == name && s.Password == pass).FirstOrDefault();
+                            }
+
+                            var response = new SupportResponse();
+                            if (currentSupp != null)
+                            {
+                                response.Message = "OK";
+                                response.Support = currentSupp;
+                            }
+                            else
+                                response.Message = "FAILD";
+
+                            // ->
+                            _bf.Serialize(netStream, response);
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -162,6 +201,15 @@ namespace Server.Repositories
             _tokenSource.Cancel();
             _l.Stop();
             MessageBox.Show($"Server stopped!");
+        }
+
+        private void UpdateLog(string key, string userId, string role, string action)
+        {
+            var item = _log.Items.Add(DateTime.Now.ToString());
+            item.SubItems.Add(key);
+            item.SubItems.Add(userId);
+            item.SubItems.Add(role);
+            item.SubItems.Add(action);
         }
     }
 }
