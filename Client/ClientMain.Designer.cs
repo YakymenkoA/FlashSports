@@ -173,7 +173,7 @@
             this.Sport1.Padding = new System.Windows.Forms.Padding(3);
             this.Sport1.Size = new System.Drawing.Size(802, 0);
             this.Sport1.TabIndex = 0;
-            this.Sport1.Text = "Sport1";
+            this.Sport1.Text = "Golf";
             this.Sport1.UseVisualStyleBackColor = true;
             // 
             // Sport2
