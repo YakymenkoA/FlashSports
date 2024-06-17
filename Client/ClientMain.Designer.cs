@@ -164,6 +164,7 @@
             this.FilterTC.SelectedIndex = 0;
             this.FilterTC.Size = new System.Drawing.Size(810, 26);
             this.FilterTC.TabIndex = 2;
+            this.FilterTC.SelectedIndexChanged += new System.EventHandler(this.FilterTC_TabChange);
             // 
             // Sport1
             // 

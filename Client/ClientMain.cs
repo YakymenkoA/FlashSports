@@ -68,7 +68,8 @@ namespace Client
                     UserNickname.Text = _clientRepo.CurrentClientInfo.User.UserName;
                     CandyAmount.Text += $" {_clientRepo.CurrentClientInfo.CandyAmount}";
                     // ------------------------------------------------------
-                    FiledEvetsList();
+
+                   
 
 
                 }
@@ -107,27 +108,48 @@ namespace Client
             if (supportChat.ShowDialog() == DialogResult.OK) {}
         }
 
-        private void FiledEvetsList()
+        private void FiledEvetsList(int index)
         {
-            EventsLV.Items.Clear();
-            FilterTC.SelectedIndex = (int)SportCategories.Soccer;
-
-            foreach(var row in _clientRepo.CurrentClientInfo.SportEvents)
+            if (index > -1)
             {
-                try
-                {
-                    var listItem = EventsLV.Items.Add(row.Title);
-                    listItem.SubItems.Add(row.Description);
-                    listItem.SubItems.Add(row.IssueDate.ToString());
-                }
-                catch(Exception ex) {
-                    MessageBox.Show($"{ex}");
+                EventsLV.Items.Clear();
+                switch (index) { 
+                    case (int)SportCategories.Football:
+                        // ...
+                    break;
+                    case (int)SportCategories.SportType2:
+                        // ...
+                        break;
+                    case (int)SportCategories.Soccer:
+                            foreach (var row in _clientRepo.CurrentClientInfo.SportEvents)
+                            {
+                                try
+                                {
+                                    var listItem = EventsLV.Items.Add(row.Title);
+                                    listItem.SubItems.Add(row.Description);
+                                    listItem.SubItems.Add(row.IssueDate.ToString());
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show($"{ex}");
+                                }
+                            }
+                        break;
+                    case (int)SportCategories.SportType4:
+                        // ...
+                        break;
+                    default:
+
+                        break;
                 }
             }
-
-           
-
         }
 
+        private void FilterTC_TabChange(object sender, EventArgs e)
+        {
+            //FilterTC.SelectedIndex = (int)SportCategories.Soccer;
+            FiledEvetsList(FilterTC.SelectedIndex);
+
+        }
     }
 }
