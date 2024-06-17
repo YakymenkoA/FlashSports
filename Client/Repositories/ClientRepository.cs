@@ -1,7 +1,6 @@
 ﻿using Client.Interfaces;
 using FlashSportsLib.Models;
 using FlashSportsLib.Services;
-using FlashSportsLIb2.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -109,6 +108,11 @@ namespace Client.Repositories
             ns?.Close();
             _client?.Close();
             return success;
+        }
+
+        public List<SportEvent> FilterEvents(int categoryId)
+        {
+            return CurrentClientInfo.SportEvents.FindAll(s => s.CategoryId == categoryId);
         }
     }
 }

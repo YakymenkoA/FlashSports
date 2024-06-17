@@ -36,7 +36,7 @@
             context.Candies.AddOrUpdate(new Candy() { Id = 5, CandyAmount = 0, UserId = 5 });
 
             context.Categories.AddOrUpdate(new Category() { Id = 1, Title = "AlexSportType" });
-            context.Categories.AddOrUpdate(new Category() { Id = 2, Title = "MaxSportType" });
+            context.Categories.AddOrUpdate(new Category() { Id = 2, Title = "Cricket" });
             context.Categories.AddOrUpdate(new Category() { Id = 3, Title = "Soccer" });
             context.Categories.AddOrUpdate(new Category() { Id = 4, Title = "IllyaSportType" });
 

@@ -1,8 +1,6 @@
 ﻿using Client.Repositories;
-using Client.Services;
 using FlashSportsLib.Models;
 using FlashSportsLib.Services;
-using FlashSportsLIb2.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

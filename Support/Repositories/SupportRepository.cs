@@ -10,26 +10,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FlashSportsLib.Services;
-using FlashSportsLIb2.Services;
 using Support.Interfaces;
 
-namespace FlashSportsLib.Repositories
+namespace Support.Repositories
 {
-    public class SupportRepository : ISupport
+    internal class SupportRepository : ISupport
     {
         private int _port;
         private IPEndPoint _ep;
         private BinaryFormatter _bf;
         private TcpClient _support;
-        private TextBox _generalChat;
+        public TextBox GeneralChat {  get; set; }
 
         public SupportResponse CurrentSupportInfo { get; set; }
 
-        public SupportRepository(TextBox generalChat)
+        public SupportRepository()
         {
             _port = 9001;
             _ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), _port);
-            _generalChat = generalChat;
         }
 
         public void ConnectSupp()
@@ -41,8 +39,8 @@ namespace FlashSportsLib.Repositories
 
             _bf.Serialize(ns, "SUPPORT_LOGIN");
             var response = (SupportResponse)_bf.Deserialize(ns);
-            _generalChat.Text += "Hello, yo";
-            _generalChat.Text = response.SuppChat;
+            GeneralChat.Text += "Hello, yo";
+            GeneralChat.Text = response.SuppChat;
 
             ns?.Close();
             _support?.Close();
