@@ -9,6 +9,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FlashSportsLib.Models;
 
 namespace Client
 {
@@ -19,17 +20,17 @@ namespace Client
         private IPAddress _remoteAddress;
         private string _supportName = "supName";
 
+        public string UserName {  get; set; }
+
         public SupportChat(int localPort)
         {
             InitializeComponent();
             SendBtn.Enabled = false;
             _localPort = localPort;
         }
-
         private void SupportChat_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("Wait for the support to connect!");
-            ReceiveInitialData();
+            Task.Run(() => ReceiveInitialData()).ContinueWith(t => ReceiveMessages());
         }
 
         private void ReceiveInitialData()
@@ -38,12 +39,20 @@ namespace Client
             IPEndPoint ep = null;
             byte[] data = udp.Receive(ref ep);
             var dataString = Encoding.UTF8.GetString(data);
-            var split = dataString.Split('~');
+            var split = dataString.Split('/');
             _remotePort = int.Parse(split[0]);
             _supportName = split[1];
             _remoteAddress = IPAddress.Parse(split[2]);
-            SendBtn.Enabled = true;
-            Task.Run(() => ReceiveMessages());
+            SupChatTB.Invoke(new Action(() =>
+            {
+                SupChatTB.Text += $"{DateTime.Now:T} - {_supportName}: Connected! \r\n";
+            }));
+            SendBtn.Invoke(new Action(() => { SendBtn.Enabled = true; }));
+            ChatGB.Invoke(new Action(() =>
+            {
+                ChatGB.Text = $"Chat with {_supportName}";
+            }));
+            udp.Close();
         }
 
         private void ReceiveMessages()
@@ -58,7 +67,7 @@ namespace Client
                     var message = Encoding.UTF8.GetString(data);
                     SupChatTB.Invoke(new Action(() =>
                     {
-                        SupChatTB.Text += $"{DateTime.Now:t} {_supportName}: {message} \r\n";
+                        SupChatTB.Text += $"[{DateTime.Now:T}] - ({_supportName}):  {message} \r\n";
                     }));
                     udp.Close();
                 }
@@ -74,7 +83,14 @@ namespace Client
 
             try
             {
-                byte[] data = Encoding.UTF8.GetBytes(MessageTB.Text);
+                string message = string.Empty;
+                MessageTB.Invoke(new Action(() =>
+                {
+                    message = MessageTB.Text;
+                    SupChatTB.Text += $"[{DateTime.Now:T}] - ({UserName}):  {message} \r\n";
+                    MessageTB.Clear();
+                }));
+                byte[] data = Encoding.UTF8.GetBytes(message);
                 udp.Send(data, data.Length, ep);
                 udp.Close();
             }
@@ -92,6 +108,6 @@ namespace Client
         {
             MessageTB.Clear();
             MessageTB.Focus();
-        }
+        }       
     }
 }

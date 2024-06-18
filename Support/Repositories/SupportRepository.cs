@@ -96,7 +96,7 @@ namespace Support.Repositories
                             if (chat.IsAvailable)
                                 item.SubItems.Add("Available");
                             else
-                                item.SubItems.Add("Not Available");
+                                item.SubItems.Add("Unavailable");
                         }
                     }));
                 }
@@ -105,6 +105,44 @@ namespace Support.Repositories
             catch (Exception)
             {
                 MessageBox.Show("Get Client Chat Error!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                _support?.Close();
+            }
+        }
+
+        public void StartClientChat(string clientName)
+        {
+            try
+            {
+                _support = new TcpClient();
+                _support.Connect(_ep);
+                var ns = _support.GetStream();
+                var request = new MyRequest() { Header = "START_CLIENT_CHAT", Obj = clientName };
+                _bf.Serialize(ns, request);
+                var response = (SupportResponse)_bf.Deserialize(ns);
+                if (response.Message == "OK")
+                {
+                    var clientChat = new ClientChat()
+                    {
+                        Info = CurrentSupportInfo.ChatInfo.Where(i => i.ClientName == clientName).First(),
+                        SupportName = CurrentSupportInfo.Support.SupportName
+                    };
+                    if(clientChat.ShowDialog() == DialogResult.OK)
+                    {
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Chat is Busy!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                ns?.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Start Chat Error!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             finally
             {
