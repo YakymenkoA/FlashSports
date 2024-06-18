@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,62 +52,85 @@ namespace Client.Repositories
 
         public bool SendRequest(MyRequest request)
         {
-            _bf = new BinaryFormatter();
             bool success = false;
+            _bf = new BinaryFormatter();
             _client = new TcpClient();
-            _client.Connect(_ep);
-            NetworkStream ns = _client.GetStream();
-            _bf.Serialize(ns, request);
-            // ->
-            var response = (ClientResponse) _bf.Deserialize(ns);
-            if(response.Message == "OK")
+            try
             {
-                if(request.Header == "AUTH")
+                _client.Connect(_ep);
+                NetworkStream ns = _client.GetStream();
+                _bf.Serialize(ns, request);
+                // ->
+                var response = (ClientResponse)_bf.Deserialize(ns);
+                if (response.Message == "OK")
                 {
-                    CurrentClientInfo = response;
-                    MessageBox.Show(
-                  "Successfully Authorization!",
-                  "Notification",
-                  MessageBoxButtons.OK,
-                   MessageBoxIcon.Information
-                  );
-                }
-                else if(request.Header == "REG")
-                {
-                    MessageBox.Show(
-                 "Successfully Registered!",
-                 "Notification",
-                 MessageBoxButtons.OK,
-                  MessageBoxIcon.Information
-                 );
-                }
-                success = true;
-            }
-            else
-            {
-                if(request.Header == "AUTH")
-                {
-                    MessageBox.Show(
-                      "Failed Authorization!",
-                      "Warning",
+                    if (request.Header == "AUTH")
+                    {
+                        CurrentClientInfo = response;
+                        MessageBox.Show(
+                      "Successfully Authorization!",
+                      "Notification",
                       MessageBoxButtons.OK,
-                      MessageBoxIcon.Warning
+                       MessageBoxIcon.Information
                       );
-                }      
-                else if (request.Header == "REG")
-                {
-                    MessageBox.Show(
-                      "Failed Registration!",
-                      "Warning",
-                      MessageBoxButtons.OK,
-                      MessageBoxIcon.Warning
-                      );
+                    }
+                    else if (request.Header == "REG")
+                    {
+                        MessageBox.Show(
+                     "Successfully Registered!",
+                     "Notification",
+                     MessageBoxButtons.OK,
+                      MessageBoxIcon.Information
+                     );
+                    }
+                    else if (request.Header == "ADDFAVORITE")
+                    {
+                        MessageBox.Show(
+                     "Event successfully added to Favorites!",
+                     "Notification",
+                     MessageBoxButtons.OK,
+                      MessageBoxIcon.Information
+                     );
+
+                        CurrentClientInfo.FavouritesIds = response.FavouritesIds;
+                    }
+                    success = true;
                 }
+                else
+                {
+                    if (request.Header == "AUTH")
+                    {
+                        MessageBox.Show(
+                          "Failed Authorization!",
+                          "Warning",
+                          MessageBoxButtons.OK,
+                          MessageBoxIcon.Warning
+                          );
+                    }
+                    else if (request.Header == "REG")
+                    {
+                        MessageBox.Show(
+                          "Failed Registration!",
+                          "Warning",
+                          MessageBoxButtons.OK,
+                          MessageBoxIcon.Warning
+                          );
+                    }
                     success = false;
+                }
+                // >
+                ns?.Close();
+                _client?.Close();
+            } catch ( Exception ex ) {
+                MessageBox.Show(ex.Message);
+                success = false;
             }
-            // >
-            ns?.Close();
-            _client?.Close();
+            finally
+            {
+                MessageBox.Show("done");
+                _client?.Close();
+            }
+           
             return success;
         }
 
@@ -114,5 +138,31 @@ namespace Client.Repositories
         {
             return CurrentClientInfo.SportEvents.FindAll(s => s.CategoryId == categoryId);
         }
+
+        public bool AddToFavorite(string title)
+        {
+            int userId = CurrentClientInfo.User.Id;
+            int evId =  CurrentClientInfo.SportEvents.Where(e => e.Title == title).FirstOrDefault().Id;
+
+            int[] ints = new int[2] { userId, evId };
+            var request = new MyRequest()
+            {
+                Header = "ADDFAVORITE",
+                Obj = ints
+            };
+            return SendRequest(request);
+        }
+
+        public List<SportEvent> FavoritesEvents()
+        {
+           List<SportEvent> events = new List<SportEvent>();
+
+            foreach(var e in CurrentClientInfo.FavouritesIds)
+            {
+                events.Add(CurrentClientInfo.SportEvents.Where(ev => ev.Id == e).FirstOrDefault());
+            }
+            return events;
+        }
+
     }
 }

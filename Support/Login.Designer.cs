@@ -49,7 +49,7 @@
             // 
             this.PasswordTB.Location = new System.Drawing.Point(74, 128);
             this.PasswordTB.Name = "PasswordTB";
-            this.PasswordTB.Size = new System.Drawing.Size(261, 26);
+            this.PasswordTB.Size = new System.Drawing.Size(261, 22);
             this.PasswordTB.TabIndex = 11;
             // 
             // label2
@@ -57,7 +57,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(71, 109);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 20);
+            this.label2.Size = new System.Drawing.Size(70, 16);
             this.label2.TabIndex = 10;
             this.label2.Text = "Password:";
             // 
@@ -65,7 +65,7 @@
             // 
             this.LoginTB.Location = new System.Drawing.Point(74, 74);
             this.LoginTB.Name = "LoginTB";
-            this.LoginTB.Size = new System.Drawing.Size(261, 26);
+            this.LoginTB.Size = new System.Drawing.Size(261, 22);
             this.LoginTB.TabIndex = 9;
             // 
             // label1
@@ -73,13 +73,13 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(71, 55);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 20);
+            this.label1.Size = new System.Drawing.Size(43, 16);
             this.label1.TabIndex = 8;
             this.label1.Text = "Login:";
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(407, 275);
             this.Controls.Add(this.SignInBtn);
@@ -92,7 +92,7 @@
             this.MaximizeBox = false;
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Login";
+            this.Text = "Login (Support) ";
             this.ResumeLayout(false);
             this.PerformLayout();
 
