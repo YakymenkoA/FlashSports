@@ -33,7 +33,7 @@
             this.ClearBtn = new System.Windows.Forms.Button();
             this.SendBtn = new System.Windows.Forms.Button();
             this.MessageTB = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.SupChatTB = new System.Windows.Forms.TextBox();
             this.ChatGB.SuspendLayout();
             this.MessageGB.SuspendLayout();
             this.SuspendLayout();
@@ -41,7 +41,7 @@
             // ChatGB
             // 
             this.ChatGB.Controls.Add(this.MessageGB);
-            this.ChatGB.Controls.Add(this.textBox1);
+            this.ChatGB.Controls.Add(this.SupChatTB);
             this.ChatGB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChatGB.Location = new System.Drawing.Point(0, 0);
             this.ChatGB.Name = "ChatGB";
@@ -56,9 +56,9 @@
             this.MessageGB.Controls.Add(this.SendBtn);
             this.MessageGB.Controls.Add(this.MessageTB);
             this.MessageGB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MessageGB.Location = new System.Drawing.Point(3, 602);
+            this.MessageGB.Location = new System.Drawing.Point(3, 598);
             this.MessageGB.Name = "MessageGB";
-            this.MessageGB.Size = new System.Drawing.Size(447, 172);
+            this.MessageGB.Size = new System.Drawing.Size(447, 176);
             this.MessageGB.TabIndex = 1;
             this.MessageGB.TabStop = false;
             this.MessageGB.Text = "Your Message :";
@@ -75,6 +75,7 @@
             // 
             // SendBtn
             // 
+            this.SendBtn.Enabled = false;
             this.SendBtn.Location = new System.Drawing.Point(58, 123);
             this.SendBtn.Name = "SendBtn";
             this.SendBtn.Size = new System.Drawing.Size(136, 43);
@@ -85,27 +86,27 @@
             // MessageTB
             // 
             this.MessageTB.Dock = System.Windows.Forms.DockStyle.Top;
-            this.MessageTB.Location = new System.Drawing.Point(3, 22);
+            this.MessageTB.Location = new System.Drawing.Point(3, 18);
             this.MessageTB.Multiline = true;
             this.MessageTB.Name = "MessageTB";
             this.MessageTB.Size = new System.Drawing.Size(441, 99);
             this.MessageTB.TabIndex = 0;
             // 
-            // textBox1
+            // SupChatTB
             // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(3, 22);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(447, 580);
-            this.textBox1.TabIndex = 0;
+            this.SupChatTB.BackColor = System.Drawing.Color.White;
+            this.SupChatTB.Dock = System.Windows.Forms.DockStyle.Top;
+            this.SupChatTB.Enabled = false;
+            this.SupChatTB.Location = new System.Drawing.Point(3, 18);
+            this.SupChatTB.Multiline = true;
+            this.SupChatTB.Name = "SupChatTB";
+            this.SupChatTB.ReadOnly = true;
+            this.SupChatTB.Size = new System.Drawing.Size(447, 580);
+            this.SupChatTB.TabIndex = 0;
             // 
             // SupportChat
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 777);
             this.Controls.Add(this.ChatGB);
@@ -126,7 +127,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox ChatGB;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox SupChatTB;
         private System.Windows.Forms.GroupBox MessageGB;
         private System.Windows.Forms.TextBox MessageTB;
         private System.Windows.Forms.Button SendBtn;

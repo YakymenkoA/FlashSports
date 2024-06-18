@@ -13,6 +13,6 @@ namespace FlashSportsLib.Services
         public string Message { get; set; }
         public Support Support { get; set; }
         public string SuppChat {  get; set; }
-
+        public List<ClientChatInfo> ChatInfo { get; set; }
     }
 }
