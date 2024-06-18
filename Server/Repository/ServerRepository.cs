@@ -232,6 +232,28 @@ namespace Server.Repositories
                             UpdateLog("GET_CLIENT_CHATS", "", "SUPPORT", $"SUPPORT GET CLIENT CHATS");
                         }
                         break;
+                    case "START_CLIENT_CHAT":
+                        {
+                            var name = (string)request.Obj;
+                            var response = new SupportResponse();
+                            var info = new ClientChatInfo();
+
+                            lock (_chats)
+                            {
+                                info = _chats.Where(cci => cci.ClientName == name && cci.IsAvailable).First();
+                            }
+
+                            if (info != null)
+                            {
+                                response.Message = "OK";
+                                info.IsAvailable = false;
+                            }
+                            else
+                                response.Message = "CHAT_IS_BUSY";
+
+                            _bf.Serialize(netStream, response);
+                        }
+                        break;
                     default:
                         break;
                 }

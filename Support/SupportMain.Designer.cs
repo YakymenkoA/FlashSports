@@ -62,7 +62,7 @@
             // 
             // StartChatBtn
             // 
-            this.StartChatBtn.Location = new System.Drawing.Point(73, 540);
+            this.StartChatBtn.Location = new System.Drawing.Point(121, 540);
             this.StartChatBtn.Name = "StartChatBtn";
             this.StartChatBtn.Size = new System.Drawing.Size(136, 43);
             this.StartChatBtn.TabIndex = 1;
@@ -77,6 +77,7 @@
             this.ClientName,
             this.Status});
             this.PendingChatLV.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PendingChatLV.FullRowSelect = true;
             this.PendingChatLV.HideSelection = false;
             this.PendingChatLV.Location = new System.Drawing.Point(3, 18);
             this.PendingChatLV.Name = "PendingChatLV";
@@ -93,11 +94,12 @@
             // ClientName
             // 
             this.ClientName.Text = "Client Name";
-            this.ClientName.Width = 120;
+            this.ClientName.Width = 110;
             // 
             // Status
             // 
             this.Status.Text = "Status";
+            this.Status.Width = 170;
             // 
             // groupBox3
             // 

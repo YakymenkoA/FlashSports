@@ -34,11 +34,22 @@ namespace Support
             MessageTB.Focus();
         }
 
-        private void SendBtn_Click(object sender, EventArgs e) { }
+        private void SendBtn_Click(object sender, EventArgs e) 
+        {
+
+        }
 
         private void StartChatBtn_Click(object sender, EventArgs e)
         {
-
+            if (PendingChatLV.SelectedItems.Count > 0)
+            {
+                var item = PendingChatLV.SelectedItems[0];
+                _suppRepo.StartClientChat(item.SubItems[1].Text);
+            }
+            else
+            {
+                MessageBox.Show("Select Chat");
+            }
         }
 
         private void SettingsBtn_Click(object sender, EventArgs e)

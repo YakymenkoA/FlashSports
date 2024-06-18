@@ -133,8 +133,11 @@ namespace Client.Repositories
             var response = (ClientResponse)_bf.Deserialize(ns);
             if (response.Message == "OK")
             {
-                var chat = new SupportChat(9010);
-                //chat.ShowDialog();
+                var chat = new SupportChat(9010) { UserName = CurrentClientInfo.User.UserName };
+                if(chat.ShowDialog() == DialogResult.OK)
+                {
+
+                }
             }
             ns?.Close();
             _client?.Close();

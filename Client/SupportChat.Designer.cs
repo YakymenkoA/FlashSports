@@ -48,7 +48,7 @@
             this.ChatGB.Size = new System.Drawing.Size(453, 777);
             this.ChatGB.TabIndex = 0;
             this.ChatGB.TabStop = false;
-            this.ChatGB.Text = "Chat with {SupportName}:";
+            this.ChatGB.Text = "Chat with:";
             // 
             // MessageGB
             // 
@@ -82,6 +82,7 @@
             this.SendBtn.TabIndex = 3;
             this.SendBtn.Text = "Send Message";
             this.SendBtn.UseVisualStyleBackColor = true;
+            this.SendBtn.Click += new System.EventHandler(this.SendBtn_Click);
             // 
             // MessageTB
             // 
@@ -115,7 +116,8 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SupportChat";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Client Chat";
+            this.Text = "Support Chat";
+            this.Load += new System.EventHandler(this.SupportChat_Load);
             this.ChatGB.ResumeLayout(false);
             this.ChatGB.PerformLayout();
             this.MessageGB.ResumeLayout(false);
