@@ -17,13 +17,7 @@ namespace Support
 
         private void SupportMain_Load(object sender, EventArgs e)
         {
-            var auth = new Login();
-            if (auth.ShowDialog() == DialogResult.OK)
-            {
-                //_suppRepo.ConnectSupp();
-            }
-            else
-                this.Close();   
+            while(!_suppRepo.AuthSupport()){}
         }
 
         private void ClearBtn_Click(object sender, EventArgs e)

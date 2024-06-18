@@ -14,14 +14,12 @@ namespace Support
 {
     public partial class Login : Form
     {
-        private SupportRepository _suppRepo;
-        public SupportResponse currentSupportInfo;
+        public string LoginDto { get; set; }
+        public string PasswordDto { get; set; }
 
         public Login()
         {
             InitializeComponent();
-            _suppRepo = new SupportRepository();
-            _suppRepo.Connect("127.0.0.1", 9001);
         }
 
         private void SignInBtn_Click(object sender, EventArgs e)
@@ -41,19 +39,10 @@ namespace Support
              else
              {
                  this.Cursor = Cursors.Default;
-                 var auth = new string[] { LoginTB.Text, Cryptographer.GetHash(PasswordTB.Text) };
-                 var request = new MyRequest()
-                 {
-                     Header = "AUTH_SUPP",
-                     Obj = auth,
-                 };
-                 if (_suppRepo.SendRequest(request))
-                 {
-                     currentSupportInfo = _suppRepo.CurrentSupportInfo;
-                     DialogResult = DialogResult.OK;
-                 }
+                LoginDto = LoginTB.Text;
+                PasswordDto = Cryptographer.GetHash(PasswordTB.Text);
+                this.DialogResult = DialogResult.OK;
              }
-            //this.DialogResult = DialogResult.OK;
         }
     }
 }

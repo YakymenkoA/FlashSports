@@ -29,13 +29,13 @@ namespace FlashSportsLib.Services
 
         public void SaveFontFamilySetting(string fontFamily)
         {
-            Registry.SetValue(_regPath + "\\" + _key, "FontSize", fontFamily);
+            Registry.SetValue(_regPath + "\\" + _key, "FontFamily", fontFamily);
         }
 
         public string ReadFontFamilySetting()
         {
             // Open data
-            var reg = Registry.GetValue(_regPath + "\\" + _key, "FontSize", null);
+            var reg = Registry.GetValue(_regPath + "\\" + _key, "FontFamily", null);
 
             if (reg != null)
                 return reg.ToString();
@@ -45,13 +45,13 @@ namespace FlashSportsLib.Services
 
         public void SaveBackColorSetting(string backColor)
         {
-            Registry.SetValue(_regPath + "\\" + _key, "FontSize", backColor);
+            Registry.SetValue(_regPath + "\\" + _key, "BackColor", backColor);
         }
 
         public string ReadBackColorSetting()
         {
             // Open data
-            var reg = Registry.GetValue(_regPath + "\\" + _key, "FontSize", null);
+            var reg = Registry.GetValue(_regPath + "\\" + _key, "BackColor", null);
 
             if (reg != null)
                 return reg.ToString();
