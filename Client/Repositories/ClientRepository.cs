@@ -28,6 +28,7 @@ namespace Client.Repositories
         public ClientRepository()
         {
             ClientSM = new SettingsManager();
+            _bf = new BinaryFormatter();
         }
 
         public void Connect(string ip, int port)
@@ -138,7 +139,6 @@ namespace Client.Repositories
         {
             return CurrentClientInfo.SportEvents.FindAll(s => s.CategoryId == categoryId);
         }
-
         public bool AddToFavorite(string title)
         {
             int userId = CurrentClientInfo.User.Id;
@@ -163,6 +163,28 @@ namespace Client.Repositories
             }
             return events;
         }
+        public List<FlashSportsLib.Models.News> FillNews()
+        {
+            return CurrentClientInfo.News;
+        }
 
+        public void ContactSupport()
+        {
+            _client = new TcpClient();
+            _ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9001);
+            _client.Connect(_ep);
+            var ns = _client.GetStream();
+            var data = new string[] { "9010", CurrentClientInfo.User.UserName, "127.0.0.1", };
+            var request = new MyRequest() { Header = "CLIENT_CONTACT_SUP", Obj = data };
+            _bf.Serialize(ns, request);
+            var response = (ClientResponse)_bf.Deserialize(ns);
+            if (response.Message == "OK")
+            {
+                var chat = new SupportChat(9010);
+                //chat.ShowDialog();
+            }
+            ns?.Close();
+            _client?.Close();
+        }
     }
 }

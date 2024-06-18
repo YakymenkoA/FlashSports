@@ -20,67 +20,96 @@ namespace Support.Repositories
         private IPEndPoint _ep;
         private BinaryFormatter _bf;
         private TcpClient _support;
-        public TextBox GeneralChat {  get; set; }
 
+        public TextBox GeneralChat {  get; set; }
+        public ListView ClientChats { get; set; }
         public SupportResponse CurrentSupportInfo { get; set; }
 
         public SupportRepository()
         {
             _port = 9001;
             _ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), _port);
+            _bf = new BinaryFormatter();
         }
 
-        public void ConnectSupp()
+        public bool AuthSupport()
         {
-            _bf = new BinaryFormatter();
-            _support = new TcpClient();
-            //_support.Connect(_ep);
-            NetworkStream ns = _support.GetStream();
-
-            _bf.Serialize(ns, "SUPPORT_LOGIN");
-            var response = (SupportResponse)_bf.Deserialize(ns);
-            GeneralChat.Text += "Hello, yo";
-            GeneralChat.Text = response.SuppChat;
-
-            ns?.Close();
-            _support?.Close();
+            var login = new Login();
+            if (login.ShowDialog() == DialogResult.OK)
+            {
+                try
+                { 
+                    _support = new TcpClient();
+                    _support.Connect(_ep);
+                    var ns = _support.GetStream();
+                    var data = new string[] { login.LoginDto, login.PasswordDto };
+                    var request = new MyRequest() { Header = "AUTH_SUPP", Obj = data };
+                    _bf.Serialize(ns, request);
+                    var response = (SupportResponse)_bf.Deserialize(ns);
+                    ns?.Close();
+                    if (response.Message == "OK")
+                    {
+                        CurrentSupportInfo = response;
+                        MessageBox.Show("Successful Authorization!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        GeneralChat.Text = CurrentSupportInfo.SuppChat;
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed Authorization!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
+                }
+                catch(Exception)
+                {
+                    MessageBox.Show("Authorization Error!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                finally
+                {
+                    _support?.Close();
+                }
+            }
+            return false;
         }
 
-        public bool SendRequest(MyRequest request)
+        public void GetClientChatInfos()
         {
-            _bf = new BinaryFormatter();
-            bool success;
-            _support = new TcpClient();
-            _support.Connect(_ep);
-            NetworkStream ns = _support.GetStream();
-            _bf.Serialize(ns, request);
-            // ->
-            var response = (SupportResponse)_bf.Deserialize(ns);
-            if (response.Message == "OK")
+            try
             {
-                CurrentSupportInfo = response;
-                MessageBox.Show(
-                "Successfully Authorization!",
-                "Notification",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-              );
-                success = true;
-            }
-            else
-            {
+                _support = new TcpClient();
+                _support.Connect(_ep);
+                var ns = _support.GetStream();
+                var request = new MyRequest() { Header = "GET_CLIENT_CHATS" };
+                _bf.Serialize(ns, request);
+                var response = (SupportResponse)_bf.Deserialize(ns);
+                if (response.Message == "OK")
+                {
+                    CurrentSupportInfo.ChatInfo = response.ChatInfo;
 
-                MessageBox.Show(
-                    "Failed Authorization!",
-                    "Warning",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-                success = false;
+                    ClientChats.Invoke(new Action(() =>
+                    {
+                        ClientChats.Items.Clear();
+                        foreach (var chat in CurrentSupportInfo.ChatInfo)
+                        {
+                            var item = ClientChats.Items.Add($"{chat.IssueDate:t}");
+                            item.SubItems.Add($"{chat.ClientName}");
+                            if (chat.IsAvailable)
+                                item.SubItems.Add("Available");
+                            else
+                                item.SubItems.Add("Not Available");
+                        }
+                    }));
+                }
+                ns?.Close();
             }
-            ns?.Close();
-            _support?.Close();
-            return success;
+            catch (Exception)
+            {
+                MessageBox.Show("Get Client Chat Error!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                _support?.Close();
+            }
         }
     }
 }

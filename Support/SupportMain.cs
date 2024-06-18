@@ -12,20 +12,20 @@ namespace Support
         public SupportMain()
         {
             InitializeComponent();
-            _suppRepo = new SupportRepository() { GeneralChat = GeneralChatTB };
+            _suppRepo = new SupportRepository() { GeneralChat = GeneralChatTB, ClientChats = PendingChatLV };
         }
 
         private void SupportMain_Load(object sender, EventArgs e)
         {
-            var auth = new Login();
-            if (auth.ShowDialog() == DialogResult.OK)
+            if(!_suppRepo.AuthSupport())
             {
-                //_suppRepo.ConnectSupp();
+                this.Close();
             }
             else
-                this.Close();
-
-            //_suppRepo.ConnectSupp();
+            {
+                this.Text = $"Support {_suppRepo.CurrentSupportInfo.Support.SupportName}";
+                UpdateChatInfo.Start();
+            }
         }
 
         private void ClearBtn_Click(object sender, EventArgs e)
@@ -36,6 +36,19 @@ namespace Support
 
         private void SendBtn_Click(object sender, EventArgs e) { }
 
-        private void StartChatBtn_Click(object sender, EventArgs e) { }
+        private void StartChatBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SettingsBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UpdateChatInfo_Tick(object sender, EventArgs e)
+        {
+            _suppRepo.GetClientChatInfos();
+        }
     }
 }

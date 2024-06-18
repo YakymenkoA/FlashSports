@@ -19,6 +19,8 @@ namespace Server
         {
             _serverRepo.ServerStart();
             ApplySettings(_serverRepo.Sm.ReadFontSizeSetting());
+
+            SupportChatTB.Text += "Hello everyone";
         }
 
         private void ServerMain_FormClosed(object sender, FormClosedEventArgs e)

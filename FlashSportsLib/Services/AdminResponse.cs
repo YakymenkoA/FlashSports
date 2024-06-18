@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 namespace FlashSportsLib.Services
 {
     [Serializable]
-    public class SupportResponse
+    public class AdminResponse
     {
         public string Message { get; set; }
-        public Support Support { get; set; }
-        public string SuppChat {  get; set; }
-        public List<ClientChatInfo> ChatInfo { get; set; }
+        public List<User> Users { get; set; }
+        public List<Support> Support { get; set; }
     }
 }

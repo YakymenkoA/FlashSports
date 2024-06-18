@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("esdfdsfsdfsdfdsfs");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientMain));
             this.MainGB = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -47,10 +48,11 @@
             this.Favorites = new System.Windows.Forms.TabPage();
             this.NewsGB = new System.Windows.Forms.GroupBox();
             this.NewsPanelLV = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.SettingIcon = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.ContactSuppL = new System.Windows.Forms.Label();
             this.SupportIcon = new System.Windows.Forms.PictureBox();
             this.CandyAmount = new System.Windows.Forms.Label();
             this.CandyIcon = new System.Windows.Forms.PictureBox();
@@ -237,19 +239,29 @@
             // 
             // NewsPanelLV
             // 
-            this.NewsPanelLV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NewsPanelLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.NewsPanelLV.FullRowSelect = true;
+            this.NewsPanelLV.GridLines = true;
             this.NewsPanelLV.HideSelection = false;
+            this.NewsPanelLV.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
             this.NewsPanelLV.Location = new System.Drawing.Point(3, 18);
             this.NewsPanelLV.Name = "NewsPanelLV";
             this.NewsPanelLV.Size = new System.Drawing.Size(235, 490);
             this.NewsPanelLV.TabIndex = 0;
             this.NewsPanelLV.UseCompatibleStateImageBehavior = false;
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Title";
+            this.columnHeader1.Width = 300;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.SettingIcon);
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.ContactSuppL);
             this.groupBox1.Controls.Add(this.SupportIcon);
             this.groupBox1.Controls.Add(this.CandyAmount);
             this.groupBox1.Controls.Add(this.CandyIcon);
@@ -283,14 +295,15 @@
             this.SettingIcon.TabStop = false;
             this.SettingIcon.Click += new System.EventHandler(this.SettingIcon_Click);
             // 
-            // label1
+            // ContactSuppL
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(934, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 16);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Contact Support";
+            this.ContactSuppL.AutoSize = true;
+            this.ContactSuppL.Location = new System.Drawing.Point(934, 38);
+            this.ContactSuppL.Name = "ContactSuppL";
+            this.ContactSuppL.Size = new System.Drawing.Size(102, 16);
+            this.ContactSuppL.TabIndex = 5;
+            this.ContactSuppL.Text = "Contact Support";
+            this.ContactSuppL.Click += new System.EventHandler(this.ContactSuppL_Click);
             // 
             // SupportIcon
             // 
@@ -301,7 +314,6 @@
             this.SupportIcon.Size = new System.Drawing.Size(33, 33);
             this.SupportIcon.TabIndex = 4;
             this.SupportIcon.TabStop = false;
-            this.SupportIcon.Click += new System.EventHandler(this.SupportIcon_Click);
             // 
             // CandyAmount
             // 
@@ -379,7 +391,7 @@
         private System.Windows.Forms.Label UserNickname;
         private System.Windows.Forms.Label CandyAmount;
         private System.Windows.Forms.PictureBox CandyIcon;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label ContactSuppL;
         private System.Windows.Forms.PictureBox SupportIcon;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox SettingIcon;
@@ -400,6 +412,7 @@
         private System.Windows.Forms.ColumnHeader Date;
         private System.Windows.Forms.TabPage Sport3;
         private System.Windows.Forms.TabPage Sport4;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }
 

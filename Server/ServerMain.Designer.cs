@@ -51,9 +51,9 @@
             this.EventLogLB.Dock = System.Windows.Forms.DockStyle.Left;
             this.EventLogLB.FullRowSelect = true;
             this.EventLogLB.HideSelection = false;
-            this.EventLogLB.Location = new System.Drawing.Point(3, 22);
+            this.EventLogLB.Location = new System.Drawing.Point(3, 18);
             this.EventLogLB.Name = "EventLogLB";
-            this.EventLogLB.Size = new System.Drawing.Size(679, 518);
+            this.EventLogLB.Size = new System.Drawing.Size(897, 522);
             this.EventLogLB.TabIndex = 0;
             this.EventLogLB.UseCompatibleStateImageBehavior = false;
             this.EventLogLB.View = System.Windows.Forms.View.Details;
@@ -81,11 +81,11 @@
             // Action
             // 
             this.Action.Text = "Action";
-            this.Action.Width = 210;
+            this.Action.Width = 433;
             // 
             // SupportChatTB
             // 
-            this.SupportChatTB.Location = new System.Drawing.Point(688, 66);
+            this.SupportChatTB.Location = new System.Drawing.Point(906, 66);
             this.SupportChatTB.Multiline = true;
             this.SupportChatTB.Name = "SupportChatTB";
             this.SupportChatTB.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -94,7 +94,7 @@
             // 
             // SettingsBtn
             // 
-            this.SettingsBtn.Location = new System.Drawing.Point(851, 18);
+            this.SettingsBtn.Location = new System.Drawing.Point(1069, 18);
             this.SettingsBtn.Name = "SettingsBtn";
             this.SettingsBtn.Size = new System.Drawing.Size(102, 37);
             this.SettingsBtn.TabIndex = 7;
@@ -110,15 +110,15 @@
             this.MainGB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainGB.Location = new System.Drawing.Point(0, 0);
             this.MainGB.Name = "MainGB";
-            this.MainGB.Size = new System.Drawing.Size(965, 543);
+            this.MainGB.Size = new System.Drawing.Size(1183, 543);
             this.MainGB.TabIndex = 8;
             this.MainGB.TabStop = false;
             // 
             // ServerMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(965, 543);
+            this.ClientSize = new System.Drawing.Size(1183, 543);
             this.Controls.Add(this.MainGB);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
