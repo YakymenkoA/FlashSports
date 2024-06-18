@@ -17,7 +17,14 @@ namespace Support
 
         private void SupportMain_Load(object sender, EventArgs e)
         {
-            while(!_suppRepo.AuthSupport()){}
+            if(!_suppRepo.AuthSupport())
+            {
+                this.Close();
+            }
+            else
+            {
+                this.Text = $"Support {_suppRepo.CurrentSupportInfo.Support.SupportName}";
+            }
         }
 
         private void ClearBtn_Click(object sender, EventArgs e)
@@ -29,5 +36,10 @@ namespace Support
         private void SendBtn_Click(object sender, EventArgs e) { }
 
         private void StartChatBtn_Click(object sender, EventArgs e) { }
+
+        private void SettingsBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
