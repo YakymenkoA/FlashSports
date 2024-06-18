@@ -102,12 +102,6 @@ namespace Client
             if (profile.ShowDialog() == DialogResult.OK) { }
         }
 
-        private void SupportIcon_Click(object sender, EventArgs e)
-        {
-            var supportChat = new SupportChat();
-            if (supportChat.ShowDialog() == DialogResult.OK) { }
-        }
-
         private void FiledEvetsList(int index)
         {
             if (index > -1)
@@ -173,6 +167,11 @@ namespace Client
             {
                 NewsPanelLV.Items.Add(n.Title);
             }
+        }
+
+        private void ContactSuppL_Click(object sender, EventArgs e)
+        {
+            _clientRepo.ContactSupport();
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Server.Repositories
         private TcpListener _l;
         private Task _serverThread;
         private FlashSportsDB _db;
+        private List<ClientChatInfo> _chats;
 
         public SettingsManager Sm {  get; set; }
         public TextBox SuppChat {  get; set; }
@@ -37,6 +38,7 @@ namespace Server.Repositories
             _tokenSource = new CancellationTokenSource();
             _db = new FlashSportsDB();
             Sm = new SettingsManager();
+            _chats = new List<ClientChatInfo>();
         }
 
         public void ServerStart()
@@ -189,6 +191,45 @@ namespace Server.Repositories
                                 UpdateLog("AUTH", "-1", "SUPPORT", $"{name} -> FAILED LOGIN");
                             }
                             _bf.Serialize(netStream, response);
+                        }
+                        break;
+                    case "CLIENT_CONTACT_SUP":
+                        {
+                            var data = (string[])request.Obj;
+                            var port = int.Parse(data[0]);
+                            var userName = data[1];
+                            var ip = data[2];
+                            var response = new ClientResponse();
+                            lock (_chats)
+                            {
+                                if (_chats.Where(cci => cci.ClientName == userName).FirstOrDefault() == null)
+                                {
+                                    _chats.Add(new ClientChatInfo() { Port = port, ClientName = userName, Ip = ip, IsAvailable = true, IssueDate = DateTime.Now });
+                                    UpdateLog("CLIENT_CONTACT_SUP", "", "USER", $"{userName} -> SUPPORT REQUEST");
+                                    response.Message = "OK";
+                                }
+                                else
+                                {
+                                    response.Message = "ALREADY_EXISTS";
+                                    UpdateLog("CLIENT_CONTACT_SUP", "", "USER", $"{userName} -> SUPPORT REQUEST DECLINED");
+                                }
+                            }
+                            _bf.Serialize(netStream, response);
+                        }
+                        break;
+                    case "GET_CLIENT_CHATS":
+                        {
+                            var response = new SupportResponse();
+                            lock(_chats)
+                            {
+                                if (_chats.Count > 0)
+                                {
+                                    response.Message = "OK";
+                                    response.ChatInfo = _chats;
+                                }
+                            }
+                            _bf.Serialize(netStream, response);
+                            UpdateLog("GET_CLIENT_CHATS", "", "SUPPORT", $"SUPPORT GET CLIENT CHATS");
                         }
                         break;
                     default:

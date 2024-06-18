@@ -22,6 +22,7 @@ namespace Support.Repositories
         private TcpClient _support;
 
         public TextBox GeneralChat {  get; set; }
+        public ListView ClientChats { get; set; }
         public SupportResponse CurrentSupportInfo { get; set; }
 
         public SupportRepository()
@@ -46,12 +47,11 @@ namespace Support.Repositories
                     _bf.Serialize(ns, request);
                     var response = (SupportResponse)_bf.Deserialize(ns);
                     ns?.Close();
-                    _support?.Close();
                     if (response.Message == "OK")
                     {
                         CurrentSupportInfo = response;
                         MessageBox.Show("Successful Authorization!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        GeneralChat.Text = response.SuppChat;
+                        GeneralChat.Text = CurrentSupportInfo.SuppChat;
                         return true;
                     }
                     else
@@ -64,8 +64,52 @@ namespace Support.Repositories
                 {
                     MessageBox.Show("Authorization Error!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+                finally
+                {
+                    _support?.Close();
+                }
             }
             return false;
+        }
+
+        public void GetClientChatInfos()
+        {
+            try
+            {
+                _support = new TcpClient();
+                _support.Connect(_ep);
+                var ns = _support.GetStream();
+                var request = new MyRequest() { Header = "GET_CLIENT_CHATS" };
+                _bf.Serialize(ns, request);
+                var response = (SupportResponse)_bf.Deserialize(ns);
+                if (response.Message == "OK")
+                {
+                    CurrentSupportInfo.ChatInfo = response.ChatInfo;
+
+                    ClientChats.Invoke(new Action(() =>
+                    {
+                        ClientChats.Items.Clear();
+                        foreach (var chat in CurrentSupportInfo.ChatInfo)
+                        {
+                            var item = ClientChats.Items.Add($"{chat.IssueDate:t}");
+                            item.SubItems.Add($"{chat.ClientName}");
+                            if (chat.IsAvailable)
+                                item.SubItems.Add("Available");
+                            else
+                                item.SubItems.Add("Not Available");
+                        }
+                    }));
+                }
+                ns?.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Get Client Chat Error!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                _support?.Close();
+            }
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.StartChatBtn = new System.Windows.Forms.Button();
             this.PendingChatLV = new System.Windows.Forms.ListView();
@@ -41,6 +42,7 @@
             this.GeneralChatTB = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.SettingsBtn = new System.Windows.Forms.Button();
+            this.UpdateChatInfo = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -53,7 +55,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(294, 590);
+            this.groupBox1.Size = new System.Drawing.Size(371, 590);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pending client chats:";
@@ -78,7 +80,7 @@
             this.PendingChatLV.HideSelection = false;
             this.PendingChatLV.Location = new System.Drawing.Point(3, 18);
             this.PendingChatLV.Name = "PendingChatLV";
-            this.PendingChatLV.Size = new System.Drawing.Size(288, 512);
+            this.PendingChatLV.Size = new System.Drawing.Size(365, 512);
             this.PendingChatLV.TabIndex = 0;
             this.PendingChatLV.UseCompatibleStateImageBehavior = false;
             this.PendingChatLV.View = System.Windows.Forms.View.Details;
@@ -86,7 +88,7 @@
             // Date
             // 
             this.Date.Text = "Date";
-            this.Date.Width = 100;
+            this.Date.Width = 65;
             // 
             // ClientName
             // 
@@ -104,9 +106,9 @@
             this.groupBox3.Controls.Add(this.MessageTB);
             this.groupBox3.Controls.Add(this.GeneralChatTB);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(294, 60);
+            this.groupBox3.Location = new System.Drawing.Point(371, 60);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(571, 530);
+            this.groupBox3.Size = new System.Drawing.Size(566, 530);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "General Chat";
@@ -148,16 +150,16 @@
             this.GeneralChatTB.Location = new System.Drawing.Point(3, 18);
             this.GeneralChatTB.Multiline = true;
             this.GeneralChatTB.Name = "GeneralChatTB";
-            this.GeneralChatTB.Size = new System.Drawing.Size(565, 404);
+            this.GeneralChatTB.Size = new System.Drawing.Size(560, 404);
             this.GeneralChatTB.TabIndex = 0;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.SettingsBtn);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(294, 0);
+            this.groupBox2.Location = new System.Drawing.Point(371, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(571, 54);
+            this.groupBox2.Size = new System.Drawing.Size(566, 54);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Settings";
@@ -172,11 +174,16 @@
             this.SettingsBtn.UseVisualStyleBackColor = true;
             this.SettingsBtn.Click += new System.EventHandler(this.SettingsBtn_Click);
             // 
+            // UpdateChatInfo
+            // 
+            this.UpdateChatInfo.Interval = 5000;
+            this.UpdateChatInfo.Tick += new System.EventHandler(this.UpdateChatInfo_Tick);
+            // 
             // SupportMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(865, 590);
+            this.ClientSize = new System.Drawing.Size(937, 590);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
@@ -211,6 +218,7 @@
         private System.Windows.Forms.TextBox MessageTB;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button SettingsBtn;
+        private System.Windows.Forms.Timer UpdateChatInfo;
     }
 }
 
