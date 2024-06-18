@@ -25,6 +25,7 @@ namespace Server.Repositories
         private TcpListener _l;
         private Task _serverThread;
         private FlashSportsDB _db;
+
         public SettingsManager Sm {  get; set; }
         public TextBox SuppChat {  get; set; }
         public ListView Log {  get; set; }
@@ -52,6 +53,13 @@ namespace Server.Repositories
             {
                 MessageBox.Show($"Server Start Error: {ex.Message}");
             }
+        }
+
+        public void ServerStop()
+        {
+            _tokenSource.Cancel();
+            _l.Stop();
+            MessageBox.Show($"Server stopped!");
         }
 
         private void ServerQueueThread()
@@ -120,7 +128,7 @@ namespace Server.Repositories
                                 response.Message = "FAILD";
                                 UpdateLog("AUTH", "-1", "USER", $"{name} -> FAILED LOGIN");
                             }
-                      
+
                             // ->
                             _bf.Serialize(netStream, response);
                         }
@@ -136,7 +144,7 @@ namespace Server.Repositories
                                 Email = userReg[1],
                                 Photo = "",
                                 IsBlocked = false,
-                               
+
                             };
                             //multi thread protection
                             lock (_db)
@@ -153,15 +161,6 @@ namespace Server.Repositories
                             };
                             _bf.Serialize(netStream, response);
                             UpdateLog("REG", "0", "USER", $"{userReg[0]} -> SUCCESSFUL REG");
-                        }
-                        break;
-                    case "SUPPORT_LOGIN":
-                        {
-                            string chat = SuppChat.Text;
-                            var response = new SupportResponse() { SuppChat = chat };
-                            _bf.Serialize(netStream, response);
-                            SuppChat.Invoke(new Action(() => SuppChat.Text = response.SuppChat));
-                            UpdateLog("129348", "1", "Support", "Some Act");
                         }
                         break;
                     case "AUTH_SUPP":
@@ -181,14 +180,14 @@ namespace Server.Repositories
                             {
                                 response.Message = "OK";
                                 response.Support = currentSupp;
+                                SuppChat.Invoke(new Action(() => { response.SuppChat = SuppChat.Text; }));
                                 UpdateLog("AUTH", $"{currentSupp.Id}", "SUPPORT", $"{name} -> SUCCESSFUL LOGIN");
                             }
                             else
                             {
-                                response.Message = "FAILD";
+                                response.Message = "FAILED";
                                 UpdateLog("AUTH", "-1", "SUPPORT", $"{name} -> FAILED LOGIN");
                             }
-                            // ->
                             _bf.Serialize(netStream, response);
                         }
                         break;
@@ -200,13 +199,6 @@ namespace Server.Repositories
             }
             catch (Exception)
             { }
-        }
-
-        public void ServerStop()
-        {
-            _tokenSource.Cancel();
-            _l.Stop();
-            MessageBox.Show($"Server stopped!");
         }
 
         private void UpdateLog(string key, string userId, string role, string action)

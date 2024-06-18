@@ -8,6 +8,6 @@ namespace Support.Interfaces
 {
     internal interface ISupport
     {
-
+        bool AuthSupport();
     }
 }

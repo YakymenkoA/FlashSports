@@ -10,8 +10,9 @@ namespace FlashSportsLib.Services
     [Serializable]
     public class SupportResponse
     {
-        public Support Support {  get; set; }
-        public string SuppChat {  get; set; }
         public string Message { get; set; }
+        public Support Support { get; set; }
+        public string SuppChat {  get; set; }
+
     }
 }
