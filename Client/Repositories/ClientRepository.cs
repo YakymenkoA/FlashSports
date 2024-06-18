@@ -128,7 +128,6 @@ namespace Client.Repositories
             }
             finally
             {
-                MessageBox.Show("done");
                 _client?.Close();
             }
            
