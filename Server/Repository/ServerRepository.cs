@@ -112,13 +112,20 @@ namespace Server.Repositories
                                 response.Message = "OK";
                                 response.User = currentUser;
                                 //multi thread protection
+
                                 lock (_db)
                                 {
                                     response.CandyAmount = _db.Candies.Where(c => c.UserId == currentUser.Id).First().CandyAmount;
                                     response.SportEvents = _db.SportEvents.ToList();
                                     response.News = _db.News.ToList();
-                                    foreach (var id in _db.Favourites.Where(f => f.UserId == currentUser.Id))
-                                        response.FavouritesIds.Append(id.SportEventId);
+
+                                    List<int> ids = new List<int>();
+                                    foreach (var id in _db.Favourites)
+                                    {
+                                        if(id.UserId == currentUser.Id)
+                                            ids.Add(id.SportEventId);
+                                    }
+                                    response.FavouritesIds = ids;
                                     response.Bets = _db.Bets.Where(b => b.UserId == currentUser.Id).ToList();
                                 }
                                 UpdateLog("AUTH", $"{currentUser.Id}", "USER", $"{name} ->SUCCESSFUL LOGIN");
@@ -161,6 +168,39 @@ namespace Server.Repositories
                             };
                             _bf.Serialize(netStream, response);
                             UpdateLog("REG", "0", "USER", $"{userReg[0]} -> SUCCESSFUL REG");
+                        }
+                        break;
+                    case "ADDFAVORITE":
+                        {
+                            var fEvent = (int[])request.Obj;
+                            var response = new ClientResponse();
+                            Favourite favourite = new Favourite() { Id = 0, UserId = fEvent[0], SportEventId = fEvent[1] };
+                            lock (_db)
+                            {
+
+                                _db.Favourites.Add(favourite);
+                                _db.SaveChanges();
+                                // ->
+                                response.Message = "OK";
+                                List<int> ids = new List<int>();
+                                foreach (var id in _db.Favourites)
+                                {
+                                    if(id.UserId == fEvent[0])
+                                        ids.Add(id.SportEventId);
+                                }
+                                response.FavouritesIds = ids;
+                            }
+                            _bf.Serialize(netStream, response);
+
+                        }
+                        break;
+                    case "SUPPORT_LOGIN":
+                        {
+                            string chat = SuppChat.Text;
+                            var response = new SupportResponse() { SuppChat = chat };
+                            _bf.Serialize(netStream, response);
+                            SuppChat.Invoke(new Action(() => SuppChat.Text = response.SuppChat));
+                            UpdateLog("129348", "1", "Support", "Some Act");
                         }
                         break;
                     case "AUTH_SUPP":
@@ -300,8 +340,10 @@ namespace Server.Repositories
                 netStream.Close();
                 acceptor.Close();
             }
-            catch (Exception)
-            { }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void UpdateLog(string key, string userId, string role, string action)

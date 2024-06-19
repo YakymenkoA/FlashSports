@@ -22,6 +22,8 @@ namespace Client
         {
             InitializeComponent();
             _clientRepo = new ClientRepository();
+            _clientRepo.Connect("127.0.0.1", 9001);
+
         }
 
         private void SettingIcon_Click(object sender, EventArgs e)
@@ -69,9 +71,6 @@ namespace Client
                     // ------------------------------------------------------
                     DisplayEvents(_clientRepo.FilterEvents(1));
                     DisplayNews(_clientRepo.FillNews());
-
-
-
                 }
                 else if (result == DialogResult.Yes)
                 {
@@ -135,7 +134,7 @@ namespace Client
                         break;
                     case (int)SportCategories.Favourites:
                         {
-                            // ...
+                            DisplayEvents(_clientRepo.FavoritesEvents());
                         }
                         break;
                     default:
@@ -153,14 +152,32 @@ namespace Client
 
         private void DisplayEvents(List<SportEvent> events)
         {
-            foreach(var e in events)
+            EventsLV.Items.Clear();
+            if(events.Count > 0)
             {
-                var listItem = EventsLV.Items.Add(e.Title);
-                listItem.SubItems.Add(e.Description);
-                listItem.SubItems.Add(e.IssueDate.ToString("g"));
+                foreach (var e in events)
+                {
+                    var listItem = EventsLV.Items.Add(e.Title);
+                    listItem.SubItems.Add(e.Description);
+                    listItem.SubItems.Add(e.IssueDate.ToString("g"));
+                }
             }
         }
 
+        private void BTN_AddFavorites_Click(object sender, EventArgs e)
+        {
+
+            if(EventsLV.SelectedItems.Count > 0)
+            {
+               
+                string titleEvent = (EventsLV.SelectedItems[0].SubItems[0].Text).ToString();
+                if (_clientRepo.AddToFavorite(titleEvent))
+                {
+                    // ...
+                }
+                
+            }
+        }
         private void DisplayNews(List<FlashSportsLib.Models.News> news)
         {
             foreach (var n in news)

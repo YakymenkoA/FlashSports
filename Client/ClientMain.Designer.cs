@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientMain));
             this.MainGB = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.BTN_AddFavorites = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.EventsLV = new System.Windows.Forms.ListView();
@@ -82,7 +82,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.BTN_AddFavorites);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.EventsLV);
@@ -95,14 +95,15 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
-            // button3
+            // BTN_AddFavorites
             // 
-            this.button3.Location = new System.Drawing.Point(552, 479);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(138, 43);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Add to Favorites";
-            this.button3.UseVisualStyleBackColor = true;
+            this.BTN_AddFavorites.Location = new System.Drawing.Point(552, 479);
+            this.BTN_AddFavorites.Name = "BTN_AddFavorites";
+            this.BTN_AddFavorites.Size = new System.Drawing.Size(138, 43);
+            this.BTN_AddFavorites.TabIndex = 5;
+            this.BTN_AddFavorites.Text = "Add to Favorites";
+            this.BTN_AddFavorites.UseVisualStyleBackColor = true;
+            this.BTN_AddFavorites.Click += new System.EventHandler(this.BTN_AddFavorites_Click);
             // 
             // button2
             // 
@@ -403,7 +404,7 @@
         private System.Windows.Forms.TabPage Sport2;
         private System.Windows.Forms.TabPage Bets;
         private System.Windows.Forms.TabPage Favorites;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button BTN_AddFavorites;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView NewsPanelLV;
