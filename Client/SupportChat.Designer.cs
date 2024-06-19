@@ -95,9 +95,8 @@
             // 
             // SupChatTB
             // 
-            this.SupChatTB.BackColor = System.Drawing.Color.White;
+            this.SupChatTB.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.SupChatTB.Dock = System.Windows.Forms.DockStyle.Top;
-            this.SupChatTB.Enabled = false;
             this.SupChatTB.Location = new System.Drawing.Point(3, 18);
             this.SupChatTB.Multiline = true;
             this.SupChatTB.Name = "SupChatTB";
@@ -117,6 +116,7 @@
             this.Name = "SupportChat";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Support Chat";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SupportChat_FormClosed);
             this.Load += new System.EventHandler(this.SupportChat_Load);
             this.ChatGB.ResumeLayout(false);
             this.ChatGB.PerformLayout();

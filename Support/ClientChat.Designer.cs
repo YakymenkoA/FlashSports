@@ -114,6 +114,7 @@
             this.Name = "ClientChat";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Client Chat";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ClientChat_FormClosed);
             this.Load += new System.EventHandler(this.ClientChat_Load);
             this.ChatGB.ResumeLayout(false);
             this.ChatGB.PerformLayout();

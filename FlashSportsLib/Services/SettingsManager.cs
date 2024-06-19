@@ -21,7 +21,7 @@ namespace FlashSportsLib.Services
         public float ReadFontSizeSetting()
         {
             var reg = Registry.CurrentUser.OpenSubKey(_key);
-            if (reg != null)
+            if (reg != null && reg.GetValue("FontSize") != null)
                 return float.Parse(reg.GetValue("FontSize").ToString());
             else
                 return (float)9.75;

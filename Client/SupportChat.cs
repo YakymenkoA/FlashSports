@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FlashSportsLib.Models;
+using FlashSportsLib.Services;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Client
 {
@@ -45,7 +47,7 @@ namespace Client
             _remoteAddress = IPAddress.Parse(split[2]);
             SupChatTB.Invoke(new Action(() =>
             {
-                SupChatTB.Text += $"{DateTime.Now:T} - {_supportName}: Connected! \r\n";
+                SupChatTB.Text += $"[{DateTime.Now:T}] - ({_supportName}): Connected! \r\n";
             }));
             SendBtn.Invoke(new Action(() => { SendBtn.Enabled = true; }));
             ChatGB.Invoke(new Action(() =>
@@ -108,6 +110,18 @@ namespace Client
         {
             MessageTB.Clear();
             MessageTB.Focus();
-        }       
+        }
+
+        private void SupportChat_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            var support = new TcpClient();
+            var bf = new BinaryFormatter();
+            support.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9001));
+            var ns = support.GetStream();
+            var request = new MyRequest() { Header = "CLIENT_DISCONNECTED", Obj = $"{UserName}~USER" };
+            bf.Serialize(ns, request);
+            ns.Close();
+            support.Close();
+        }
     }
 }

@@ -50,7 +50,6 @@ namespace Support.Repositories
                     if (response.Message == "OK")
                     {
                         CurrentSupportInfo = response;
-                        MessageBox.Show("Successful Authorization!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         GeneralChat.Text = CurrentSupportInfo.SuppChat;
                         return true;
                     }
@@ -100,6 +99,13 @@ namespace Support.Repositories
                         }
                     }));
                 }
+                else
+                {
+                    ClientChats.Invoke(new Action(() =>
+                    {
+                        ClientChats.Items.Clear();
+                    }));
+                }
                 ns?.Close();
             }
             catch (Exception)
@@ -122,6 +128,8 @@ namespace Support.Repositories
                 var request = new MyRequest() { Header = "START_CLIENT_CHAT", Obj = clientName };
                 _bf.Serialize(ns, request);
                 var response = (SupportResponse)_bf.Deserialize(ns);
+                ns?.Close();
+                _support?.Close();
                 if (response.Message == "OK")
                 {
                     var clientChat = new ClientChat()
@@ -129,16 +137,12 @@ namespace Support.Repositories
                         Info = CurrentSupportInfo.ChatInfo.Where(i => i.ClientName == clientName).First(),
                         SupportName = CurrentSupportInfo.Support.SupportName
                     };
-                    if(clientChat.ShowDialog() == DialogResult.OK)
-                    {
-
-                    }
+                    clientChat.Show();
                 }
                 else
                 {
                     MessageBox.Show("Chat is Busy!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                ns?.Close();
             }
             catch (Exception)
             {

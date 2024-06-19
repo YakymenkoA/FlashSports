@@ -49,7 +49,6 @@ namespace Server.Repositories
                 _l.Start(100);
                 _serverThread = new Task(ServerQueueThread, _tokenSource.Token);
                 _serverThread.Start();
-                MessageBox.Show($"Server started!");
             }
             catch (Exception ex)
             {
@@ -61,7 +60,6 @@ namespace Server.Repositories
         {
             _tokenSource.Cancel();
             _l.Stop();
-            MessageBox.Show($"Server stopped!");
         }
 
         private void ServerQueueThread()
@@ -227,9 +225,11 @@ namespace Server.Repositories
                                     response.Message = "OK";
                                     response.ChatInfo = _chats;
                                 }
+                                else
+                                    response.Message = "FAILED";
                             }
                             _bf.Serialize(netStream, response);
-                            UpdateLog("GET_CLIENT_CHATS", "", "SUPPORT", $"SUPPORT GET CLIENT CHATS");
+                            //UpdateLog("GET_CLIENT_CHATS", "", "SUPPORT", $"SUPPORT GET CLIENT CHATS");
                         }
                         break;
                     case "START_CLIENT_CHAT":
@@ -240,18 +240,58 @@ namespace Server.Repositories
 
                             lock (_chats)
                             {
-                                info = _chats.Where(cci => cci.ClientName == name && cci.IsAvailable).First();
+                                info = _chats.Where(cci => cci.ClientName == name).First();
                             }
 
                             if (info != null)
                             {
-                                response.Message = "OK";
-                                info.IsAvailable = false;
+                                if (info.IsAvailable)
+                                {
+                                    response.Message = "OK";
+                                    info.IsAvailable = false;
+                                    UpdateLog("START_CLIENT_CHAT", "", "SUPPORT", $"STARTING CHAT");
+                                }
+                                else
+                                {
+                                    response.Message = "CHAT_IS_BUSY";
+                                    UpdateLog("START_CLIENT_CHAT", "", "SUPPORT", $"CHAT IS BUSY, DECLINED");
+                                }
                             }
                             else
-                                response.Message = "CHAT_IS_BUSY";
+                            {
+                                response.Message = "CHAT IS CLOSED";
+                                UpdateLog("START_CLIENT_CHAT", "", "SUPPORT", $"CHAT IS CLOSED, DECLINED");
+                            }
 
                             _bf.Serialize(netStream, response);
+                        }
+                        break;
+                    case "CLIENT_DISCONNECTED":
+                        {
+                            var data = (string)request.Obj;
+                            var parts = data.Split('~');
+                            var name = parts[0];
+                            var sender = parts[1];
+                            lock (_chats)
+                            {
+                                var chat = _chats.Where(c => c.ClientName == name).FirstOrDefault();
+                                if (chat != null)
+                                {
+                                    _chats.Remove(chat);
+                                    UpdateLog("CLIENT_DISCONNECTED", "", $"{sender}", $"CHAT INFO REMOVE");
+                                }
+                                else
+                                {
+                                    UpdateLog("CLIENT_DISCONNECTED", "", $"{sender}", $"NO ACTION");
+                                }
+                            }
+                        }
+                        break;
+                    case "SAVE_CHAT_HISTORY":
+                        {
+                            var chat = (string)request.Obj;
+                            //parse and save chat here
+                            UpdateLog("SAVE_CHAT_HISTORY", "", "SUPPORT", $"CHAT HISTORY SAVED");
                         }
                         break;
                     default:

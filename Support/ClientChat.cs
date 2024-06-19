@@ -10,6 +10,8 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Support
 {
@@ -19,6 +21,7 @@ namespace Support
 
         public string SupportName {  get; set; }
         public ClientChatInfo Info { get; set; }
+        public Button Btn { get; set; }
 
         public ClientChat()
         {
@@ -43,7 +46,7 @@ namespace Support
                 udpClient.Send(data, data.Length, remoteEP);
                 udpClient.Close();
             }
-             catch (Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Send Error: {ex.Message}");
             }
@@ -101,6 +104,23 @@ namespace Support
             {
                 udpClient?.Close();
             }
+        }
+
+        private void SendRequest(MyRequest request)
+        {
+            var support = new TcpClient();
+            var bf = new BinaryFormatter();
+            support.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9001));
+            var ns = support.GetStream();
+            bf.Serialize(ns, request);
+            ns.Close();
+            support.Close();
+        }
+
+        private void ClientChat_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SendRequest(new MyRequest() { Header = "CLIENT_DISCONNECTED", Obj = $"{Info.ClientName}~SUPPORT" });
+            SendRequest(new MyRequest() { Header = "SAVE_CHAT_HISTORY", Obj = ClientChatTB.Text });
         }
     }
 }
