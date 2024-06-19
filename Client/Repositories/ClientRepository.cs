@@ -65,12 +65,41 @@ namespace Client.Repositories
                 var response = (ClientResponse)_bf.Deserialize(ns);
                 if (response.Message == "OK")
                 {
+<<<<<<< HEAD
+                    CurrentClientInfo = response;
+                    /*MessageBox.Show(
+                  "Successfully Authorization!",
+                  "Notification",
+                  MessageBoxButtons.OK,
+                   MessageBoxIcon.Information
+                  );*/
+                }
+                else if(request.Header == "REG")
+                {
+                    MessageBox.Show(
+                 "Successfully Registered!",
+                 "Notification",
+                 MessageBoxButtons.OK,
+                  MessageBoxIcon.Information
+                 );
+                }
+                success = true;
+            }
+            else
+            {
+                if(request.Header == "AUTH")
+                {
+                    MessageBox.Show(
+                      "Failed Authorization!",
+                      "Warning",
+=======
                     if (request.Header == "AUTH")
                     {
                         CurrentClientInfo = response;
                         MessageBox.Show(
                       "Successfully Authorization!",
                       "Notification",
+>>>>>>> main
                       MessageBoxButtons.OK,
                        MessageBoxIcon.Information
                       );
@@ -177,16 +206,15 @@ namespace Client.Repositories
             var request = new MyRequest() { Header = "CLIENT_CONTACT_SUP", Obj = data };
             _bf.Serialize(ns, request);
             var response = (ClientResponse)_bf.Deserialize(ns);
+            ns?.Close();
+            _client?.Close();
             if (response.Message == "OK")
             {
                 var chat = new SupportChat(9010) { UserName = CurrentClientInfo.User.UserName };
-                if(chat.ShowDialog() == DialogResult.OK)
-                {
-
-                }
+                chat.Show();
             }
-            ns?.Close();
-            _client?.Close();
+            else
+                MessageBox.Show("Your chat is already open!");
         }
     }
 }
