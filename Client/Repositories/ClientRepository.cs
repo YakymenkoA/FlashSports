@@ -68,11 +68,11 @@ namespace Client.Repositories
                     if (request.Header == "AUTH")
                     {
                         CurrentClientInfo = response;
-                        MessageBox.Show(
+                        /*MessageBox.Show(
                             "Successfully Authorization!",
                             "Notification",
                             MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+                            MessageBoxIcon.Information);*/
                     }
                     else if (request.Header == "REG")
                     {
