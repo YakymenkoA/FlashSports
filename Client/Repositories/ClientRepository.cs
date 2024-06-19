@@ -65,62 +65,30 @@ namespace Client.Repositories
                 var response = (ClientResponse)_bf.Deserialize(ns);
                 if (response.Message == "OK")
                 {
-<<<<<<< HEAD
-                    CurrentClientInfo = response;
-                    /*MessageBox.Show(
-                  "Successfully Authorization!",
-                  "Notification",
-                  MessageBoxButtons.OK,
-                   MessageBoxIcon.Information
-                  );*/
-                }
-                else if(request.Header == "REG")
-                {
-                    MessageBox.Show(
-                 "Successfully Registered!",
-                 "Notification",
-                 MessageBoxButtons.OK,
-                  MessageBoxIcon.Information
-                 );
-                }
-                success = true;
-            }
-            else
-            {
-                if(request.Header == "AUTH")
-                {
-                    MessageBox.Show(
-                      "Failed Authorization!",
-                      "Warning",
-=======
                     if (request.Header == "AUTH")
                     {
                         CurrentClientInfo = response;
                         MessageBox.Show(
-                      "Successfully Authorization!",
-                      "Notification",
->>>>>>> main
-                      MessageBoxButtons.OK,
-                       MessageBoxIcon.Information
-                      );
+                            "Successfully Authorization!",
+                            "Notification",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
                     }
                     else if (request.Header == "REG")
                     {
                         MessageBox.Show(
-                     "Successfully Registered!",
-                     "Notification",
-                     MessageBoxButtons.OK,
-                      MessageBoxIcon.Information
-                     );
+                            "Successfully Registered!",
+                            "Notification",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
                     }
                     else if (request.Header == "ADDFAVORITE")
                     {
                         MessageBox.Show(
-                     "Event successfully added to Favorites!",
-                     "Notification",
-                     MessageBoxButtons.OK,
-                      MessageBoxIcon.Information
-                     );
+                            "Event successfully added to Favorites!",
+                            "Notification",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
 
                         CurrentClientInfo.FavouritesIds = response.FavouritesIds;
                     }
@@ -151,7 +119,9 @@ namespace Client.Repositories
                 // >
                 ns?.Close();
                 _client?.Close();
-            } catch ( Exception ex ) {
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message);
                 success = false;
             }
@@ -159,7 +129,7 @@ namespace Client.Repositories
             {
                 _client?.Close();
             }
-           
+
             return success;
         }
 
