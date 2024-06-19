@@ -65,44 +65,16 @@ namespace Client.Repositories
                 var response = (ClientResponse)_bf.Deserialize(ns);
                 if (response.Message == "OK")
                 {
-<<<<<<< HEAD
-                    CurrentClientInfo = response;
-                    /*MessageBox.Show(
-                  "Successfully Authorization!",
-                  "Notification",
-                  MessageBoxButtons.OK,
-                   MessageBoxIcon.Information
-                  );*/
-                }
-                else if(request.Header == "REG")
-                {
-                    MessageBox.Show(
-                 "Successfully Registered!",
-                 "Notification",
-                 MessageBoxButtons.OK,
-                  MessageBoxIcon.Information
-                 );
-                }
-                success = true;
-            }
-            else
-            {
-                if(request.Header == "AUTH")
-                {
-                    MessageBox.Show(
-                      "Failed Authorization!",
-                      "Warning",
-=======
                     if (request.Header == "AUTH")
                     {
                         CurrentClientInfo = response;
+                        /*CurrentClientInfo = response;
                         MessageBox.Show(
                       "Successfully Authorization!",
                       "Notification",
->>>>>>> main
                       MessageBoxButtons.OK,
                        MessageBoxIcon.Information
-                      );
+                      );*/
                     }
                     else if (request.Header == "REG")
                     {
@@ -151,7 +123,9 @@ namespace Client.Repositories
                 // >
                 ns?.Close();
                 _client?.Close();
-            } catch ( Exception ex ) {
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message);
                 success = false;
             }
@@ -159,9 +133,9 @@ namespace Client.Repositories
             {
                 _client?.Close();
             }
-           
+
             return success;
-        }
+        }    
 
         public List<SportEvent> FilterEvents(int categoryId)
         {
