@@ -401,11 +401,14 @@ namespace Server.Repositories
         {
             lock (Log)
             {
-                var item = Log.Items.Add(DateTime.Now.ToString("g"));
-                item.SubItems.Add(key);
-                item.SubItems.Add(userId);
-                item.SubItems.Add(role);
-                item.SubItems.Add(action);
+                Log.Invoke(new Action(() =>
+                {
+                    var item = Log.Items.Add(DateTime.Now.ToString("g"));
+                    item.SubItems.Add(key);
+                    item.SubItems.Add(userId);
+                    item.SubItems.Add(role);
+                    item.SubItems.Add(action);
+                }));               
             }
         }
     }
