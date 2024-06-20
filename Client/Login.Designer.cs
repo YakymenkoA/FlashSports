@@ -51,6 +51,7 @@
             this.LoginTB.Name = "LoginTB";
             this.LoginTB.Size = new System.Drawing.Size(261, 22);
             this.LoginTB.TabIndex = 1;
+            this.LoginTB.Text = "Alex";
             // 
             // PasswordTB
             // 
@@ -58,6 +59,7 @@
             this.PasswordTB.Name = "PasswordTB";
             this.PasswordTB.Size = new System.Drawing.Size(261, 22);
             this.PasswordTB.TabIndex = 3;
+            this.PasswordTB.Text = "Alex";
             this.PasswordTB.UseSystemPasswordChar = true;
             // 
             // label2

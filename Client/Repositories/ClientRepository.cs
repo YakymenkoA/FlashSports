@@ -155,6 +155,7 @@ namespace Client.Repositories
         {
             return CurrentClientInfo.SportEvents.FindAll(s => s.CategoryId == categoryId);
         }
+
         public bool AddToFavorite(string title)
         {
             int userId = CurrentClientInfo.User.Id;
@@ -179,6 +180,7 @@ namespace Client.Repositories
             }
             return events;
         }
+
         public List<FlashSportsLib.Models.News> FillNews()
         {
             return CurrentClientInfo.News;

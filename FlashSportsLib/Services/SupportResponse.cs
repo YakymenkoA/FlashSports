@@ -14,5 +14,6 @@ namespace FlashSportsLib.Services
         public Support Support { get; set; }
         public string SuppChat {  get; set; }
         public List<ClientChatInfo> ChatInfo { get; set; }
+        public int ChatId { get; set; }
     }
 }

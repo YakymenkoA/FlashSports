@@ -87,6 +87,7 @@
             this.PendingChatLV.TabIndex = 0;
             this.PendingChatLV.UseCompatibleStateImageBehavior = false;
             this.PendingChatLV.View = System.Windows.Forms.View.Details;
+            this.PendingChatLV.SelectedIndexChanged += new System.EventHandler(this.PendingChatLV_SelectedIndexChanged);
             // 
             // Date
             // 
@@ -180,7 +181,7 @@
             // 
             // UpdateChatInfo
             // 
-            this.UpdateChatInfo.Interval = 5000;
+            this.UpdateChatInfo.Interval = 3000;
             this.UpdateChatInfo.Tick += new System.EventHandler(this.UpdateChatInfo_Tick);
             // 
             // UpdateGeneralChat
