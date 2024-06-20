@@ -24,12 +24,14 @@ namespace Support.Repositories
         public TextBox GeneralChat {  get; set; }
         public ListView ClientChats { get; set; }
         public SupportResponse CurrentSupportInfo { get; set; }
+        public SettingsManager SupportSM { get; set; }
 
         public SupportRepository()
         {
             _port = 9001;
             _ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), _port);
             _bf = new BinaryFormatter();
+            SupportSM = new SettingsManager();
         }
 
         public bool AuthSupport()
