@@ -253,15 +253,6 @@ namespace Server.Repositories
                             SuppChat.Text += $"\r\n> {req}";
                         }
                         break;
-                    case "SUPPORT_LOGIN":
-                        {
-                            string chat = SuppChat.Text;
-                            var response = new SupportResponse() { SuppChat = chat };
-                            _bf.Serialize(netStream, response);
-                            SuppChat.Invoke(new Action(() => SuppChat.Text = response.SuppChat));
-                            UpdateLog("129348", "1", "Support", "Some Act");
-                        }
-                        break;
                     case "AUTH_SUPP":
                         {
                             var req = (string[])request.Obj;
