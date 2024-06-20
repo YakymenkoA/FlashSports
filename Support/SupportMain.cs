@@ -13,7 +13,8 @@ namespace Support
         public SupportMain()
         {
             InitializeComponent();
-            _suppRepo = new SupportRepository() { GeneralChat = GeneralChatTB, ClientChats = PendingChatLV };
+            _suppRepo = new SupportRepository() { GeneralChat = GeneralChatTB, ClientChats = PendingChatLV};
+            
         }
 
         private void SupportMain_Load(object sender, EventArgs e)
@@ -37,7 +38,9 @@ namespace Support
 
         private void SendBtn_Click(object sender, EventArgs e) 
         {
-
+            string mess = MessageTB.Text;
+            _suppRepo.SendMess(mess);
+            
         }
 
         private void StartChatBtn_Click(object sender, EventArgs e)
@@ -81,5 +84,12 @@ namespace Support
             if (PendingChatLV.Items.Count > 0 && PendingChatLV.SelectedIndices.Count > 0 && PendingChatLV.SelectedItems[0].SubItems[1].Text != _selectedChat)
                 _selectedChat = PendingChatLV.SelectedItems[0].SubItems[1].Text;
         }
+
+        private void UpdateGeneralChat_Tick(object sender, EventArgs e)
+        {
+            _suppRepo.GetGeneralChat();
+        }
+
+       
     }
 }

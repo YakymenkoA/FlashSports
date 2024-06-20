@@ -92,6 +92,24 @@ namespace Client.Repositories
 
                         CurrentClientInfo.FavouritesIds = response.FavouritesIds;
                     }
+                    else if(request.Header == "UPDATEUSER")
+                    {
+                        MessageBox.Show(
+                           "User information successfully update!",
+                           "Notification",
+                           MessageBoxButtons.OK,
+                           MessageBoxIcon.Information);
+                        CurrentClientInfo.User = response.User;
+                    }
+                    else if (request.Header == "UPDATECANDIES")
+                    {
+                       /* MessageBox.Show(
+                           "User information successfully update!",
+                           "Notification",
+                           MessageBoxButtons.OK,
+                           MessageBoxIcon.Information);*/
+                        CurrentClientInfo.CandyAmount = response.CandyAmount;
+                    }
                     success = true;
                 }
                 else
@@ -187,6 +205,28 @@ namespace Client.Repositories
             }
             else
                 MessageBox.Show("Your chat is already open!");
+        }
+
+        public bool UpdateUser(User u)
+        {
+            u.Id = CurrentClientInfo.User.Id;
+            var request = new MyRequest()
+            {
+                Header = "UPDATEUSER",
+                Obj = (object)u
+            };
+            return SendRequest(request);
+        }
+
+        public bool UpdateCandies(int candies)
+        {
+            int[] ints = new int[2] { CurrentClientInfo.User.Id, candies };
+            var request = new MyRequest()
+            {
+                Header = "UPDATECANDIES",
+                Obj = ints
+            };
+            return SendRequest(request);
         }
     }
 }

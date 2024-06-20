@@ -78,7 +78,6 @@ namespace Client
                     DialogResult result2 = reg.ShowDialog();
                     if (result2 == DialogResult.OK)
                     {
-
                         success = true;
                     }
                     else
@@ -97,8 +96,15 @@ namespace Client
 
         private void UserAvatar_Click(object sender, EventArgs e)
         {
-            var profile = new Profile();
-            if (profile.ShowDialog() == DialogResult.OK) { }
+            var profile = new Profile(_clientRepo.CurrentClientInfo.User.UserName, _clientRepo.CurrentClientInfo.User.Email, _clientRepo.CurrentClientInfo.User.Password, _clientRepo.CurrentClientInfo.User.Photo, _clientRepo.CurrentClientInfo.CandyAmount);
+            if (profile.ShowDialog() == DialogResult.OK) {
+                // 1
+                if (_clientRepo.UpdateCandies(profile.GetCandiesAmount()))
+                    CandyAmount.Text = $"Amount of candies: {_clientRepo.CurrentClientInfo.CandyAmount.ToString()}";
+                // 2
+                if (_clientRepo.UpdateUser(profile.GetUserInfo()))
+                    UserNickname.Text = _clientRepo.CurrentClientInfo.User.UserName;   
+            }
         }
 
         private void FiledEvetsList(int index)

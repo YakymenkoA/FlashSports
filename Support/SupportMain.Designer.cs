@@ -43,6 +43,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.SettingsBtn = new System.Windows.Forms.Button();
             this.UpdateChatInfo = new System.Windows.Forms.Timer(this.components);
+            this.UpdateGeneralChat = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -182,6 +183,12 @@
             this.UpdateChatInfo.Interval = 3000;
             this.UpdateChatInfo.Tick += new System.EventHandler(this.UpdateChatInfo_Tick);
             // 
+            // UpdateGeneralChat
+            // 
+            this.UpdateGeneralChat.Enabled = true;
+            this.UpdateGeneralChat.Interval = 3000;
+            this.UpdateGeneralChat.Tick += new System.EventHandler(this.UpdateGeneralChat_Tick);
+            // 
             // SupportMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -222,6 +229,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button SettingsBtn;
         private System.Windows.Forms.Timer UpdateChatInfo;
+        private System.Windows.Forms.Timer UpdateGeneralChat;
     }
 }
 
