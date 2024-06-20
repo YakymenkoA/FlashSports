@@ -9,5 +9,7 @@ namespace Support.Interfaces
     internal interface ISupport
     {
         bool AuthSupport();
+        void GetClientChatInfos();
+        void StartClientChat(string clientName);
     }
 }

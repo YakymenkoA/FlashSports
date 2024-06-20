@@ -12,6 +12,7 @@ using Server.Interface;
 using FlashSportsLib.Services;
 using FlashSportsLib.Models;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Server.Repositories
 {
@@ -327,11 +328,61 @@ namespace Server.Repositories
                             }
                         }
                         break;
+                    case "CREATE_CHAT":
+                        {
+                            var data = ((string)request.Obj).Split('~');
+                            var userName = data[0];
+                            var supName = data[1];
+                            var chatId = -1;
+
+                            lock (_db)
+                            {
+                                var chat = new Chat()
+                                {
+                                    Date = DateTime.Now,
+                                    SupportId = _db.Supports.Where(s => s.SupportName == supName).First().Id,
+                                    UserId = _db.Users.Where(u => u.UserName == userName).First().Id
+                                };
+                                _db.Chats.Add(chat);
+                                _db.SaveChanges();
+                                chatId = chat.Id;
+                            }
+
+                            var response = new SupportResponse() { ChatId = chatId };
+                            _bf.Serialize(netStream, response);
+                            UpdateLog("CREATE_CHAT", "", "SUPPORT", $"CHAT CREATED");
+                        }
+                        break;
                     case "SAVE_CHAT_HISTORY":
                         {
-                            var chat = (string)request.Obj;
-                            //parse and save chat here
+                            var messages = (List<FlashSportsLib.Models.Message>)request.Obj;
+                            lock (_db)
+                            {
+                                _db.Messages.AddRange(messages);
+                                _db.SaveChanges();
+                            }
                             UpdateLog("SAVE_CHAT_HISTORY", "", "SUPPORT", $"CHAT HISTORY SAVED");
+                        }
+                        break;
+                    case "SEND_SUPPORT_MAIL":
+                        {
+                            var data = ((string)request.Obj).Split('~');
+                            var chatId = int.Parse(data[0]);
+                            var clientName = data[1];
+                            var chatLog = string.Empty;
+                            var clientEmail = string.Empty;
+
+                            lock(_db)
+                            {
+                                var messages = _db.Messages.Where(m => m.ChatId == chatId).ToList();
+                                foreach (var m in messages)
+                                    chatLog += $"{m.Date:T}:  {m.MessageText}\n";
+                                clientEmail = _db.Users.Where(u => u.UserName == clientName).First().Email;
+                            }
+
+                            var mm = new MailManager();
+                            mm.SendMail(clientEmail, chatLog);
+                            UpdateLog("SEND_SUPPORT_MAIL", "", "SUPPORT", $"SENDING MAIL");
                         }
                         break;
                     default:
