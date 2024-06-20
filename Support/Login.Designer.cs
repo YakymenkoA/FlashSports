@@ -51,6 +51,7 @@
             this.PasswordTB.Name = "PasswordTB";
             this.PasswordTB.Size = new System.Drawing.Size(261, 22);
             this.PasswordTB.TabIndex = 11;
+            this.PasswordTB.Text = "AlexSup";
             this.PasswordTB.UseSystemPasswordChar = true;
             // 
             // label2
@@ -68,6 +69,7 @@
             this.LoginTB.Name = "LoginTB";
             this.LoginTB.Size = new System.Drawing.Size(261, 22);
             this.LoginTB.TabIndex = 9;
+            this.LoginTB.Text = "AlexSup";
             // 
             // label1
             // 
@@ -93,7 +95,6 @@
             this.MaximizeBox = false;
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Login (Support) ";
             this.Text = "Support Login";
             this.ResumeLayout(false);
             this.PerformLayout();
