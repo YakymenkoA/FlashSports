@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using FlashSportsLib.Models;
 using FlashSportsLib.Services;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 
 namespace Client
 {
@@ -20,6 +21,7 @@ namespace Client
         private int _localPort;
         private int _remotePort;
         private IPAddress _remoteAddress;
+        private IPEndPoint _remoteEP;
         private string _supportName = "supName";
 
         public string UserName {  get; set; }
@@ -45,6 +47,7 @@ namespace Client
             _remotePort = int.Parse(split[0]);
             _supportName = split[1];
             _remoteAddress = IPAddress.Parse(split[2]);
+            _remoteEP = new IPEndPoint(_remoteAddress, _remotePort);
             SupChatTB.Invoke(new Action(() =>
             {
                 SupChatTB.Text += $"[{DateTime.Now:T}] - ({_supportName}): Connected! \r\n";
@@ -67,11 +70,16 @@ namespace Client
                     IPEndPoint ep = null;
                     byte[] data = udp.Receive(ref ep);
                     var message = Encoding.UTF8.GetString(data);
+                    udp.Close();
+                    if (message == "SUPPORT_DISCONNECTED_FIRST")
+                    {
+                        message = "Disconnected";
+                        SendBtn.Invoke(new Action(() => { SendBtn.Enabled = false; }));
+                    }
                     SupChatTB.Invoke(new Action(() =>
                     {
                         SupChatTB.Text += $"[{DateTime.Now:T}] - ({_supportName}):  {message} \r\n";
                     }));
-                    udp.Close();
                 }
             }
             catch (Exception)
@@ -80,29 +88,27 @@ namespace Client
 
         private void SendBtn_Click(object sender, EventArgs e)
         {
-            var udp = new UdpClient();
-            var ep = new IPEndPoint(_remoteAddress, _remotePort);
+            string message = MessageTB.Text;
+            SupChatTB.Text += $"[{DateTime.Now:T}] - ({UserName}):  {message} \r\n";
+            DataSender(Encoding.UTF8.GetBytes(message));
+            MessageTB.Clear();
+        }
 
+        private void DataSender(byte[] data)
+        {
+            var udpClient = new UdpClient();
             try
             {
-                string message = string.Empty;
-                MessageTB.Invoke(new Action(() =>
-                {
-                    message = MessageTB.Text;
-                    SupChatTB.Text += $"[{DateTime.Now:T}] - ({UserName}):  {message} \r\n";
-                    MessageTB.Clear();
-                }));
-                byte[] data = Encoding.UTF8.GetBytes(message);
-                udp.Send(data, data.Length, ep);
-                udp.Close();
+                udpClient.Send(data, data.Length, _remoteEP);
+                udpClient.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Send Error: {ex.Message}");
+                MessageBox.Show($"Data Sender Error: {ex.Message}");
             }
             finally
             {
-                udp?.Close();
+                udpClient?.Close();
             }
         }
 
@@ -112,7 +118,7 @@ namespace Client
             MessageTB.Focus();
         }
 
-        private void SupportChat_FormClosed(object sender, FormClosedEventArgs e)
+        private void SendDisconnectRequest()
         {
             var support = new TcpClient();
             var bf = new BinaryFormatter();
@@ -122,6 +128,13 @@ namespace Client
             bf.Serialize(ns, request);
             ns.Close();
             support.Close();
+        }
+
+        private void SupportChat_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SendDisconnectRequest();
+            if (SendBtn.Enabled)
+                DataSender(Encoding.UTF8.GetBytes("CLIENT_DISCONNECTED_FIRST"));
         }
     }
 }

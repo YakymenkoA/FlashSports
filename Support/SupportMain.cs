@@ -8,6 +8,7 @@ namespace Support
     public partial class SupportMain : Form
     {
         private SupportRepository _suppRepo;
+        private string _selectedChat = string.Empty;
 
         public SupportMain()
         {
@@ -60,6 +61,25 @@ namespace Support
         private void UpdateChatInfo_Tick(object sender, EventArgs e)
         {
             _suppRepo.GetClientChatInfos();
+            SelectLastItem();            
+        }
+
+        private void SelectLastItem()
+        {
+            foreach (ListViewItem item in PendingChatLV.Items)
+                if (item.SubItems[1].Text == _selectedChat)
+                {
+                    item.Selected = true;
+                    break;
+                }
+        }
+
+        private void PendingChatLV_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (PendingChatLV.SelectedIndices.Count == 0)
+                _selectedChat = string.Empty;
+            if (PendingChatLV.Items.Count > 0 && PendingChatLV.SelectedIndices.Count > 0 && PendingChatLV.SelectedItems[0].SubItems[1].Text != _selectedChat)
+                _selectedChat = PendingChatLV.SelectedItems[0].SubItems[1].Text;
         }
     }
 }

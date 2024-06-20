@@ -12,12 +12,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Runtime.Serialization.Formatters.Binary;
+using FlashSportsLib.Models;
+using System.Threading;
 
 namespace Support
 {
     public partial class ClientChat : Form
     {
         private int _localPort = 9015;
+        private int _chatId;
+        private List<FlashSportsLib.Models.Message> _messages;
+        private IPEndPoint _remoteEP;
 
         public string SupportName {  get; set; }
         public ClientChatInfo Info { get; set; }
@@ -26,6 +31,7 @@ namespace Support
         public ClientChat()
         {
             InitializeComponent();
+            _messages = new List<FlashSportsLib.Models.Message>();
         }
 
         private void ClientChat_Load(object sender, EventArgs e)
@@ -36,24 +42,9 @@ namespace Support
 
         private void SendInitialData()
         {
-            var udpClient = new UdpClient();
-            var ip = IPAddress.Parse(Info.Ip);
-            var remoteEP = new IPEndPoint(ip, Info.Port);
-
-            try
-            {
-                byte[] data = Encoding.UTF8.GetBytes($"9015/{SupportName}/127.0.0.1");
-                udpClient.Send(data, data.Length, remoteEP);
-                udpClient.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Send Error: {ex.Message}");
-            }
-            finally
-            {
-                udpClient?.Close();
-            }
+            _remoteEP = new IPEndPoint(IPAddress.Parse(Info.Ip), Info.Port);
+            DataSender(Encoding.UTF8.GetBytes($"9015/{SupportName}/127.0.0.1"));
+            SendRequest(new MyRequest() { Header = "CREATE_CHAT", Obj = $"{Info.ClientName}~{SupportName}" });
         }
 
         private void ReceiveMessages()
@@ -66,11 +57,23 @@ namespace Support
                     IPEndPoint ep = null;
                     byte[] data = udp.Receive(ref ep);
                     var message = Encoding.UTF8.GetString(data);
+                    udp.Close();
+                    if (message == "CLIENT_DISCONNECTED_FIRST")
+                    {
+                        SendBtn.Invoke(new Action(() => { SendBtn.Enabled = false; }));
+                        message = "Disconnected";
+                    }
+                    else
+                    {
+                        lock (_messages)
+                        {
+                            _messages.Add(new FlashSportsLib.Models.Message() { ChatId = _chatId, Date = DateTime.Now, MessageText = message });
+                        }
+                    }
                     ClientChatTB.Invoke(new Action(() =>
                     {
                         ClientChatTB.Text += $"[{DateTime.Now:T}] - ({Info.ClientName}):  {message} \r\n";
                     }));
-                    udp.Close();
                 }
             }
             catch (Exception)
@@ -79,26 +82,32 @@ namespace Support
 
         private void SendBtn_Click(object sender, EventArgs e)
         {
-            var udpClient = new UdpClient();
-            var ip = IPAddress.Parse(Info.Ip);
-            var remoteEP = new IPEndPoint(ip, Info.Port);
+            var message = MessageTB.Text;
+            ClientChatTB.Text += $"[{DateTime.Now:T}] - ({SupportName}):  {message} \r\n";
+            MessageTB.Clear();
+            DataSender(Encoding.UTF8.GetBytes(message));
+            lock (_messages)
+            {
+                _messages.Add(new FlashSportsLib.Models.Message() { ChatId = _chatId, Date = DateTime.Now, MessageText = message });
+            }
+        }
 
+        private void SendFinalMessage()
+        {
+            DataSender(Encoding.UTF8.GetBytes("SUPPORT_DISCONNECTED_FIRST"));
+        }
+
+        private void DataSender(byte[] data)
+        {
+            var udpClient = new UdpClient();
             try
             {
-                var message = string.Empty;
-                ClientChatTB.Invoke(new Action(() =>
-                {
-                    message = MessageTB.Text;
-                    ClientChatTB.Text += $"[{DateTime.Now:T}] - ({SupportName}):  {message} \r\n";
-                    MessageTB.Clear();
-                }));
-                byte[] data = Encoding.UTF8.GetBytes(message);
-                udpClient.Send(data, data.Length, remoteEP);
+                udpClient.Send(data, data.Length, _remoteEP);
                 udpClient.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Send Error: {ex.Message}");
+                MessageBox.Show($"Data Sender Error: {ex.Message}");
             }
             finally
             {
@@ -113,6 +122,11 @@ namespace Support
             support.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9001));
             var ns = support.GetStream();
             bf.Serialize(ns, request);
+            if (request.Header == "CREATE_CHAT")
+            {
+                var response = (SupportResponse)bf.Deserialize(ns);
+                _chatId = response.ChatId;
+            }
             ns.Close();
             support.Close();
         }
@@ -120,7 +134,10 @@ namespace Support
         private void ClientChat_FormClosed(object sender, FormClosedEventArgs e)
         {
             SendRequest(new MyRequest() { Header = "CLIENT_DISCONNECTED", Obj = $"{Info.ClientName}~SUPPORT" });
-            SendRequest(new MyRequest() { Header = "SAVE_CHAT_HISTORY", Obj = ClientChatTB.Text });
+            SendRequest(new MyRequest() { Header = "SAVE_CHAT_HISTORY", Obj = (object)_messages });
+            SendRequest(new MyRequest() { Header = "SEND_SUPPORT_MAIL", Obj = $"{_chatId}~{Info.ClientName}" });
+            if (SendBtn.Enabled)
+                SendFinalMessage();
         }
     }
 }

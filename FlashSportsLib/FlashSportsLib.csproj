@@ -92,6 +92,7 @@
     <Compile Include="Services\ApiManager.cs" />
     <Compile Include="Services\ClientChatInfo.cs" />
     <Compile Include="Services\Cryptographer.cs" />
+    <Compile Include="Services\MailManager.cs" />
     <Compile Include="Services\MyRequest.cs" />
     <Compile Include="Services\ClientResponse.cs" />
     <Compile Include="Services\SettingsManager.cs" />
