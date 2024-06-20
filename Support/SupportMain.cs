@@ -12,7 +12,8 @@ namespace Support
         public SupportMain()
         {
             InitializeComponent();
-            _suppRepo = new SupportRepository() { GeneralChat = GeneralChatTB, ClientChats = PendingChatLV };
+            _suppRepo = new SupportRepository() { GeneralChat = GeneralChatTB, ClientChats = PendingChatLV};
+            
         }
 
         private void SupportMain_Load(object sender, EventArgs e)
@@ -36,7 +37,9 @@ namespace Support
 
         private void SendBtn_Click(object sender, EventArgs e) 
         {
-
+            string mess = MessageTB.Text;
+            _suppRepo.SendMess(mess);
+            
         }
 
         private void StartChatBtn_Click(object sender, EventArgs e)
@@ -60,6 +63,16 @@ namespace Support
         private void UpdateChatInfo_Tick(object sender, EventArgs e)
         {
             _suppRepo.GetClientChatInfos();
+        }
+
+        private void UpdateGeneralChat_Tick(object sender, EventArgs e)
+        {
+            _suppRepo.GetGeneralChat();
+        }
+
+        private void Update_Chat2_Tick(object sender, EventArgs e)
+        {
+            _suppRepo.GetGeneralChat();
         }
     }
 }

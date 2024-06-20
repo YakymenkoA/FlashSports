@@ -28,19 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Profile));
             this.ClientAvatar = new System.Windows.Forms.PictureBox();
             this.CandyAmount = new System.Windows.Forms.Label();
             this.CandyIcon = new System.Windows.Forms.PictureBox();
             this.MainGB = new System.Windows.Forms.GroupBox();
+            this.PasswordTB = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.EmailTB = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.NameTB = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.CloseBtn = new System.Windows.Forms.Button();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.AddCandyBtn = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.NameTB = new System.Windows.Forms.TextBox();
-            this.EmailTB = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.PasswordTB = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ClientAvatar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CandyIcon)).BeginInit();
             this.MainGB.SuspendLayout();
@@ -48,12 +49,14 @@
             // 
             // ClientAvatar
             // 
+            this.ClientAvatar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientAvatar.Location = new System.Drawing.Point(7, 18);
             this.ClientAvatar.Margin = new System.Windows.Forms.Padding(4);
             this.ClientAvatar.Name = "ClientAvatar";
             this.ClientAvatar.Size = new System.Drawing.Size(344, 343);
             this.ClientAvatar.TabIndex = 0;
             this.ClientAvatar.TabStop = false;
+            this.ClientAvatar.Click += new System.EventHandler(this.ClientAvatar_Click);
             // 
             // CandyAmount
             // 
@@ -66,6 +69,8 @@
             // 
             // CandyIcon
             // 
+            this.CandyIcon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("CandyIcon.BackgroundImage")));
+            this.CandyIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.CandyIcon.Location = new System.Drawing.Point(534, 18);
             this.CandyIcon.Name = "CandyIcon";
             this.CandyIcon.Size = new System.Drawing.Size(33, 33);
@@ -93,65 +98,6 @@
             this.MainGB.TabIndex = 6;
             this.MainGB.TabStop = false;
             // 
-            // CloseBtn
-            // 
-            this.CloseBtn.Location = new System.Drawing.Point(417, 440);
-            this.CloseBtn.Name = "CloseBtn";
-            this.CloseBtn.Size = new System.Drawing.Size(175, 64);
-            this.CloseBtn.TabIndex = 8;
-            this.CloseBtn.Text = "Close";
-            this.CloseBtn.UseVisualStyleBackColor = true;
-            // 
-            // SaveBtn
-            // 
-            this.SaveBtn.Location = new System.Drawing.Point(176, 440);
-            this.SaveBtn.Name = "SaveBtn";
-            this.SaveBtn.Size = new System.Drawing.Size(175, 64);
-            this.SaveBtn.TabIndex = 7;
-            this.SaveBtn.Text = "Save";
-            this.SaveBtn.UseVisualStyleBackColor = true;
-            // 
-            // AddCandyBtn
-            // 
-            this.AddCandyBtn.Location = new System.Drawing.Point(534, 57);
-            this.AddCandyBtn.Name = "AddCandyBtn";
-            this.AddCandyBtn.Size = new System.Drawing.Size(162, 35);
-            this.AddCandyBtn.TabIndex = 6;
-            this.AddCandyBtn.Text = "Add More Candies";
-            this.AddCandyBtn.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(373, 130);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 16);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Name:";
-            // 
-            // NameTB
-            // 
-            this.NameTB.Location = new System.Drawing.Point(376, 149);
-            this.NameTB.Name = "NameTB";
-            this.NameTB.Size = new System.Drawing.Size(309, 22);
-            this.NameTB.TabIndex = 10;
-            // 
-            // EmailTB
-            // 
-            this.EmailTB.Location = new System.Drawing.Point(376, 202);
-            this.EmailTB.Name = "EmailTB";
-            this.EmailTB.Size = new System.Drawing.Size(309, 22);
-            this.EmailTB.TabIndex = 12;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(373, 183);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 16);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Email:";
-            // 
             // PasswordTB
             // 
             this.PasswordTB.Location = new System.Drawing.Point(376, 257);
@@ -169,6 +115,68 @@
             this.label3.TabIndex = 13;
             this.label3.Text = "Password:";
             // 
+            // EmailTB
+            // 
+            this.EmailTB.Location = new System.Drawing.Point(376, 202);
+            this.EmailTB.Name = "EmailTB";
+            this.EmailTB.Size = new System.Drawing.Size(309, 22);
+            this.EmailTB.TabIndex = 12;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(373, 183);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 16);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Email:";
+            // 
+            // NameTB
+            // 
+            this.NameTB.Location = new System.Drawing.Point(376, 149);
+            this.NameTB.Name = "NameTB";
+            this.NameTB.Size = new System.Drawing.Size(309, 22);
+            this.NameTB.TabIndex = 10;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(373, 130);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 16);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Name:";
+            // 
+            // CloseBtn
+            // 
+            this.CloseBtn.Location = new System.Drawing.Point(417, 440);
+            this.CloseBtn.Name = "CloseBtn";
+            this.CloseBtn.Size = new System.Drawing.Size(175, 64);
+            this.CloseBtn.TabIndex = 8;
+            this.CloseBtn.Text = "Close";
+            this.CloseBtn.UseVisualStyleBackColor = true;
+            this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
+            // 
+            // SaveBtn
+            // 
+            this.SaveBtn.Location = new System.Drawing.Point(176, 440);
+            this.SaveBtn.Name = "SaveBtn";
+            this.SaveBtn.Size = new System.Drawing.Size(175, 64);
+            this.SaveBtn.TabIndex = 7;
+            this.SaveBtn.Text = "Save";
+            this.SaveBtn.UseVisualStyleBackColor = true;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
+            // 
+            // AddCandyBtn
+            // 
+            this.AddCandyBtn.Location = new System.Drawing.Point(534, 57);
+            this.AddCandyBtn.Name = "AddCandyBtn";
+            this.AddCandyBtn.Size = new System.Drawing.Size(162, 35);
+            this.AddCandyBtn.TabIndex = 6;
+            this.AddCandyBtn.Text = "Add More Candies";
+            this.AddCandyBtn.UseVisualStyleBackColor = true;
+            this.AddCandyBtn.Click += new System.EventHandler(this.AddCandyBtn_Click);
+            // 
             // Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -181,6 +189,7 @@
             this.Name = "Profile";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Profile";
+            this.Load += new System.EventHandler(this.Profile_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ClientAvatar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CandyIcon)).EndInit();
             this.MainGB.ResumeLayout(false);

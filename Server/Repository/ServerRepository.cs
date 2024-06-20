@@ -12,6 +12,7 @@ using Server.Interface;
 using FlashSportsLib.Services;
 using FlashSportsLib.Models;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace Server.Repositories
 {
@@ -189,9 +190,66 @@ namespace Server.Repositories
                                         ids.Add(id.SportEventId);
                                 }
                                 response.FavouritesIds = ids;
+
                             }
                             _bf.Serialize(netStream, response);
+                            UpdateLog("ADDFAVORITE", $"{fEvent[0]}", "USER", $"EVENT -> SUCCESSFUL ADDED");
 
+                        }
+                        break;
+                    case "UPDATEUSER":
+                        {
+                            var u = (User)request.Obj;
+                            var response = new ClientResponse();
+                            lock (_db)
+                            {
+                                var user = _db.Users.Where(us => us.Id == u.Id).First();
+                                user.UserName = u.UserName;
+                                user.Password = u.Password;
+                                user.Email = u.Email;
+                                user.Photo = u.Photo;
+                                _db.SaveChanges();
+                            }
+                            response.Message = "OK";
+                            response.User = u;
+                            _bf.Serialize(netStream, response);
+                            UpdateLog("UPDATEUSER", $"{u.Id}", "USER", $"{u.UserName} -> SUCCESSFUL UDATE");
+                        }
+                        break;
+                    case "UPDATECANDIES":
+                        {
+                            var reques = (int[])request.Obj;
+                            int id = reques[0];
+                            int amount = reques[1];
+                            var response = new ClientResponse();
+                            lock (_db)
+                            {
+                                _db.Candies.Where(c => c.UserId == id).First().CandyAmount = amount;
+                                _db.SaveChanges();  
+                            }
+                            response.Message = "OK";
+                            response.CandyAmount = amount;
+                            _bf.Serialize(netStream, response);
+                            UpdateLog("UPDATECANDIES", $"{reques[0]}", "USER", $"CandyAmount -> SUCCESSFUL UPDATED");
+                        }
+                        break;
+                    case "GET_SUPPORT_CHATS":
+                        {
+                            //......
+                            var response = new SupportResponse();
+                            response.Message = "OK";
+                            SuppChat.Invoke(new Action(() =>
+                            {
+                                response.SuppChat = SuppChat.Text;
+                            }));
+                            _bf.Serialize(netStream, response);
+                        }
+                        break;
+                    case "ADD_SUPPORT_MESS":
+                        {
+                            var req = request.Obj.ToString();
+                            
+                            SuppChat.Text += $"\r\n> {req}";
                         }
                         break;
                     case "SUPPORT_LOGIN":
@@ -350,11 +408,15 @@ namespace Server.Repositories
         {
             lock (Log)
             {
-                var item = Log.Items.Add(DateTime.Now.ToString("g"));
-                item.SubItems.Add(key);
-                item.SubItems.Add(userId);
-                item.SubItems.Add(role);
-                item.SubItems.Add(action);
+                Log.Invoke(new Action(() =>
+                {
+                    var item = Log.Items.Add(DateTime.Now.ToString("g"));
+                    item.SubItems.Add(key);
+                    item.SubItems.Add(userId);
+                    item.SubItems.Add(role);
+                    item.SubItems.Add(action);
+                }));
+               
             }
         }
     }

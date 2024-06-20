@@ -25,6 +25,7 @@ namespace Support.Repositories
         public ListView ClientChats { get; set; }
         public SupportResponse CurrentSupportInfo { get; set; }
 
+
         public SupportRepository()
         {
             _port = 9001;
@@ -147,6 +148,58 @@ namespace Support.Repositories
             catch (Exception)
             {
                 MessageBox.Show("Start Chat Error!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                _support?.Close();
+            }
+        }
+
+        public void GetGeneralChat()
+        {
+            try
+            {
+                _support = new TcpClient();
+                _support.Connect(_ep);
+                var ns = _support.GetStream();
+                var request = new MyRequest() { Header = "GET_SUPPORT_CHATS" };
+                _bf.Serialize(ns, request);
+                var response = (SupportResponse)_bf.Deserialize(ns);
+                if (response.Message == "OK")
+                {
+                    GeneralChat.Text = response.SuppChat.ToString();   
+                }
+                else
+                {
+                    GeneralChat.Clear();
+                }
+                ns?.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Get Support Chat Error!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                _support?.Close();
+            }
+        }
+        public void SendMess(string mess)
+        {
+            GeneralChat.Text += $"\r\n{mess}";
+            try
+            {
+                _support = new TcpClient();
+                _support.Connect(_ep);
+                var ns = _support.GetStream();
+                var request = new MyRequest() { Header = "ADD_SUPPORT_MESS" };
+                request.Obj = mess;
+                _bf.Serialize(ns, request);
+                ns?.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Get Support Chat Error!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             finally
             {
