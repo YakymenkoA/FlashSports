@@ -90,9 +90,6 @@ namespace Support
             _suppRepo.GetGeneralChat();
         }
 
-        private void Update_Chat2_Tick(object sender, EventArgs e)
-        {
-            _suppRepo.GetGeneralChat();
-        }
+       
     }
 }

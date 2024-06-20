@@ -12,11 +12,8 @@ using Server.Interface;
 using FlashSportsLib.Services;
 using FlashSportsLib.Models;
 using System.Xml.Linq;
-<<<<<<< HEAD
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
-=======
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
->>>>>>> 12329623d10ba569b11d37de7d16e6c8f8a80abf
 
 namespace Server.Repositories
 {
@@ -469,12 +466,8 @@ namespace Server.Repositories
                     item.SubItems.Add(userId);
                     item.SubItems.Add(role);
                     item.SubItems.Add(action);
-<<<<<<< HEAD
                 }));
-               
-=======
-                }));               
->>>>>>> 12329623d10ba569b11d37de7d16e6c8f8a80abf
+                          
             }
         }
     }
