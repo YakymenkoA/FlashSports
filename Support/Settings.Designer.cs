@@ -48,7 +48,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(64, 37);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(124, 16);
+            this.label1.Size = new System.Drawing.Size(153, 20);
             this.label1.TabIndex = 8;
             this.label1.Text = "Background Image:";
             // 
@@ -59,10 +59,11 @@
             this.BackgroundPB.Size = new System.Drawing.Size(298, 45);
             this.BackgroundPB.TabIndex = 9;
             this.BackgroundPB.TabStop = false;
+            this.BackgroundPB.Click += new System.EventHandler(this.BackgroundPB_Click);
             // 
             // Settings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(419, 181);
             this.Controls.Add(this.BackgroundPB);

@@ -12,6 +12,7 @@ namespace FlashSportsLib.Services
         // Same path for everything
         private readonly string _regPath = Registry.CurrentUser.Name;
         private readonly string _key = "FlashSports";
+        private readonly string _regPath2 = @"HKEY_CURRENT_USER\Software\MyApp";
 
         public void SaveFontSizeSetting(float fontSize)
         {
@@ -57,6 +58,21 @@ namespace FlashSportsLib.Services
                 return reg.ToString();
             else
                 return "Control"; // Def
+        }
+
+        public void SaveImg(string imgPath)
+        {
+            Registry.SetValue(_regPath2, "Img", imgPath);
+        }
+
+        public string SaveBackroundImgSetting()
+        {
+            var reg = Registry.GetValue(_regPath2, "Img", null);
+
+            if (reg != null)
+                return reg.ToString();
+            else
+                return "Img";
         }
     }
 }
