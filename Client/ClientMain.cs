@@ -135,7 +135,7 @@ namespace Client
                         break;
                     case (int)SportCategories.Bets:
                         {
-                            // ...
+                            DisplayEvents(_clientRepo.BetsEvents());
                         }
                         break;
                     case (int)SportCategories.Favourites:
@@ -195,6 +195,18 @@ namespace Client
         private void ContactSuppL_Click(object sender, EventArgs e)
         {
             _clientRepo.ContactSupport();
+        }
+
+        private void NewsPanelLV_DoubleClick(object sender, EventArgs e)
+        {
+            var news = new News();
+            if (news.ShowDialog() == DialogResult.OK)
+            {
+                if (NewsPanelLV.SelectedIndices.Count > 0)
+                {
+                    _clientRepo.newsId = NewsPanelLV.SelectedIndices[0];
+                }
+            }
         }
     }
 }

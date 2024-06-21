@@ -22,6 +22,8 @@ namespace Client.Repositories
         private TcpClient _client;
         private BinaryFormatter _bf;
 
+        public int newsId;
+
         public ClientResponse CurrentClientInfo { get; set; }
         public SettingsManager ClientSM { get; set; }
 
@@ -181,6 +183,35 @@ namespace Client.Repositories
             return events;
         }
 
+        public List<SportEvent> BetsEvents()
+        {
+            try
+            {
+                if (CurrentClientInfo == null || CurrentClientInfo.BetsIds == null || CurrentClientInfo.SportEvents == null)
+                {
+                    MessageBox.Show("You don't have any bets", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return new List<SportEvent>();
+                }
+
+                List<SportEvent> events = new List<SportEvent>();
+
+                foreach (var e in CurrentClientInfo.BetsIds)
+                {
+                    SportEvent sportEvent = CurrentClientInfo.SportEvents.FirstOrDefault(ev => ev.Id == e);
+                    if (sportEvent != null)
+                    {
+                        events.Add(sportEvent);
+                    }
+                }
+                return events;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new List<SportEvent>();
+            }
+        }
+
         public List<FlashSportsLib.Models.News> FillNews()
         {
             return CurrentClientInfo.News;
@@ -227,6 +258,17 @@ namespace Client.Repositories
                 Obj = ints
             };
             return SendRequest(request);
+        }
+
+        public void ShowNew(int Id, Label labelTitle, TextBox contentLabel)
+        {
+            var news = CurrentClientInfo.News.Where(n => n.Id == Id).FirstOrDefault();
+
+            if (news != null)
+            {
+                labelTitle.Text = news.Title;
+                contentLabel.Text = news.Content;
+            }
         }
     }
 }

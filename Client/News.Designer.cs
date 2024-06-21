@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             this.MainGB = new System.Windows.Forms.GroupBox();
-            this.TitleGB = new System.Windows.Forms.GroupBox();
-            this.TitleL = new System.Windows.Forms.Label();
-            this.CommentsGB = new System.Windows.Forms.GroupBox();
             this.NewsTextGB = new System.Windows.Forms.GroupBox();
             this.ContentTB = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.CommentTB = new System.Windows.Forms.TextBox();
-            this.PostBtn = new System.Windows.Forms.Button();
+            this.CommentsGB = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.AllCommentsTB = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.PostBtn = new System.Windows.Forms.Button();
+            this.CommentTB = new System.Windows.Forms.TextBox();
+            this.TitleGB = new System.Windows.Forms.GroupBox();
+            this.TitleL = new System.Windows.Forms.Label();
             this.MainGB.SuspendLayout();
-            this.TitleGB.SuspendLayout();
-            this.CommentsGB.SuspendLayout();
             this.NewsTextGB.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.CommentsGB.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.TitleGB.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainGB
@@ -59,26 +59,26 @@
             this.MainGB.TabIndex = 0;
             this.MainGB.TabStop = false;
             // 
-            // TitleGB
+            // NewsTextGB
             // 
-            this.TitleGB.Controls.Add(this.TitleL);
-            this.TitleGB.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TitleGB.Location = new System.Drawing.Point(3, 18);
-            this.TitleGB.Name = "TitleGB";
-            this.TitleGB.Size = new System.Drawing.Size(584, 100);
-            this.TitleGB.TabIndex = 0;
-            this.TitleGB.TabStop = false;
+            this.NewsTextGB.Controls.Add(this.ContentTB);
+            this.NewsTextGB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NewsTextGB.Location = new System.Drawing.Point(3, 122);
+            this.NewsTextGB.Name = "NewsTextGB";
+            this.NewsTextGB.Size = new System.Drawing.Size(584, 336);
+            this.NewsTextGB.TabIndex = 2;
+            this.NewsTextGB.TabStop = false;
             // 
-            // TitleL
+            // ContentTB
             // 
-            this.TitleL.AutoSize = true;
-            this.TitleL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TitleL.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TitleL.Location = new System.Drawing.Point(3, 18);
-            this.TitleL.Name = "TitleL";
-            this.TitleL.Size = new System.Drawing.Size(66, 31);
-            this.TitleL.TabIndex = 0;
-            this.TitleL.Text = "Title";
+            this.ContentTB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ContentTB.Location = new System.Drawing.Point(3, 22);
+            this.ContentTB.Multiline = true;
+            this.ContentTB.Name = "ContentTB";
+            this.ContentTB.ReadOnly = true;
+            this.ContentTB.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.ContentTB.Size = new System.Drawing.Size(578, 311);
+            this.ContentTB.TabIndex = 0;
             // 
             // CommentsGB
             // 
@@ -91,47 +91,39 @@
             this.CommentsGB.TabIndex = 1;
             this.CommentsGB.TabStop = false;
             // 
-            // NewsTextGB
+            // groupBox2
             // 
-            this.NewsTextGB.Controls.Add(this.ContentTB);
-            this.NewsTextGB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.NewsTextGB.Location = new System.Drawing.Point(3, 118);
-            this.NewsTextGB.Name = "NewsTextGB";
-            this.NewsTextGB.Size = new System.Drawing.Size(584, 340);
-            this.NewsTextGB.TabIndex = 2;
-            this.NewsTextGB.TabStop = false;
+            this.groupBox2.Controls.Add(this.AllCommentsTB);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(3, 161);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(578, 246);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "All comments:";
             // 
-            // ContentTB
+            // AllCommentsTB
             // 
-            this.ContentTB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ContentTB.Location = new System.Drawing.Point(3, 18);
-            this.ContentTB.Multiline = true;
-            this.ContentTB.Name = "ContentTB";
-            this.ContentTB.ReadOnly = true;
-            this.ContentTB.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ContentTB.Size = new System.Drawing.Size(578, 319);
-            this.ContentTB.TabIndex = 0;
+            this.AllCommentsTB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AllCommentsTB.Location = new System.Drawing.Point(3, 22);
+            this.AllCommentsTB.Multiline = true;
+            this.AllCommentsTB.Name = "AllCommentsTB";
+            this.AllCommentsTB.ReadOnly = true;
+            this.AllCommentsTB.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.AllCommentsTB.Size = new System.Drawing.Size(572, 221);
+            this.AllCommentsTB.TabIndex = 0;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.PostBtn);
             this.groupBox1.Controls.Add(this.CommentTB);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(3, 18);
+            this.groupBox1.Location = new System.Drawing.Point(3, 22);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(578, 139);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Comment:";
-            // 
-            // CommentTB
-            // 
-            this.CommentTB.Dock = System.Windows.Forms.DockStyle.Top;
-            this.CommentTB.Location = new System.Drawing.Point(3, 18);
-            this.CommentTB.Multiline = true;
-            this.CommentTB.Name = "CommentTB";
-            this.CommentTB.Size = new System.Drawing.Size(572, 65);
-            this.CommentTB.TabIndex = 0;
             // 
             // PostBtn
             // 
@@ -142,50 +134,59 @@
             this.PostBtn.Text = "Post";
             this.PostBtn.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // CommentTB
             // 
-            this.groupBox2.Controls.Add(this.AllCommentsTB);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 157);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(578, 250);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "All comments:";
+            this.CommentTB.Dock = System.Windows.Forms.DockStyle.Top;
+            this.CommentTB.Location = new System.Drawing.Point(3, 22);
+            this.CommentTB.Multiline = true;
+            this.CommentTB.Name = "CommentTB";
+            this.CommentTB.Size = new System.Drawing.Size(572, 65);
+            this.CommentTB.TabIndex = 0;
             // 
-            // AllCommentsTB
+            // TitleGB
             // 
-            this.AllCommentsTB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AllCommentsTB.Location = new System.Drawing.Point(3, 18);
-            this.AllCommentsTB.Multiline = true;
-            this.AllCommentsTB.Name = "AllCommentsTB";
-            this.AllCommentsTB.ReadOnly = true;
-            this.AllCommentsTB.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.AllCommentsTB.Size = new System.Drawing.Size(572, 229);
-            this.AllCommentsTB.TabIndex = 0;
+            this.TitleGB.Controls.Add(this.TitleL);
+            this.TitleGB.Dock = System.Windows.Forms.DockStyle.Top;
+            this.TitleGB.Location = new System.Drawing.Point(3, 22);
+            this.TitleGB.Name = "TitleGB";
+            this.TitleGB.Size = new System.Drawing.Size(584, 100);
+            this.TitleGB.TabIndex = 0;
+            this.TitleGB.TabStop = false;
+            // 
+            // TitleL
+            // 
+            this.TitleL.AutoSize = true;
+            this.TitleL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TitleL.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TitleL.Location = new System.Drawing.Point(3, 22);
+            this.TitleL.Name = "TitleL";
+            this.TitleL.Size = new System.Drawing.Size(82, 39);
+            this.TitleL.TabIndex = 0;
+            this.TitleL.Text = "Title";
             // 
             // News
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(590, 871);
             this.Controls.Add(this.MainGB);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "News";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "News";
+            this.Load += new System.EventHandler(this.News_Load);
             this.MainGB.ResumeLayout(false);
-            this.TitleGB.ResumeLayout(false);
-            this.TitleGB.PerformLayout();
-            this.CommentsGB.ResumeLayout(false);
             this.NewsTextGB.ResumeLayout(false);
             this.NewsTextGB.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.CommentsGB.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.TitleGB.ResumeLayout(false);
+            this.TitleGB.PerformLayout();
             this.ResumeLayout(false);
 
         }
