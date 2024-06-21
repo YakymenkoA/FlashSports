@@ -15,7 +15,6 @@ namespace FlashSportsLib.Services
         public List<News> News { get; set; }
         public int CandyAmount { get; set; }
         public List<int> FavouritesIds { get; set; }
-        public List<int> BetsIds { get; set; }
         public User User { get; set; }
         public List<Bet> Bets { get; set; }
     }
