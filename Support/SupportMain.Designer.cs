@@ -185,6 +185,7 @@
             // 
             // UpdateGeneralChat
             // 
+            this.UpdateGeneralChat.Enabled = true;
             this.UpdateGeneralChat.Interval = 3000;
             this.UpdateGeneralChat.Tick += new System.EventHandler(this.UpdateGeneralChat_Tick);
             // 

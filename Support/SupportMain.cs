@@ -28,7 +28,6 @@ namespace Support
             {
                 this.Text = $"Support {_suppRepo.CurrentSupportInfo.Support.SupportName}";
                 UpdateChatInfo.Start();
-                UpdateGeneralChat.Start();
             }
 
             string backgroundImgPath = _suppRepo.SupportSM.SaveBackroundImgSetting();
